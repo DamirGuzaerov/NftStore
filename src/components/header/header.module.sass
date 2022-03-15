@@ -1,0 +1,45 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+header
+  width: 100%
+  background-color: gs.$dark-main-color
+
+.header_wrapper
+  max-width: gs.$max-width
+  margin: 0 auto
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.logo
+  display: flex
+  flex-direction: row
+
+.logo_name
+  font-family: 'Poppins'
+  font-style: normal
+  font-weight: 600
+  font-size: 24px
+  color: white
+  margin-left: 8px
+  padding-right: 32px
+  border-right: 2px solid #353945
+
+.header__left_content
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  nav
+    a
+      margin-left: 32px
+      @include gs.links-settings
+
+    a:hover
+      color: white
+
+.buttons_container
+  width: 167px
+  display: flex
+  justify-content: space-between
+

@@ -1,0 +1,19 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+@mixin button-settings
+  font-size: 14px
+  font-weight: bold
+  border-radius: 90px
+  color: white
+
+.button_submit
+  border: none
+  background-color: gs.$button-submit-color
+  @include button-settings
+
+.button_action
+  @include button-settings
+  background: none
+  border: 2px solid #777E90
+
+
