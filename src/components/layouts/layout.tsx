@@ -3,7 +3,7 @@ import styles from './layout.module.sass';
 import {Outlet} from "react-router-dom";
 
 export const Layout = () => {
-    return(
+    return (
         <div className={styles.div}>
             <Header/>
             <Outlet/>

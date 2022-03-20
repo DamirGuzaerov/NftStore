@@ -9,8 +9,9 @@ interface IconProps {
 const Icon: FC<IconProps> = (props) => {
     const {
         name,
-        width=24,
-        height=24 } = props;
+        width = 24,
+        height = 24
+    } = props;
 
     return (
         <svg

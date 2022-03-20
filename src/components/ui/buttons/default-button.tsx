@@ -1,4 +1,5 @@
 import styles from './buttonStyles.module.sass';
+
 interface props {
     value: string,
     type: string
@@ -29,7 +30,7 @@ export const DefaultButton = ({value, paddingRightLeft, paddingTopBottom, type, 
             paddingRight: paddingRightLeft
         }
     }
-    return(
+    return (
         <button className={styles.default_button} style={buttonStyle} onClick={func()}>
             {value}
         </button>

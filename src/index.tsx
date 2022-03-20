@@ -6,9 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {mainStore} from "./stores/mainStore";
-import {ModalConstructor} from "./components/modals/modalConstructor/modalConstructor";
 import { MoralisProvider } from 'react-moralis';
-
+import Moralis from "moralis";
+Moralis.start({ serverUrl : "https://qtqaadqffvcu.usemoralis.com:2053/server", appId : "BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt" });
 
 ReactDOM.render(
   <React.StrictMode>

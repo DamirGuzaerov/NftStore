@@ -1,5 +1,5 @@
 import Icon from "../ui/icon/icon";
-import styles from'./header.module.sass';
+import styles from './header.module.sass';
 import logo from './../../assets/logo.svg'
 import {Link} from "react-router-dom";
 import {Search} from "../ui/search/search";
@@ -19,7 +19,7 @@ export const Header = () => {
     }
 
 
-    return(
+    return (
         <header>
             <div className={styles.header_wrapper}>
                 <div className={styles.header__left_content}>
@@ -38,8 +38,10 @@ export const Header = () => {
                 </div>
                 <Search/>
                 <div className={styles.buttons_container}>
-                    <DefaultButton type={'submit'}  paddingRightLeft={16} paddingTopBottom={12} value={'Upload'} func={console.log}/>
-                    <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'} func={console.log}/>
+                    <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
+                                   func={console.log}/>
+                    <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
+                                   func={console.log}/>
                 </div>
                 <Icon name={'language'} width={20} height={20}/>
             </div>
