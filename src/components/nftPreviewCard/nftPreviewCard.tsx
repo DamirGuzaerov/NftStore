@@ -22,7 +22,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
 
     return(
         <div className={styles.previewCardWrapper}>
-            <div className={styles.previewCardImgWrapper}>
+            <div className={styles.previewCardImgWrapper} >
                 <img className={styles.previewCardImg} src={imgUrl} alt=""/>
                 <div className={styles.hoverElements}>
                     <button className={styles.buyNftButton}>Buy Now

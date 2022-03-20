@@ -4,24 +4,30 @@
   border-bottom: 1px #b2b2b2 solid
 
 .previewCardImgWrapper
+  position: relative
+
   object-fit: cover
+
   max-height: 303px
   height: 303px
   width: 256px
+
   border-radius: 10px
+
   overflow: hidden
   &:hover
-    background: rgb(255, 255, 255)
     cursor: pointer
     .hoverElements
       transform: translate(0px,-60px)
 
 .hoverElements
+  position: absolute
+
   display: flex
   justify-content: center
 
   transition: transform 0.7s
-  bottom: 0px
+  bottom: -50px
   position: relative
 
 .buyNftButton
@@ -38,7 +44,6 @@
   &:hover
     cursor: pointer
     background: #2244a1
-
 
 .previewCardInfoWrapper
   margin-top: 21px
