@@ -19,9 +19,11 @@ export const nftSlice = createSlice({
         },
         nftsFetchingSuccess(state, action: PayloadAction<string[]>) {
             state.isLoading = false;
+            state.nfts = action.payload;
         },
         nftsFetchingError(state, action: PayloadAction<string>) {
             state.isLoading = false
+            state.error = action.payload;
         }
     }
 })
