@@ -1,3 +1,52 @@
 * {
     font-family: DM Sans;
 }
+
+.swiper {
+    position: static;
+}
+
+.swiper-button-next{
+    position: absolute;
+    width: 44px;
+    height: 44px;
+
+    box-sizing: border-box;
+    border-radius: 100%;
+    border: 2px solid #353945;
+
+    background: url("assets/images/rightArrow.svg") no-repeat 50%;
+
+    right: 0px;
+    top:136px;
+    z-index: 2;
+}
+
+.swiper-button-next::after{
+    display: none;
+}
+
+.swiper-button-prev{
+    position: absolute;
+    width: 44px;
+    height: 44px;
+
+    box-sizing: border-box;
+    border: 2px solid #353945;
+    border-radius: 100%;
+
+    background: url("assets/images/leftArrow.svg") no-repeat 50%;
+
+    right: 52px;
+    top:136px;
+    z-index: 2;
+}
+
+.swiper-button-prev::after{
+    display: none;
+}
+
+.swiper-button-disabled{
+    opacity: 1;
+    border: 0;
+}

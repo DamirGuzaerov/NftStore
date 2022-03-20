@@ -1,7 +1,6 @@
 import styles from "./nftPreviewCard.module.sass"
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import Icon from "../ui/icon/icon";
-
 interface nftPreviewProps{
     imgUrl:string,
     nftName:string,
@@ -11,7 +10,6 @@ interface nftPreviewProps{
 }
 
 const NftPreviewCard: FC<nftPreviewProps> = (props) => {
-
     const {
         imgUrl,
         nftName,

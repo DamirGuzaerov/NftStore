@@ -8,9 +8,8 @@
 
   object-fit: cover
 
-  max-height: 303px
   height: 303px
-  width: 256px
+  max-width: 256px
 
   border-radius: 10px
 
@@ -18,11 +17,14 @@
   &:hover
     cursor: pointer
     .hoverElements
-      transform: translate(0px,-60px)
+      transform: translate(0px,-110px)
+
+.previewCardImg
+  object-fit: cover
 
 .hoverElements
   position: absolute
-
+  bottom: -50px
   display: flex
   justify-content: center
 
@@ -56,6 +58,8 @@
 .nftName
   font-size: 16px
   color: #FCFCFD
+  &:hover
+    cursor: pointer
 
 .nftCost
   font-size: 14px
@@ -77,6 +81,8 @@
   width: 24px
   height: 24px
   border: 2px solid #45B36B
+  &:hover
+    cursor: pointer
 
 .nftLikes
   color: #ffffff
