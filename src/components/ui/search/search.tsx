@@ -1,6 +1,6 @@
 import styles from './search.module.sass'
 import {useState} from "react";
-import Icon from "../../utils/icon/icon";
+import Icon from "../icon/icon";
 
 export const Search = () => {
     const [value, setValue] = useState('');
