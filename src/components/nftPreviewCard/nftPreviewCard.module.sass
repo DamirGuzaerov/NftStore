@@ -1,0 +1,85 @@
+.previewCardWrapper
+  max-width: 256px
+  border-radius: 10px 10px 0px 0px
+  border-bottom: 1px #b2b2b2 solid
+
+.previewCardImgWrapper
+  object-fit: cover
+  max-height: 303px
+  height: 303px
+  width: 256px
+  border-radius: 10px
+  overflow: hidden
+  &:hover
+    background: rgb(255, 255, 255)
+    cursor: pointer
+    .hoverElements
+      transform: translate(0px,-60px)
+
+.hoverElements
+  display: flex
+  justify-content: center
+
+  transition: transform 0.7s
+  bottom: 0px
+  position: relative
+
+.buyNftButton
+  display: flex
+  align-items: center
+
+  color: white
+
+  background: #3772FF
+  border-radius: 90px
+  font-size: 16px
+  padding: 14px 16px
+  border: 0
+  &:hover
+    cursor: pointer
+    background: #2244a1
+
+
+.previewCardInfoWrapper
+  margin-top: 21px
+
+.previewCardMainInfo
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.nftName
+  font-size: 16px
+  color: #FCFCFD
+
+.nftCost
+  font-size: 14px
+
+  padding: 6px
+
+  border: 2px solid #45B36B
+  border-radius: 4px
+
+  color:  #45B36B
+
+.previewCardSecInfo
+  @extend .previewCardMainInfo
+  margin: 12px 0
+
+.creatorAvatar
+  border-radius: 100%
+  object-fit: cover
+  width: 24px
+  height: 24px
+  border: 2px solid #45B36B
+
+.nftLikes
+  color: #ffffff
+  display: flex
+  align-items: center
+
+.iconContainer
+  margin-right: 3px
+  display: flex
+  align-items: center
+

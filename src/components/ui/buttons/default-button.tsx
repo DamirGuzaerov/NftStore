@@ -17,7 +17,7 @@ export const DefaultButton = ({value, paddingRightLeft, paddingTopBottom, type, 
             paddingTop: paddingTopBottom,
             paddingBottom: paddingTopBottom,
             paddingLeft: paddingRightLeft,
-            paddingRight: paddingRightLeft
+            paddingRight: paddingRightLeft,
         }
     } else {
         buttonStyle = {
