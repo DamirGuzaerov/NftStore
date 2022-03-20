@@ -7,15 +7,18 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {mainStore} from "./stores/mainStore";
 import {ModalConstructor} from "./components/modals/modalConstructor/modalConstructor";
+import { MoralisProvider } from 'react-moralis';
 
 
 ReactDOM.render(
   <React.StrictMode>
+      <MoralisProvider serverUrl='https://qtqaadqffvcu.usemoralis.com:2053/server' appId="BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt">
       <Provider store={mainStore()}>
           <BrowserRouter>
               <App />
           </BrowserRouter>
       </Provider>
+      </MoralisProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
