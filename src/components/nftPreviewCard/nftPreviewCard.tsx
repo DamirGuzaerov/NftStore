@@ -1,12 +1,13 @@
 import styles from "./nftPreviewCard.module.sass"
 import {FC, useEffect} from "react";
 import Icon from "../ui/icon/icon";
-interface nftPreviewProps{
-    imgUrl:string,
-    nftName:string,
-    nftCost:string,
-    creatorImgUrl:string,
-    nftLikes:string
+
+export interface nftPreviewProps {
+    imgUrl: string,
+    nftName: string,
+    nftCost: string,
+    creatorImgUrl: string,
+    nftLikes: string
 }
 
 const NftPreviewCard: FC<nftPreviewProps> = (props) => {
@@ -18,9 +19,16 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
         nftLikes
     } = props;
 
-    return(
+    let name;
+    if(nftName.length > 30) {
+        name = nftName.slice(0, 27);
+    } else {
+        name = nftName;
+    }
+
+    return (
         <div className={styles.previewCardWrapper}>
-            <div className={styles.previewCardImgWrapper} >
+            <div className={styles.previewCardImgWrapper}>
                 <img className={styles.previewCardImg} src={imgUrl} alt=""/>
                 <div className={styles.hoverElements}>
                     <button className={styles.buyNftButton}>Buy Now
@@ -29,7 +37,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
             </div>
             <div className={styles.previewCardInfoWrapper}>
                 <div className={styles.previewCardMainInfo}>
-                    <div className={styles.nftName}>{nftName}</div>
+                    <div className={styles.nftName}>{name}</div>
                     <div className={styles.nftCost}>{nftCost}</div>
                 </div>
                 <div className={styles.previewCardSecInfo}>
@@ -43,7 +51,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
                 </div>
             </div>
         </div>
-        )
+    )
 }
 
 export default NftPreviewCard;
