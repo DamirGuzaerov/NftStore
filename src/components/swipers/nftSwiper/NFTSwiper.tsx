@@ -3,7 +3,6 @@ import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "./Swiper.module.sass"
 import NftPreviewCard from "../../nftPreviewCard/nftPreviewCard";
-import nftImg from "../../../assets/images/tempImg/nftPreviewImg.png";
 import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import axios from "axios";
 import Moralis from "moralis";
@@ -15,19 +14,21 @@ const NFTSwiper = () => {
         getNFT();
     }, [])
 
-
     async function getNFT() {
-        const options = {q: "Pancake", filter: "name",limit:50};
+        const options = {q: "citti", filter: "name", chain:'eth', limit: 10};
         // @ts-ignore
         const NFTs = await Moralis.Web3API.token.searchNFTs(options);
         let promises: any[] = [];
         let localUrls: string[] = [];
 
         NFTs.result?.forEach((e) => {
+            console.log(e.token_uri);
             promises.push(
                 axios.get(e.token_uri)
                     .then(response => {
-                        localUrls.push(response.data.image_url);
+                        if(!response.data.image)
+                            localUrls.push(response.data.image_url)
+                        else localUrls.push(response.data.image)
                     }).catch(function (error) {
                     console.log(error)
                 })
@@ -50,9 +51,9 @@ const NFTSwiper = () => {
                     onSlideChange={() => console.log('slide change')}
                     className={styles.customSwiper}
                 >
-                    {urls.map(url => {
+                    {urls.map((url,index) => {
                         return (
-                            <SwiperSlide key={url}>
+                            <SwiperSlide key={index}>
                                 <NftPreviewCard
                                     imgUrl={url}
                                     creatorImgUrl={authorImg}

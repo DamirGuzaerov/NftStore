@@ -6,8 +6,6 @@
 .previewCardImgWrapper
   position: relative
 
-  object-fit: cover
-
   height: 303px
   max-width: 256px
 
@@ -17,20 +15,21 @@
   &:hover
     cursor: pointer
     .hoverElements
-      transform: translate(0px,-110px)
+      transform: translate(0px,-64px)
 
 .previewCardImg
-  object-fit: cover
+  width: 100%
+  height: 100%
+  object-fit: contain
 
 .hoverElements
-  position: absolute
-  bottom: -50px
+  width: 100%
   display: flex
   justify-content: center
 
   transition: transform 0.7s
   bottom: -50px
-  position: relative
+  position: absolute
 
 .buyNftButton
   display: flex
