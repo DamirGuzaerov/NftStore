@@ -6,6 +6,7 @@ import NftPreviewCard from "../../nftPreviewCard/nftPreviewCard";
 import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import axios from "axios";
 import Moralis from "moralis";
+import { Oval } from  'react-loader-spinner'
 
 export interface NFTContent {
     url: string,
@@ -18,6 +19,7 @@ export interface NFTContent {
 const NFTSwiper = () => {
     const [NFTs, setNFTs] = useState<NFTContent[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    let index = 0;
 
     useEffect(() => {
         getNFT();
@@ -56,11 +58,11 @@ const NFTSwiper = () => {
             .catch((reason) => setNFTs([]));
     }
 
-    if (isLoading) {
-        return (
-            <p>
-                Загрузка
-            </p>
+    if(isLoading) {
+        return(
+            <div className={styles.loading}>
+                <Oval color="#00BFFF" height={50} width={50} />
+            </div>
         )
     }
 
@@ -79,8 +81,9 @@ const NFTSwiper = () => {
                     className={styles.customSwiper}
                 >
                     {NFTs.map(nft => {
+                        index++;
                         return (
-                            <SwiperSlide key={nft.url}>
+                            <SwiperSlide key={index}>
                                 <NftPreviewCard
                                     imgUrl={nft.url}
                                     creatorImgUrl={authorImg}

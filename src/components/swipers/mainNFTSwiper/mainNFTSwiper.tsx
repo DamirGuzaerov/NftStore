@@ -3,10 +3,12 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
 import {MainNFTSlide} from "./mainNFTSlide";
 import './swiper-settings.module.css';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Moralis from "moralis";
 import axios from "axios";
 import {NFTContent} from "../nftSwiper/NFTSwiper";
+import { Oval } from  'react-loader-spinner'
+
 
 
 export const MainNFTSwiper = () => {
@@ -49,6 +51,14 @@ export const MainNFTSwiper = () => {
         })
             .catch((reason) => setNFTs([]));
     }
+
+    if(isLoading) {
+        return(
+            <div className={styles.loading}>
+                <Oval color="#00BFFF" height={50} width={50} />
+            </div>
+        )
+    }
     return(
         <Swiper
             modules={[Navigation]}
@@ -61,7 +71,7 @@ export const MainNFTSwiper = () => {
         >
                 {NFTs.map((e) => {
                     return(
-                        <SwiperSlide>
+                        <SwiperSlide key={e.name}>
                             <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.url} nftCost={e.price} nftLikes={'0'} nftName={e.name}/>
                         </SwiperSlide>
                     );

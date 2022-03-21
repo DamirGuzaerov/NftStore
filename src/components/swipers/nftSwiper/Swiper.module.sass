@@ -1,3 +1,5 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
 .customSwiper
   min-height: 300px
   max-width: 1120px
@@ -17,5 +19,9 @@
 
 .titleStyle
   text-align: left
+
+.loading
+  @include gs.loading_container
+
 
 
