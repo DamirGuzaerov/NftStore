@@ -7,36 +7,60 @@ import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import axios from "axios";
 import Moralis from "moralis";
 
+export interface NFTContent {
+    url: string,
+    name: string,
+    price: string
+}
+
+
+
 const NFTSwiper = () => {
-    const [urls, setUrl] = useState(['']);
+    const [NFTs, setNFTs] = useState<NFTContent[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
-        urls.pop();
         getNFT();
     }, [])
 
+
     async function getNFT() {
-        const options = {q: "citti", filter: "name", chain:'eth', limit: 10};
+        const options = {q: "war", filter: "name", chain: "polygon", limit: 10};
+
         // @ts-ignore
         const NFTs = await Moralis.Web3API.token.searchNFTs(options);
         let promises: any[] = [];
-        let localUrls: string[] = [];
+        let nfts: NFTContent[] = [];
 
         NFTs.result?.forEach((e) => {
-            console.log(e.token_uri);
+            console.log(e);
             promises.push(
                 axios.get(e.token_uri)
                     .then(response => {
-                        if(!response.data.image)
-                            localUrls.push(response.data.image_url)
-                        else localUrls.push(response.data.image)
+                        nfts.push({url: response.data.image, name: response.data.name, price: response.data.price});
+                        console.log(e.token_uri)
                     }).catch(function (error) {
                     console.log(error)
                 })
             )
         })
 
-        Promise.all(promises).then(() => setUrl(localUrls)).catch((reason)=> console.log(reason));
+        Promise.all(promises).then(() => {
+            setNFTs(nfts);
+            console.log(nfts);
+            setIsLoading(false);
+        })
+            .catch((reason) => setNFTs([]));
     }
+
+    if (isLoading) {
+        return (
+            <p>
+                Загрузка
+            </p>
+        )
+    }
+
 
     return (
         <div className={styles.customSwiperContainer}>
@@ -51,15 +75,15 @@ const NFTSwiper = () => {
                     onSlideChange={() => console.log('slide change')}
                     className={styles.customSwiper}
                 >
-                    {urls.map((url,index) => {
+                    {NFTs.map(nft => {
                         return (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide key={nft.url}>
                                 <NftPreviewCard
-                                    imgUrl={url}
+                                    imgUrl={nft.url}
                                     creatorImgUrl={authorImg}
-                                    nftCost={'1000 ETH'}
-                                    nftName={'Amazing NFT'}
-                                    nftLikes={'245'}
+                                    nftCost={nft.price}
+                                    nftName={nft.name}
+                                    nftLikes={'0'}
                                 />
                             </SwiperSlide>
                         )
