@@ -1,11 +1,9 @@
 import React, {FC} from "react";
-import imgUrl from "../../assets/images/tempImg/tempPreviewImgCollection.svg";
 import NftCollectionPreviewCard from "../nftCollectionPreviewCard/nftCollectionPreviewCard";
 import styles from './nftCollectionsList.module.sass'
 import {DefaultButton} from "../ui/buttons/default-button";
 
-const NFtCollectionsList = () => {
-
+const NFTCollectionsList = () => {
     return (
         <div className={styles.collectionsListWrapper}>
             <h1 className={styles.collectionsListFilter}>
@@ -81,4 +79,4 @@ const NFtCollectionsList = () => {
     )
 }
 
-export default NFtCollectionsList
+export default NFTCollectionsList

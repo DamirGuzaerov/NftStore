@@ -25,7 +25,7 @@ const NFTSwiper = () => {
 
 
     async function getNFT() {
-        const options = {q: "war", filter: "name", chain: "polygon", limit: 10};
+        const options = {q: "Pancake", filter: "name", chain: "eth", limit: 15};
 
         // @ts-ignore
         const NFTs = await Moralis.Web3API.token.searchNFTs(options);
@@ -37,7 +37,10 @@ const NFTSwiper = () => {
             promises.push(
                 axios.get(e.token_uri)
                     .then(response => {
-                        nfts.push({url: response.data.image, name: response.data.name, price: response.data.price});
+                        let url;
+                        if(response.data.image==null) url = response.data.image_url
+                        else url = response.data.image
+                        nfts.push({url: url, name: response.data.name, price: response.data.price});
                         console.log(e.token_uri)
                     }).catch(function (error) {
                     console.log(error)
