@@ -14,8 +14,6 @@ export interface NFTContent {
     price: string
 }
 
-
-
 const NFTSwiper = () => {
     const [NFTs, setNFTs] = useState<NFTContent[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -25,29 +23,28 @@ const NFTSwiper = () => {
         getNFT();
     }, [])
 
-
     async function getNFT() {
-        const options = {q: "Pancake", filter: "name", chain: "eth", limit: 15};
-
-        // @ts-ignore
-        const NFTs = await Moralis.Web3API.token.searchNFTs(options);
+        const NFTs = await Moralis.Web3API.token.getAllTokenIds({address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth",limit:600});
+        console.log(NFTs)
         let promises: any[] = [];
         let nfts: NFTContent[] = [];
 
         NFTs.result?.forEach((e) => {
             console.log(e);
-            promises.push(
-                axios.get(e.token_uri)
-                    .then(response => {
-                        let url;
-                        if(response.data.image==null) url = response.data.image_url
-                        else url = response.data.image
-                        nfts.push({url: url, name: response.data.name, price: response.data.price});
-                        console.log(e.token_uri)
-                    }).catch(function (error) {
-                    console.log(error)
-                })
-            )
+            if (e.token_uri != null) {
+                promises.push(
+                    axios.get(e.token_uri)
+                        .then(response => {
+                            let url;
+                            if (response.data.image == null) url = response.data.image_url
+                            else url = response.data.image
+                            nfts.push({url: url, name: response.data.name, price: response.data.price});
+                            console.log(e.token_uri)
+                        }).catch(function (error) {
+                        console.log(error)
+                    })
+                )
+            }
         })
 
         Promise.all(promises).then(() => {
@@ -65,7 +62,6 @@ const NFTSwiper = () => {
             </div>
         )
     }
-
 
     return (
         <div className={styles.customSwiperContainer}>

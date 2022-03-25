@@ -19,13 +19,6 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
         nftLikes
     } = props;
 
-    let name;
-    if(nftName.length > 30) {
-        name = nftName.slice(0, 27);
-    } else {
-        name = nftName;
-    }
-
     return (
         <div className={styles.previewCardWrapper}>
             <div className={styles.previewCardImgWrapper}>
@@ -37,7 +30,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
             </div>
             <div className={styles.previewCardInfoWrapper}>
                 <div className={styles.previewCardMainInfo}>
-                    <div className={styles.nftName}>{name}</div>
+                    <div className={styles.nftName}>{nftName}</div>
                     <div className={styles.nftCost}>{nftCost}</div>
                 </div>
                 <div className={styles.previewCardSecInfo}>
