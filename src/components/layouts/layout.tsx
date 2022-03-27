@@ -5,7 +5,7 @@ import {Footer} from "../footer/footer";
 
 export const Layout = () => {
     return (
-        <div className={styles.div}>
+        <div className={styles.container}>
             <Header/>
             <Outlet/>
             <Footer/>
