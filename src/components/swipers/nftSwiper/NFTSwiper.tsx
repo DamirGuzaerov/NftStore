@@ -7,11 +7,25 @@ import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import axios from "axios";
 import Moralis from "moralis";
 import { Oval } from  'react-loader-spinner'
+import {chainType, useNFT} from "../../../utils/hooks/getNFT-hook";
 
 export interface NFTContent {
     url: string,
     name: string,
-    price: string
+    price: string,
+    id?: string
+}
+
+export interface nft {
+    amount?: string,
+    contract_type: string,
+    metadata?: string,
+    name: string,
+    symbol: string,
+    synced_al?: string,
+    token_address: string,
+    token_id: string,
+    token_url: string
 }
 
 const NFTSwiper = () => {
@@ -19,18 +33,21 @@ const NFTSwiper = () => {
     const [isLoading, setIsLoading] = useState(true);
     let index = 0;
 
+    const chain: chainType = "eth";
+
+    console.log(useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 20, chain));
+
     useEffect(() => {
         getNFT();
     }, [])
 
     async function getNFT() {
-        const NFTs = await Moralis.Web3API.token.getAllTokenIds({address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth",limit:600});
-        console.log(NFTs)
+        const NFTs = await Moralis.Web3API.token.getAllTokenIds({address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth",limit:20});
+
         let promises: any[] = [];
         let nfts: NFTContent[] = [];
 
         NFTs.result?.forEach((e) => {
-            console.log(e);
             if (e.token_uri != null) {
                 promises.push(
                     axios.get(e.token_uri)
@@ -39,7 +56,6 @@ const NFTSwiper = () => {
                             if (response.data.image == null) url = response.data.image_url
                             else url = response.data.image
                             nfts.push({url: url, name: response.data.name, price: response.data.price});
-                            console.log(e.token_uri)
                         }).catch(function (error) {
                         console.log(error)
                     })
@@ -49,7 +65,6 @@ const NFTSwiper = () => {
 
         Promise.all(promises).then(() => {
             setNFTs(nfts);
-            console.log(nfts);
             setIsLoading(false);
         })
             .catch((reason) => setNFTs([]));

@@ -10,7 +10,6 @@ interface props {
 
 export const DefaultButton = ({value, paddingRightLeft, paddingTopBottom, type, func}: props) => {
     let buttonStyle;
-    console.log(typeof func);
     if (type != 'action') {
         buttonStyle = {
             border: 'none',
@@ -31,7 +30,7 @@ export const DefaultButton = ({value, paddingRightLeft, paddingTopBottom, type, 
         }
     }
     return (
-        <button className={styles.default_button} style={buttonStyle} onClick={()=>func()}>
+        <button className={styles.default_button} style={buttonStyle} onClick={func()}>
             {value}
         </button>
     )

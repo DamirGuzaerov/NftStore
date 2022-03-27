@@ -1,23 +1,22 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import React from "react";
 
 export interface Modal {
-    currentModal?: React.ReactNode;
+    modalType: string
 }
 
 const initialState: Modal = {
-    currentModal: null
+    modalType: ''
 }
 
 export const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
-        addModal(state, action: PayloadAction<Modal>) {
-            state.currentModal = action.payload.currentModal;
+        addModal(state, action: PayloadAction<string>) {
+            state.modalType = action.payload;
         },
         removeModal(state) {
-            state.currentModal = null;
+            state.modalType = '';
         }
     }
 });

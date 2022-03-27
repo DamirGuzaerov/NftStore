@@ -4,25 +4,30 @@ import logo from './../../assets/logo.svg'
 import {Link} from "react-router-dom";
 import {Search} from "../ui/search/search";
 import {DefaultButton} from "../ui/buttons/default-button";
-import {addModal, modalSlice} from "../../stores/reducers/modalSlice";
-import {LoginModal} from "../modals/loginModal/loginModal";
-import {useDispatch} from "react-redux";
-import {Modal} from "../../stores/reducers/modalSlice";
+import {addModal, removeModal} from "../../stores/reducers/modalSlice";
+import {useDispatch, useSelector} from "react-redux";
+import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import Moralis from "moralis";
+
 
 const moralisAuth = () => {
     Moralis.authenticate().then(function (user) {
         console.log(user)
     })
 }
-
 export const Header = () => {
     const dispatch = useDispatch();
+    const t = useAppSelector(state => state.ModalReducer);
+
     const openLogin = () => {
-        console.log('opened');
-        const modal: Modal = {currentModal: LoginModal};
-        dispatch(addModal(modal));
+        dispatch(addModal('Login'));
+        console.log('opened')
     }
+
+    const closeLogin = () => {
+        dispatch(removeModal());
+    }
+
 
     return (
         <header>
@@ -44,9 +49,9 @@ export const Header = () => {
                 <Search/>
                 <div className={styles.buttons_container}>
                     <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
-                                   func={console.log}/>
+                                   func={() => closeLogin}/>
                     <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                   func={moralisAuth}/>
+                                   func={() => openLogin}/>
                 </div>
                 <Icon name={'language'} width={20} height={20}/>
             </div>
