@@ -8,20 +8,19 @@ import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import Moralis from "moralis";
+import {fetchUser} from "../../stores/reducers/ActionCreators";
 
 
-const moralisAuth = () => {
-    Moralis.authenticate().then(function (user) {
-        console.log(user)
-    })
-}
 export const Header = () => {
     const dispatch = useDispatch();
-    const t = useAppSelector(state => state.ModalReducer);
 
     const openLogin = () => {
         dispatch(addModal('Login'));
         console.log('opened')
+    }
+
+    const login = async () => {
+        dispatch(fetchUser());
     }
 
     const closeLogin = () => {
@@ -51,7 +50,7 @@ export const Header = () => {
                     <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
                                    func={() => closeLogin}/>
                     <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                   func={() => openLogin}/>
+                                   func={() => openLogin()}/>
                 </div>
                 <Icon name={'language'} width={20} height={20}/>
             </div>
