@@ -31,7 +31,7 @@ export const DefaultButton = ({value, paddingRightLeft, paddingTopBottom, type, 
         }
     }
     return (
-        <button className={styles.default_button} style={buttonStyle} onClick={func()}>
+        <button className={styles.default_button} style={buttonStyle} onClick={()=>func()}>
             {value}
         </button>
     )

@@ -8,16 +8,21 @@ import {addModal, modalSlice} from "../../stores/reducers/modalSlice";
 import {LoginModal} from "../modals/loginModal/loginModal";
 import {useDispatch} from "react-redux";
 import {Modal} from "../../stores/reducers/modalSlice";
+import Moralis from "moralis";
+
+const moralisAuth = () => {
+    Moralis.authenticate().then(function (user) {
+        console.log(user)
+    })
+}
 
 export const Header = () => {
     const dispatch = useDispatch();
-
     const openLogin = () => {
         console.log('opened');
         const modal: Modal = {currentModal: LoginModal};
         dispatch(addModal(modal));
     }
-
 
     return (
         <header>
@@ -41,7 +46,7 @@ export const Header = () => {
                     <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
                                    func={console.log}/>
                     <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                   func={console.log}/>
+                                   func={moralisAuth}/>
                 </div>
                 <Icon name={'language'} width={20} height={20}/>
             </div>

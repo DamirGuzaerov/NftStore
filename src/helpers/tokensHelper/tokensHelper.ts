@@ -32,12 +32,9 @@ export const networkCollections = {
             image: 'https://lh3.googleusercontent.com/mhHqco_bu5oRx1TftVg36aztvlsk44FT_RSzHv0MC0erh6_jwJSjdA-dvZumhTLaBo8-HDzTh5xVRGVExLeNbBK4oYK3N9xJxR2CHg=s130'
         },
     ],
-    "polygon":[{
-
-    }]
 }
 
-export const getCollectionsByChain = (chain: "eth"|"polygon") => {
+export const getCollectionsByChain = (chain: "eth") => {
     return networkCollections[chain]
 }
 

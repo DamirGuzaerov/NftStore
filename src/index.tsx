@@ -8,11 +8,11 @@ import {Provider} from "react-redux";
 import {mainStore} from "./stores/mainStore";
 import { MoralisProvider } from 'react-moralis';
 import Moralis from "moralis";
-Moralis.start({ serverUrl : "https://qtqaadqffvcu.usemoralis.com:2053/server", appId : "BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt" });
+Moralis.start({ serverUrl : "https://p3hmnjsc9iyv.usemoralis.com:2053/server", appId : "ezQDEaeNmCAGkSvIGHURBDVbTl5x6oEmX3JXfzS4" });
 
 ReactDOM.render(
   <React.StrictMode>
-      <MoralisProvider serverUrl='https://qtqaadqffvcu.usemoralis.com:2053/server' appId="BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt">
+      <MoralisProvider serverUrl='https://p3hmnjsc9iyv.usemoralis.com:2053/server' appId="ezQDEaeNmCAGkSvIGHURBDVbTl5x6oEmX3JXfzS4">
       <Provider store={mainStore()}>
           <BrowserRouter>
               <App />

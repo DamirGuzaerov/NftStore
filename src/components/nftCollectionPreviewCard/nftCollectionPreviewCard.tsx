@@ -9,15 +9,17 @@ interface NftCollectionPreviewCardProps {
 }
 
 const NFtCollectionPreviewCard:FC<NftCollectionPreviewCardProps> = (props) => {
-    const {collectionAddress,
+    const {
+        collectionAddress,
         previewImgUrl,
-        name}=props
+        name
+    }=props
 
     return (
         <div className={styles.cardWrapper}>
-            <img className={styles.cardPreviewImg} src={imgUrl}></img>
+            <img className={styles.cardPreviewImg} src={previewImgUrl}></img>
             <div className={styles.collectionInfo}>
-                <div className={styles.collectionName}>Meebits</div>
+                <div className={styles.collectionName}>{name}</div>
                 <div className={styles.collectionPrice}>17,315,885$</div>
             </div>
         </div>

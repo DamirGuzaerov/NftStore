@@ -2,8 +2,11 @@ import React, {FC} from "react";
 import NftCollectionPreviewCard from "../nftCollectionPreviewCard/nftCollectionPreviewCard";
 import styles from './nftCollectionsList.module.sass'
 import {DefaultButton} from "../ui/buttons/default-button";
+import {getCollectionsByChain} from "../../helpers/tokensHelper/tokensHelper";
 
 const NFTCollectionsList = () => {
+    const nftCollections = getCollectionsByChain('eth');
+
     return (
         <div className={styles.collectionsListWrapper}>
             <h1 className={styles.collectionsListFilter}>
@@ -20,60 +23,17 @@ const NFTCollectionsList = () => {
                     type={'action'}/>
             </h1>
             <ul className={styles.collectionsList}>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
-                <li>
-                    <NftCollectionPreviewCard
-                        collectionAddress={'0xED5AF388653567Af2F388E6224dC7C4b3241C544'}
-                        name={'Azuki'}
-                    />
-                </li>
+                {nftCollections.map((nftCollection,index)=>{
+                    return(
+                        <li key = {index}>
+                            <NftCollectionPreviewCard
+                                collectionAddress={nftCollection.address}
+                                name={nftCollection.name}
+                                previewImgUrl={nftCollection.image}
+                            />
+                         </li>
+                    )
+                })}
             </ul>
         </div>
     )
