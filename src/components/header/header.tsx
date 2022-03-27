@@ -6,8 +6,6 @@ import {Search} from "../ui/search/search";
 import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch, useSelector} from "react-redux";
-import {useAppSelector} from "../../utils/hooks/redux-hooks";
-import Moralis from "moralis";
 import {fetchUser} from "../../stores/reducers/ActionCreators";
 
 
@@ -26,7 +24,6 @@ export const Header = () => {
     const closeLogin = () => {
         dispatch(removeModal());
     }
-
 
     return (
         <header>

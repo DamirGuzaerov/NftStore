@@ -1,3 +1,23 @@
+$button-success: rgb(55, 114, 255)
+$button-success-hover: rgb(34, 73, 164)
+
+@mixin modal-default-font-settings
+  font-weight: 400
+  font-size: 14px
+
+
+@mixin button-example
+  display: flex
+  height: 56px
+  justify-content: center
+  align-items: center
+  border-radius: 8px
+  border: none
+  margin-top: 32px
+  font-size: 16px
+  line-height: 24px
+
+
 .overlay
   position: fixed
   left: 0
@@ -10,4 +30,130 @@
   display: flex
   justify-content: center
   align-items: center
+  z-index: 1
+
+
+.modalOverlay
+  position: fixed
+  left: 0
+  right: 0
+  top: 0
+  bottom: 0
+  width: 100%
+  height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
   z-index: 2
+
+.modal__container
+  background: rgb(24, 24, 24)
+  border-radius: 24px
+  width: 100%
+  max-width: 345px
+  min-width: 325px
+  padding: 48px
+
+  input
+    display: flex
+    border: 1px solid rgba(0, 11, 38, 0.16)
+    margin-top: 24px
+    border-radius: 8px
+    padding: 20px 16px
+    width: 384px
+
+  input:first-child
+    margin-top: 48px
+
+  input::placeholder
+    @include modal-default-font-settings
+    color: rgba(0, 11, 38, 0.4)
+
+  h2
+    font-style: normal
+    font-weight: 600
+    font-size: 28px
+    line-height: 32px
+    margin: 0
+
+.modal__form_container
+  display: flex
+  flex-direction: column
+
+.title
+  color: white
+
+.modal__firstrow
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+
+.modal__closeButton
+  display: flex
+  background: none
+  border: none
+  &:hover
+    cursor: pointer
+
+.btnIcon
+  margin-right: 15px
+.modal__sendButton
+  @include button-example
+  width: 100%
+
+  border-radius: 40px
+
+
+  background-color: $button-success
+  color: rgb(255, 255, 255)
+  display: flex
+  justify-content: center
+  &:hover
+    cursor: pointer
+    background-color: $button-success-hover
+
+.modal_content
+  display: flex
+  flex-direction: column
+
+.modal__underLinks
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  margin-top: 16px
+
+  button
+    color: $button-success
+    background: none
+    border: none
+    @include modal-default-font-settings
+
+  button:hover
+    cursor: pointer
+    color: #0f8d6a
+
+.modal__enterForPartnersButton
+  @include button-example
+  background: rgba(62, 80, 114, 0.08)
+  &:hover
+    cursor: pointer
+    background: rgba(12, 18, 21, 0.14)
+
+.error_message
+  @include modal-default-font-settings
+  margin: 0
+  margin: 8px 0 0 15px
+  color: #FF4545
+
+
+.modal__subtitle
+  font-weight: 400
+  font-size: 14px
+  line-height: 20px
+  color: rgba(0, 11, 38, 0.72)
+  margin: 24px 0px
+
+
+
+
