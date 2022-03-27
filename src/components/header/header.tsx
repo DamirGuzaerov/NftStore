@@ -37,6 +37,9 @@ export const Header = () => {
                         <Link to={'/'}>
                             Discover
                         </Link>
+                        <Link to={'/collections'}>
+                            NFT Collections
+                        </Link>
                         <Link to={'/'}>
                             How it works
                         </Link>

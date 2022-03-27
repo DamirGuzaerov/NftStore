@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useState} from "react";
 import styles from "./nftCollectionPreviewCard.module.sass"
-import imgUrl from '../../assets/images/tempImg/tempPreviewImgCollection.svg'
-interface NftCollectionPreviewCardProps {
+
+export interface NftCollectionPreviewCardProps {
     collectionAddress:string,
-    previewImgUrl?:string,
+    previewImgUrl:string,
     name:string,
-    totalPrice?:string
+    totalPrice?:string,
+    description?:string
 }
 
 const NFtCollectionPreviewCard:FC<NftCollectionPreviewCardProps> = (props) => {
@@ -25,5 +26,7 @@ const NFtCollectionPreviewCard:FC<NftCollectionPreviewCardProps> = (props) => {
         </div>
     )
 }
+
+
 
 export default NFtCollectionPreviewCard

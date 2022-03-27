@@ -1,0 +1,105 @@
+.previewCardWrapper
+  border-radius: 15px
+  overflow: hidden
+  border: 1px #424242 solid
+  &:hover
+    border: 1px white solid
+    cursor: pointer
+
+.previewCardImgWrapper
+  position: relative
+
+  max-height: 280px
+
+  overflow: hidden
+  &:hover
+    cursor: pointer
+    .hoverElements
+      transform: translate(0px,-64px)
+
+.previewCardImg
+  width: 100%
+  object-fit: contain
+
+.hoverElements
+  width: 100%
+  display: flex
+  justify-content: center
+
+  transition: transform 0.7s
+  bottom: -50px
+  position: absolute
+
+.buyNftButton
+  display: flex
+  align-items: center
+
+  color: white
+
+  background: #3772FF
+  border-radius: 90px
+  font-size: 16px
+  padding: 14px 16px
+  border: 0
+  &:hover
+    cursor: pointer
+    background: #2244a1
+
+.previewCardInfoWrapper
+
+  border-top: 0
+  overflow: hidden
+  padding-top: 21px
+
+.previewCardMainInfo
+  padding: 0 24px
+  text-align: center
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.collectionName
+  font-size: 16px
+  margin-bottom: 12px
+  color: #FCFCFD
+  &:hover
+    cursor: pointer
+
+.collectionDesc
+  color: #a9a9a9
+  overflow: hidden
+  text-overflow: ellipsis
+  display: -moz-box
+  -moz-box-orient: vertical
+  display: -webkit-box
+  -webkit-line-clamp: 3
+  -webkit-box-orient: vertical
+  line-clamp: 3
+  box-orient: vertical
+
+.previewCardSecInfo
+  color: white
+  @extend .previewCardMainInfo
+  margin: 12px 0
+
+.creatorAvatar
+  border-radius: 100%
+  margin-left: 10px
+  object-fit: cover
+  width: 24px
+  height: 24px
+  border: 2px solid #45B36B
+  &:hover
+    cursor: pointer
+
+.nftLikes
+  color: #ffffff
+  display: flex
+  align-items: center
+
+.iconContainer
+  margin-right: 3px
+  display: flex
+  align-items: center
+

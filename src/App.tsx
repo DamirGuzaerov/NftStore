@@ -13,8 +13,8 @@ function App() {
             <Route path={'/'} element={<Layout/>}>
                 <Route element={<Homepage/>} index/>
                 <Route element={<Collections/>} path={'collections'}>
-                    <Route element={<Collection></Collection>} path={':collectionName'}></Route>
                 </Route>
+                <Route element={<Collection/>} path={'collections/:collectionAddress'}></Route>
             </Route>
         </Routes>
     );

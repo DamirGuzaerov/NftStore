@@ -43,7 +43,6 @@ const NFTSwiper = () => {
 
     async function getNFT() {
         const NFTs = await Moralis.Web3API.token.getAllTokenIds({address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth",limit:20});
-
         let promises: any[] = [];
         let nfts: NFTContent[] = [];
 
