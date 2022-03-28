@@ -17,10 +17,8 @@ function App() {
                 <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
                 </RequireAuth>}/>
-                <Route element={<Collections/>} path={'collections'}>
-                    <Route element={<Collection></Collection>} path={':collectionName'}></Route>
-                </Route>
-                <Route element={<Collection/>} path={'collections/:collectionAddress'}></Route>
+                <Route element={<Collections/>} path={'collections'}/>
+                <Route element={<Collection/>} path={'collections/:collectionAddress'}/>
             </Route>
         </Routes>
     );

@@ -2,9 +2,11 @@ import styles from "../home/homepageStyles.module.sass";
 import collectionStyles from "./collections.module.sass";
 import {getCollectionsByChain} from "../../helpers/tokensHelper/tokensHelper";
 import {NFTCollectionLgPreviewCard} from "../../components/nftCollectionLgPreviewCard/nftCollectionLgPreviewCard";
+import { Outlet } from "react-router-dom";
 
 const Collections= ()=>{
     return(
+        <Outlet/>||
         <main>
             <div className={styles.main_container}>
                 <h1 className={collectionStyles.title}>

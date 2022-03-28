@@ -31,18 +31,19 @@ export interface nft {
 const NFTSwiper = () => {
     const [isLoading, setIsLoading] = useState(true);
     let index = 0;
-    const [NFTs, setNFTs] = useState<NFTContent[]>([])
+    const [NFTs,setNFTs] = useState<NFTContent[]>()
     const chain: chainType = "eth";
     let NFTsPromise = useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 20, chain);
 
-    useEffect(() => {
+    useEffect(()=>{
         NFTsPromise
             .then(
                 result => {
                     setNFTs(result)
                     setIsLoading(false)
-                });
-    }, [])
+                })
+        ;
+    },[NFTsPromise])
 
 
     if (isLoading) {
