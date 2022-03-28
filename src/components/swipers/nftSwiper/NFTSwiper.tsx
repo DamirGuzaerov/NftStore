@@ -42,7 +42,7 @@ const NFTSwiper = () => {
                     setNFTs(result)
                     setIsLoading(false)
                 });
-    }, [])
+    }, [NFTsPromise])
 
 
     if (isLoading) {

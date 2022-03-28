@@ -9,11 +9,11 @@ import {mainStore} from "./stores/mainStore";
 import { MoralisProvider } from 'react-moralis';
 import Moralis from "moralis";
 import {ModalConstructor} from "./components/modals/modalConstructor/modalConstructor";
-Moralis.start({ serverUrl : "https://qtqaadqffvcu.usemoralis.com:2053/server", appId : "BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt" });
-
+Moralis.start({ serverUrl : process.env.REACT_APP_SERVER_URL, appId : process.env.REACT_APP_APPLICATION_ID});
+console.log(process.env.REACT_APP_SERVER_URL);
 ReactDOM.render(
   <React.StrictMode>
-      <MoralisProvider serverUrl='https://qtqaadqffvcu.usemoralis.com:2053/server' appId="BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt">
+      <MoralisProvider serverUrl='https://qtqaadqffvcu.usemoralis.com:2053/server' appId={"BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt"}>
       <Provider store={mainStore()}>
           <BrowserRouter>
               <App />
