@@ -6,7 +6,7 @@ import axios from "axios";
 export type chainType = "eth" | "0x1" | "ropsten" | "0x3" | "rinkeby" | "0x4" | "goerli" | "0x5" | "kovan" | "0x2a" | "polygon";
 
 
-export function useNFT(address: string, limit: number, chain: chainType) {
+export function useNFT(address: string, limit: number, chain: chainType) : Promise<NFTContent[]> {
     const [NFTs, setNFTs] = useState<NFTContent[]>();
     useEffect(() => {
         async function fetchNFT(): Promise<void | any[]> {
@@ -19,7 +19,6 @@ export function useNFT(address: string, limit: number, chain: chainType) {
                     promises.push(
                         axios.get(e.token_uri)
                             .then(response => {
-                                console.log(response);
                                 let url;
                                 if (response.data.image == null) url = response.data.image_url
                                 else url = response.data.image
@@ -42,7 +41,13 @@ export function useNFT(address: string, limit: number, chain: chainType) {
         fetchNFT();
 
     }, []);
-    return NFTs;
+    return new Promise(function(resolve, reject) {
+        if(NFTs == null){
+            reject(new Error("NFTs not found"))
+        }
+        else{
+            resolve(NFTs);
+        }
+    });;
 }
 
-// {address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth",limit:600}

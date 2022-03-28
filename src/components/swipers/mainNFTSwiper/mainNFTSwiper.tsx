@@ -27,12 +27,10 @@ export const MainNFTSwiper = () => {
 
         // @ts-ignore
         const NFTs = await Moralis.Web3API.token.searchNFTs(options);
-        console.log(NFTs);
         let promises: any[] = [];
         let nfts: NFTContent[] = [];
 
         NFTs.result?.forEach((e) => {
-            console.log(e);
             promises.push(
                 axios.get(e.token_uri)
                     .then(response => {
@@ -46,7 +44,6 @@ export const MainNFTSwiper = () => {
 
         Promise.all(promises).then(() => {
             setNFTs(nfts);
-            console.log(nfts);
             setIsLoading(false);
         })
             .catch((reason) => setNFTs([]));
