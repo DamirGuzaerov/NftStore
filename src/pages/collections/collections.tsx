@@ -6,7 +6,6 @@ import { Outlet } from "react-router-dom";
 
 const Collections= ()=>{
     return(
-        <Outlet/>||
         <main>
             <div className={styles.main_container}>
                 <h1 className={collectionStyles.title}>

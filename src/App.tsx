@@ -18,7 +18,7 @@ function App() {
                     <Profile/>
                 </RequireAuth>}/>
                 <Route element={<Collections/>} path={'collections'}/>
-                <Route element={<Collection/>} path={'collections/:collectionAddress'}/>
+                <Route element={<Collection/>} path={'collection/:collectionAddress'}/>
             </Route>
         </Routes>
     );
