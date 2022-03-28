@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../utils/models/iuser";
 import {fetchUser} from "./ActionCreators";
+import {useNavigate} from "react-router-dom";
 
 const initialState: IUser = {
     name: '',
@@ -14,20 +15,6 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        userFetchingSuccess(state, action: PayloadAction<IUser>) {
-            state.isLoading = false;
-            state.name = action.payload.name;
-            state.wallet = action.payload.wallet;
-            state.token = action.payload.token;
-            state.error = '';
-        },
-        userFetching(state) {
-            state.isLoading = true;
-        },
-        userFetchingError(state, action: PayloadAction<string>) {
-            state.isLoading = false;
-            state.error = action.payload;
-        }
     },
     extraReducers: {
         [fetchUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
@@ -46,7 +33,5 @@ export const userSlice = createSlice({
         }
     }
 });
-
-export const {userFetching, userFetchingError, userFetchingSuccess} = userSlice.actions;
 
 export default userSlice.reducer;

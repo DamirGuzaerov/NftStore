@@ -1,0 +1,127 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+.profile_container_wrapper
+  background-color: gs.$dark-main-color
+
+.profile_container
+  max-width: gs.$max-width
+  margin: 0 auto
+
+.profile
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  margin-top: 213px
+  margin-bottom: 136px
+
+.profile_info_block
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: 32px 35px
+  background-color: gs.$light-main-color
+  box-shadow: 0px 40px 32px -24px rgba(15, 15, 15, 0.12)
+  border-radius: 16px
+  max-width: 256px
+
+  &
+    word-break: break-word
+    text-align: center
+
+    .profile_avatar
+      width: 160px
+      height: 160px
+      border-radius: 50%
+      object-fit: contain
+
+    .profile_name
+      margin-top: 32px
+      @include gs.poppins-font
+      font-size: 24px
+      color: white
+      max-width: 186px
+
+    .wallet
+      @include gs.links-settings
+      margin-top: 8px
+      color: white
+      display: flex
+      align-items: center
+
+    .wallet:hover
+      text-decoration: white
+
+    .description_profile
+      @include gs.poppins-font
+      margin-top: 20px
+      color: rgba(119, 126, 144, 1)
+
+    .buttons_profile
+      display: flex
+      flex-direction: row
+      justify-content: space-between
+      width: 80%
+      margin-top: 48px
+
+      button
+        display: flex
+        border: 2px solid #353945
+        background: none
+        padding: 10px
+        border-radius: 40px
+
+.profile_nfts_container
+  margin-left: 40px
+  display: flex
+  flex-direction: column
+  max-width: 800px
+  width: 100%
+
+.buttons_edit_row
+  display: flex
+  justify-content: right
+
+.edit_button
+  background: none
+  padding: 12px 16px
+  display: flex
+  justify-content: space-between
+  border-radius: 90px
+  border: 2px solid #777E91
+  width: 134px
+  align-items: center
+
+  p
+    font-weight: 700
+    color: white
+
+.profile_nfts
+  margin-top: 100px
+  display: flex
+  flex-direction: column
+  width: 100%
+  justify-content: left
+
+.profile_nav
+  display: flex
+
+  .nav_buttons
+    padding: 6px 12px
+    background: none
+    color: #777E91
+    border-radius: 100px
+    border: none
+    margin-right: 12px
+
+  .nav_buttons:hover
+    background-color: white
+    color: gs.$dark-main-color
+
+.nft_list
+  display: flex
+  margin-top: 30px
+  width: 100%
+  justify-content: space-between
+  flex-wrap: wrap
+
+

@@ -3,10 +3,21 @@ import Moralis from "moralis";
 import {NFTContent} from "../../components/swipers/nftSwiper/NFTSwiper";
 import axios from "axios";
 
-export type chainType = "eth" | "0x1" | "ropsten" | "0x3" | "rinkeby" | "0x4" | "goerli" | "0x5" | "kovan" | "0x2a" | "polygon";
+export type chainType =
+    "eth"
+    | "0x1"
+    | "ropsten"
+    | "0x3"
+    | "rinkeby"
+    | "0x4"
+    | "goerli"
+    | "0x5"
+    | "kovan"
+    | "0x2a"
+    | "polygon";
 
 
-export function useNFT(address: string, limit: number, chain: chainType) : Promise<NFTContent[]> {
+export function useNFT(address: string, limit: number, chain: chainType): Promise<NFTContent[]> {
     const [NFTs, setNFTs] = useState<NFTContent[]>();
     useEffect(() => {
         async function fetchNFT(): Promise<void | any[]> {
@@ -24,7 +35,7 @@ export function useNFT(address: string, limit: number, chain: chainType) : Promi
                                 else url = response.data.image
                                 nfts.push({url: url, name: response.data.name, price: response.data.price});
                             }).catch(function (error) {
-                                console.log(error)
+                            console.log(error)
                         })
                     )
                 }
@@ -41,13 +52,12 @@ export function useNFT(address: string, limit: number, chain: chainType) : Promi
         fetchNFT();
 
     }, []);
-    return new Promise(function(resolve, reject) {
-        if(NFTs == null){
+    return new Promise(function (resolve, reject) {
+        if (NFTs == null) {
             reject(new Error("NFTs not found"))
-        }
-        else{
+        } else {
             resolve(NFTs);
         }
-    });;
+    });
 }
 
