@@ -40,8 +40,33 @@ header
     a:hover
       color: white
 
+.search_wrapper
+  display: flex
+  align-items: center
+
 .buttons_container
-  width: 167px
+  min-width: 120px
+  max-width: content-box
   display: flex
   justify-content: space-between
+
+.icon_wrapper
+  display: flex
+  margin-left: 10px
+
+@media (max-width: 1038px)
+  .logo_name
+    padding-right: 16px
+  nav
+    display: flex
+    align-items: center
+
+    a
+      font-size: 12px !important
+      text-align: center
+      margin-left: 16px !important
+
+    a:last-child
+      margin-right: 16px
+
 

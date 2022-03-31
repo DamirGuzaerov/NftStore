@@ -1,5 +1,4 @@
 import styles from './MainSwiper.module.sass';
-import image from './../../../assets/images/tempImg/nftPreviewImg.png'
 import author from './../../../assets/images/tempImg/creatorImg.png';
 import {Link} from "react-router-dom";
 import {nftPreviewProps} from "../../nftPreviewCard/nftPreviewCard";
