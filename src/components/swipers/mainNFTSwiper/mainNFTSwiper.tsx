@@ -1,78 +1,67 @@
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
+import './swiperSettings.moudle.sass';
 import {MainNFTSlide} from "./mainNFTSlide";
-import './swiper-settings.module.css';
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Moralis from "moralis";
 import axios from "axios";
 import {NFTContent} from "../nftSwiper/NFTSwiper";
-import { Oval } from  'react-loader-spinner'
-
+import {Oval} from 'react-loader-spinner'
+import {chainType, useNFT} from "../../../utils/hooks/getNFT-hook";
 
 
 export const MainNFTSwiper = () => {
     const [NFTs, setNFTs] = useState<NFTContent[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const navigationPrevRef = useRef(null)
+    const navigationNextRef = useRef(null)
+
+    const chain: chainType = "eth";
+    let NFTsPromise = useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 5, chain);
+
     useEffect(() => {
-        getNFT();
-        console.log('works')
-    }, [])
-
-
-    async function getNFT() {
-        console.log('nft')
-        const options = {q: "cat", filter: "name", chain: "polygon", limit: 3};
-
-        // @ts-ignore
-        const NFTs = await Moralis.Web3API.token.searchNFTs(options);
-        let promises: any[] = [];
-        let nfts: NFTContent[] = [];
-
-        NFTs.result?.forEach((e) => {
-            promises.push(
-                axios.get(e.token_uri)
-                    .then(response => {
-                        nfts.push({url: response.data.image, name: response.data.name, price: response.data.price});
-                        console.log(e.token_uri)
-                    }).catch(function (error) {
-                    console.log(error)
+        NFTsPromise
+            .then(
+                result => {
+                    setNFTs(result)
+                    setIsLoading(false)
                 })
-            )
-        })
+        ;
+    }, [NFTsPromise])
 
-        Promise.all(promises).then(() => {
-            setNFTs(nfts);
-            setIsLoading(false);
-        })
-            .catch((reason) => setNFTs([]));
-    }
-
-    if(isLoading) {
-        return(
+    if (isLoading) {
+        return (
             <div className={styles.loading}>
-                <Oval color="#00BFFF" height={50} width={50} />
+                <Oval color="#00BFFF" height={50} width={50}/>
             </div>
         )
     }
-    return(
+    return (
         <Swiper
             modules={[Navigation]}
             spaceBetween={32}
             slidesPerView={1}
-            navigation
+            navigation={{
+                prevEl: navigationPrevRef.current,
+                nextEl: navigationNextRef.current
+            }}
             onSwiper={(swiper) => console.log(swiper)}
             onSlideChange={() => console.log('slide change')}
             className={styles.customSwiper}
         >
-                {NFTs.map((e) => {
-                    return(
-                        <SwiperSlide key={e.name}>
-                            <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.url} nftCost={e.price} nftLikes={'0'} nftName={e.name}/>
-                        </SwiperSlide>
-                    );
-                })}
+            {NFTs.map((e) => {
+                return (
+                    <SwiperSlide key={e.name}>
+                        <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.url} nftCost={e.price} nftLikes={'0'}
+                                      nftName={e.name}/>
+                    </SwiperSlide>
+                );
+            })}
+
+            <div ref={navigationPrevRef}/>
+            <div ref={navigationNextRef}/>
         </Swiper>
     );
 }

@@ -5,20 +5,17 @@ import {Link} from "react-router-dom";
 import {Search} from "../ui/search/search";
 import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
-import {useDispatch, useSelector} from "react-redux";
-import {fetchUser} from "../../stores/reducers/ActionCreators";
+import {useDispatch} from "react-redux";
+import {useAuth} from "../../utils/hooks/useAuth";
 
 
 export const Header = () => {
     const dispatch = useDispatch();
+    const auth = useAuth();
 
     const openLogin = () => {
         dispatch(addModal('Login'));
         console.log('opened')
-    }
-
-    const login = async () => {
-        dispatch(fetchUser());
     }
 
     const closeLogin = () => {
@@ -45,14 +42,18 @@ export const Header = () => {
                         </Link>
                     </nav>
                 </div>
-                <Search/>
-                <div className={styles.buttons_container}>
-                    <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
-                                   func={() => closeLogin}/>
-                    <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                   func={() => openLogin()}/>
+                <div className={styles.search_wrapper}>
+                    <Search/>
+                    <div className={styles.buttons_container}>
+                        <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
+                                       func={() => closeLogin}/>
+                        {!auth? (<DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
+                                        func={() => openLogin()}/>) : null}
+                    </div>
+                    <div className={styles.icon_wrapper}>
+                        <Icon name={'language'} width={20} height={20}/>
+                    </div>
                 </div>
-                <Icon name={'language'} width={20} height={20}/>
             </div>
         </header>
     );
