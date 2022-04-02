@@ -1,70 +1,54 @@
 import styles from "./collection.module.sass";
-import {Link, useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
-import {chainType, useNFT} from "../../utils/hooks/getNFT-hook";
-import Moralis from "moralis";
-import axios from "axios";
+import React, {useEffect, useRef, useState} from "react";
 import {Oval} from "react-loader-spinner";
-import {Swiper, SwiperSlide} from "swiper/react/swiper-react";
-import {Navigation} from "swiper";
 import NftPreviewCard from "../../components/nftPreviewCard/nftPreviewCard";
 import authorImg from "../../assets/images/tempImg/creatorImg.png";
-import {NFTContent} from "../../components/swipers/nftSwiper/NFTSwiper";
+import {fetchNFT, NFTsContainer} from "../../utils/services/NFTservices/fetchNFT";
 
 const Collection = () => {
-    let {collectionAddress} = useParams();
-
-    const [NFTs, setNFTs] = useState<NFTContent[]>([]);
+    const [NFTsContainer, setNFTsContainer] = useState<NFTsContainer>({total:0,nfts:[]});
     const [isLoading, setIsLoading] = useState(true);
-    let index = 0;
+    const [currentOffset,setCurrentOffset] = useState(0);
+    const [fetching,setFetching] = useState(true);
 
-    const chain: chainType = "eth";
+    const limit = 40;
 
-    console.log(useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 20, chain));
-
-    useEffect(() => {
-        getNFT();
-    }, [])
-
-    async function getNFT() {
-        const NFTs = await Moralis.Web3API.token.getAllTokenIds({address:'0xED5AF388653567Af2F388E6224dC7C4b3241C544',chain:"eth"});
-
-        let promises: any[] = [];
-        let nfts: NFTContent[] = [];
-
-        NFTs.result?.forEach((e) => {
-            if (e.token_uri != null) {
-                promises.push(
-                    axios.get(e.token_uri)
-                        .then(response => {
-                            let url;
-                            if (response.data.image == null) url = response.data.image_url
-                            else url = response.data.image
-                            nfts.push({url: url, name: response.data.name, price: response.data.price});
-                        }).catch(function (error) {
-                        console.log(error)
-                    })
-                )
-            }
-        })
-
-        Promise.all(promises).then(() => {
-            setNFTs(nfts);
-            setIsLoading(false);
-        })
-            .catch((reason) => setNFTs([]));
+    function fetchNFTs() {
+        fetchNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', "eth", limit, currentOffset)
+            .then(
+                result => {
+                    console.log(result)
+                    setNFTsContainer({total: result.total, nfts:[...NFTsContainer.nfts,...result.nfts]})
+                    setCurrentOffset(prevState => prevState+limit)
+                    setIsLoading(false)
+                })
+            .finally(()=>setFetching(false));
     }
 
-    if(isLoading) {
-        return(
-            <div className={styles.loading}>
-                <Oval color="#00BFFF" height={50} width={50} />
-            </div>
-        )
+    useEffect(()=>{
+        if(fetching){
+            setIsLoading(true)
+            fetchNFTs();
+        }
+    },[fetching])
+
+    function scrollHandler() {
+        if (
+            Math.ceil(window.innerHeight + window.scrollY) >=
+            document.documentElement.offsetHeight && NFTsContainer.nfts.length < NFTsContainer.total
+        ){
+            setFetching(true);
+        }
     }
+
+    useEffect(()=>{
+        document.addEventListener("scroll",scrollHandler);
+        return function (){
+            document.removeEventListener("scroll",scrollHandler);
+        }
+    })
 
     return (
-
         <>
             <header className={styles.collectionHeader}>
                 <div className={styles.bannerWrapper}>
@@ -94,9 +78,9 @@ const Collection = () => {
                     </div>
                 </div>
             </header>
-            <div className={styles.collectionGridWrapper}>
+             <div className={styles.collectionGridWrapper}>
                 <div className={styles.collectionGrid}>
-                    {NFTs.map(nft => {
+                    {NFTsContainer.nfts.map(nft => {
                         return (
                             <NftPreviewCard
                                 imgUrl={nft.url}
@@ -109,6 +93,9 @@ const Collection = () => {
                     })}
                 </div>
             </div>
+            {isLoading && <div className={styles.loading}>
+                <Oval color="#00BFFF" height={100} width={100} />
+            </div>}
         </>
     );
 }

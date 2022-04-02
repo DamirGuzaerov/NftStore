@@ -1,11 +1,8 @@
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
-import './swiperSettings.moudle.sass';
 import {MainNFTSlide} from "./mainNFTSlide";
 import React, {useEffect, useRef, useState} from "react";
-import Moralis from "moralis";
-import axios from "axios";
 import {NFTContent} from "../nftSwiper/NFTSwiper";
 import {Oval} from 'react-loader-spinner'
 import {chainType, useNFT} from "../../../utils/hooks/getNFT-hook";
