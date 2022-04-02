@@ -94,9 +94,10 @@ const Collection = () => {
                     </div>
                 </div>
             </header>
-            <div className={styles.collectionGrid}>
-                {NFTs.map(nft => {
-                    return (
+            <div className={styles.collectionGridWrapper}>
+                <div className={styles.collectionGrid}>
+                    {NFTs.map(nft => {
+                        return (
                             <NftPreviewCard
                                 imgUrl={nft.url}
                                 creatorImgUrl={authorImg}
@@ -104,8 +105,9 @@ const Collection = () => {
                                 nftName={nft.name}
                                 nftLikes={'0'}
                             />
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
         </>
     );

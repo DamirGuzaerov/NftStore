@@ -57,14 +57,18 @@
     margin-bottom: 14px
 
 
-.collectionGrid
-  display: grid
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr
-  grid-column-gap: 15px
-  grid-row-gap: 1em
-
-  max-width: 1480px
+.collectionGridWrapper
+  max-width: 1940px
+  width: 100%
   margin: 0 auto
 
+.collectionGrid
+  display: grid
+  grid-template-columns: repeat(auto-fill, 340px)
+  grid-column-gap: 15px
+  grid-row-gap: 1em
+  justify-items: stretch
+  align-items: stretch
 
+  justify-content: center
 
