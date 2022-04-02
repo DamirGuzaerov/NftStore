@@ -4,15 +4,20 @@ import axios from "axios";
 import {useState} from "react";
 import {chainType} from "../../hooks/getNFT-hook";
 
-export interface NFTsContainer{
-    total:number,
-    nfts:NFTContent[]
+export interface NFTsContainer {
+    total: number,
+    nfts: NFTContent[]
 }
 
-export async function fetchNFT(address:string,chain:chainType,limit:number|undefined,offset:number):Promise<NFTsContainer> {
-    const NFTs = await Moralis.Web3API.token.getAllTokenIds({address: address, chain: chain, limit: limit,offset:offset});
+export async function fetchNFT(address: string, chain: chainType, limit: number | undefined, offset: number): Promise<NFTsContainer> {
+    const NFTs = await Moralis.Web3API.token.getAllTokenIds({
+        address: address,
+        chain: chain,
+        limit: limit,
+        offset: offset
+    });
     let promises: any[] = [];
-    let NFTsContainer: NFTsContainer = {total:0,nfts:[]};
+    let NFTsContainer: NFTsContainer = {total: 0, nfts: []};
     NFTsContainer.total = NFTs.total!;
     NFTs.result?.forEach((e) => {
         if (e.token_uri != null) {

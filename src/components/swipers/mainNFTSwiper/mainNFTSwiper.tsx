@@ -1,32 +1,31 @@
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
+import './swiperSettings.moudle.sass';
 import {MainNFTSlide} from "./mainNFTSlide";
 import React, {useEffect, useRef, useState} from "react";
-import {NFTContent} from "../nftSwiper/NFTSwiper";
+import {INFT} from "../nftSwiper/NFTSwiper";
 import {Oval} from 'react-loader-spinner'
-import {chainType, useNFT} from "../../../utils/hooks/getNFT-hook";
+import {getNft} from "../../../utils/hooks/getNfts";
+
 
 
 export const MainNFTSwiper = () => {
-    const [NFTs, setNFTs] = useState<NFTContent[]>([]);
+    const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
 
-    const chain: chainType = "eth";
-    let NFTsPromise = useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 5, chain);
 
     useEffect(() => {
-        NFTsPromise
-            .then(
-                result => {
-                    setNFTs(result)
-                    setIsLoading(false)
-                })
-        ;
-    }, [NFTsPromise])
+        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 5, 'eth').then(r => {
+            setIsLoading(false);
+            setNFTs(r);
+        }).catch(() => {
+            setIsLoading(false);
+        })
+    }, [])
 
     if (isLoading) {
         return (
@@ -50,8 +49,8 @@ export const MainNFTSwiper = () => {
         >
             {NFTs.map((e) => {
                 return (
-                    <SwiperSlide key={e.name}>
-                        <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.url} nftCost={e.price} nftLikes={'0'}
+                    <SwiperSlide key={e.token_id}>
+                        <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.token_uri} nftCost={'0'} nftLikes={'0'}
                                       nftName={e.name}/>
                     </SwiperSlide>
                 );

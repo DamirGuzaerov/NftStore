@@ -7,6 +7,8 @@ import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch} from "react-redux";
 import {useAuth} from "../../utils/hooks/useAuth";
+import {useEffect} from "react";
+import axios from "axios";
 
 
 export const Header = () => {

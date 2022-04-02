@@ -4,19 +4,17 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "./Swiper.module.sass"
 import NftPreviewCard from "../../nftPreviewCard/nftPreviewCard";
 import authorImg from "../../../assets/images/tempImg/creatorImg.png";
-import axios from "axios";
-import Moralis from "moralis";
 import {Oval} from 'react-loader-spinner'
-import {chainType, useNFT} from "../../../utils/hooks/getNFT-hook";
+import {getNft} from "../../../utils/hooks/getNfts";
 
 export interface NFTContent {
     url: string,
     name: string,
     price: string,
-    id?: string
+    id?: string,
 }
 
-export interface nft {
+export interface INFT {
     amount?: string,
     contract_type: string,
     metadata?: string,
@@ -25,25 +23,22 @@ export interface nft {
     synced_al?: string,
     token_address: string,
     token_id: string,
-    token_url: string
+    token_uri: string
 }
 
 const NFTSwiper = () => {
     const [isLoading, setIsLoading] = useState(true);
     let index = 0;
-    const [NFTs,setNFTs] = useState<NFTContent[]>()
-    const chain: chainType = "eth";
-    let NFTsPromise = useNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 20, chain);
+    const [NFTs, setNFTs] = useState<INFT[]>();
 
-    useEffect(()=>{
-        NFTsPromise
-            .then(
-                result => {
-                    setNFTs(result)
-                    setIsLoading(false)
-                })
-        ;
-    },[NFTsPromise])
+    useEffect(() => {
+        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 15, 'eth').then(r => {
+            setIsLoading(false);
+            setNFTs(r);
+        }).catch(() => {
+            setIsLoading(false);
+        })
+    }, [])
 
 
     if (isLoading) {
@@ -70,9 +65,9 @@ const NFTSwiper = () => {
                         return (
                             <SwiperSlide key={index}>
                                 <NftPreviewCard
-                                    imgUrl={nft.url}
+                                    imgUrl={nft.token_uri}
                                     creatorImgUrl={authorImg}
-                                    nftCost={nft.price}
+                                    nftCost={'0'}
                                     nftName={nft.name}
                                     nftLikes={'0'}
                                 />
