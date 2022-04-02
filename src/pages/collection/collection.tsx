@@ -3,10 +3,11 @@ import React, {useEffect, useRef, useState} from "react";
 import {Oval} from "react-loader-spinner";
 import NftPreviewCard from "../../components/nftPreviewCard/nftPreviewCard";
 import authorImg from "../../assets/images/tempImg/creatorImg.png";
-import {fetchNFT, NFTsContainer} from "../../utils/services/NFTservices/fetchNFT";
+import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
+import {getNft} from "../../utils/hooks/getNfts";
 
 const Collection = () => {
-    const [NFTsContainer, setNFTsContainer] = useState<NFTsContainer>({total:0,nfts:[]});
+    const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentOffset,setCurrentOffset] = useState(0);
     const [fetching,setFetching] = useState(true);
@@ -14,11 +15,11 @@ const Collection = () => {
     const limit = 40;
 
     function fetchNFTs() {
-        fetchNFT('0xED5AF388653567Af2F388E6224dC7C4b3241C544', "eth", limit, currentOffset)
+        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', limit, "eth")
             .then(
                 result => {
                     console.log(result)
-                    setNFTsContainer({total: result.total, nfts:[...NFTsContainer.nfts,...result.nfts]})
+                    setNFTs([...NFTs,...result])
                     setCurrentOffset(prevState => prevState+limit)
                     setIsLoading(false)
                 })
@@ -35,7 +36,7 @@ const Collection = () => {
     function scrollHandler() {
         if (
             Math.ceil(window.innerHeight + window.scrollY) >=
-            document.documentElement.offsetHeight && NFTsContainer.nfts.length < NFTsContainer.total
+            document.documentElement.offsetHeight && NFTs.length < 10000
         ){
             setFetching(true);
         }
@@ -74,18 +75,18 @@ const Collection = () => {
                             <p>
                                 Ready to take the red bean?
                             </p>
-                            </p>
+                        </p>
                     </div>
                 </div>
             </header>
-             <div className={styles.collectionGridWrapper}>
+            <div className={styles.collectionGridWrapper}>
                 <div className={styles.collectionGrid}>
-                    {NFTsContainer.nfts.map(nft => {
+                    {NFTs.map(nft => {
                         return (
                             <NftPreviewCard
-                                imgUrl={nft.url}
+                                imgUrl={nft.token_uri}
                                 creatorImgUrl={authorImg}
-                                nftCost={nft.price}
+                                nftCost={"0"}
                                 nftName={nft.name}
                                 nftLikes={'0'}
                             />
