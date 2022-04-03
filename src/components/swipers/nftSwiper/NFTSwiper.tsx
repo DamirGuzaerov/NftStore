@@ -5,26 +5,20 @@ import styles from "./Swiper.module.sass"
 import NftPreviewCard from "../../nftPreviewCard/nftPreviewCard";
 import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import {Oval} from 'react-loader-spinner'
-import {getNft} from "../../../utils/hooks/getNfts";
-
-export interface NFTContent {
-    url: string,
-    name: string,
-    price: string,
-    id?: string,
-}
+import {getCollection} from "../../../utils/hooks/getNfts";
 
 export interface INFT {
     amount?: string,
     contract_type: string,
-    metadata?: string,
+    metadata: string,
     name: string,
     symbol: string,
     synced_al?: string,
     token_address: string,
     token_id: string,
-    token_uri: string,
+    image: string,
     price?: number
+    token_uri:string
 }
 
 const NFTSwiper = () => {
@@ -33,7 +27,7 @@ const NFTSwiper = () => {
     const [NFTs, setNFTs] = useState<INFT[]>();
 
     useEffect(() => {
-        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 'eth', 15).then(r => {
+        getCollection('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 'eth', 15).then(r => {
             setIsLoading(false);
             setNFTs(r);
         }).catch(() => {
@@ -66,7 +60,7 @@ const NFTSwiper = () => {
                         return (
                             <SwiperSlide key={index}>
                                 <NftPreviewCard
-                                    imgUrl={nft.token_uri}
+                                    imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={'0'}
                                     nftName={nft.name}

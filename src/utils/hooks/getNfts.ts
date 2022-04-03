@@ -3,7 +3,7 @@ import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 
 const url = 'https://deep-index.moralis.io/api/v2';
 
-export async function getNft(address: string, chain: string, limit?: number, offset?: number) {
+export async function getCollection(address: string, chain: string, limit?: number, offset?: number) {
     return axios.get(url + `/nft/${address}`, {
         params: {
             chain: chain,
@@ -13,37 +13,42 @@ export async function getNft(address: string, chain: string, limit?: number, off
         headers: {
             'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
         }
-    }).then((response) => {
-        return getImages(response.data.result);
+    }).then(async (response) => {
+        const arr = await setImages(response.data.result);
+        return arr;
     }).catch((er) => {
         return er;
     })
 }
 
-async function getImages(prom: INFT[]) {
+async function setImages(prom: INFT[]) {
+    console.log(prom);
     let promises: any[] = [];
-    let nftsArray: INFT[] =  prom;
-    await prom.forEach(e => {
-        promises.push(
-            axios.get(e.token_uri)
-                .then((data) => {
-                    if(!data.data.image.includes('ipfs://')) {
-                        e.token_uri = data.data.image;
+    await prom.forEach((e) => {
+            if (e.metadata != null) {
+            const image = JSON.parse(e.metadata).image;
+            if (!image.includes('ipfs://')) {
+                e.image = image
+            } else {
+                e.image = image.replace('ipfs:/', 'https://ipfs.io/ipfs');
+            }
+        } else {
+                promises.push( axios.get(e.token_uri).then((r) => {
+                    let res = r.data.image;
+                    if (!res.includes('ipfs://')) {
+                        e.image = res
                     } else {
-                        e.token_uri = data.data.image.replace('ipfs:/', 'https://ipfs.io/ipfs');
+                        e.image = res.replace('ipfs:/', 'https://ipfs.io/ipfs');
                     }
-                })
-                .catch(e => {
-                    console.log(e.message);
                 }))
-    });
-
-    return Promise.all(promises).then(() => {
-        return nftsArray;
+        }
     })
+    return Promise.all(promises).then(()=>{
+        return prom
+    });
 }
 
-export async function getTokenId(address: string, token_id: string, chain?: string, format?: string, limit?: number) {
+export async function getNft(address: string, token_id: string, chain?: string, format?: string, limit?: number) {
     return axios.get(url + `/nft/${address}/${token_id}`, {
         headers: {
             'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
@@ -54,7 +59,7 @@ export async function getTokenId(address: string, token_id: string, chain?: stri
             limit: limit
         }
     }).then((r) => {
-        return r
+        return r.data
     }).catch(e => {
         console.log(e);
     })

@@ -1,6 +1,8 @@
 import styles from "./nftPreviewCard.module.sass"
 import {FC, useEffect} from "react";
 import Icon from "../ui/icon/icon";
+import {NftCost} from "../ui/nftCost/nftCost";
+
 
 export interface nftPreviewProps {
     imgUrl: string,
@@ -31,7 +33,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
             <div className={styles.previewCardInfoWrapper}>
                 <div className={styles.previewCardMainInfo}>
                     <div className={styles.nftName}>{nftName}</div>
-                    <div className={styles.nftCost}>{nftCost}</div>
+                    <NftCost cost={100} currency={"ETH"}/>
                 </div>
                 <div className={styles.previewCardSecInfo}>
                     <img className={styles.creatorAvatar} src={creatorImgUrl} alt=""/>

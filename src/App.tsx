@@ -8,6 +8,7 @@ import {Profile} from "./pages/profile/profilepage";
 import {RequireAuth} from "./utils/provider/authProvider";
 import Collection from "./pages/collection/collection";
 import Collections from "./pages/collections/collections";
+import {Nft} from "./pages/nft/nft";
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
                     <Profile/>
                 </RequireAuth>}/>
                 <Route element={<Collections/>} path={'collections'}/>
-                <Route element={<Collection/>} path={'collection/:collectionAddress'}/>
+                <Route element={<Collection/>} path={'collections/:collectionName'}/>
+                <Route element={<Nft/>} path={'assets/:address/:token_id'}/>
             </Route>
         </Routes>
     );

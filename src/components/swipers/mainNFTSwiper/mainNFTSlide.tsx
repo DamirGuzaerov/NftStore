@@ -4,9 +4,6 @@ import {Link} from "react-router-dom";
 import {nftPreviewProps} from "../../nftPreviewCard/nftPreviewCard";
 import {FC} from "react";
 
-
-
-
 export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, creatorImgUrl}) => {
     let name;
     if(nftName.length > 15) {
