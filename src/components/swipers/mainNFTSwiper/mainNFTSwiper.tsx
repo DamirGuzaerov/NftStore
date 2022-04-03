@@ -6,7 +6,9 @@ import {MainNFTSlide} from "./mainNFTSlide";
 import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../nftSwiper/NFTSwiper";
 import {Oval} from 'react-loader-spinner'
-import {getNft} from "../../../utils/hooks/getNfts";
+import {getNft, getTokenId} from "../../../utils/hooks/getNfts";
+
+
 
 
 
@@ -19,13 +21,16 @@ export const MainNFTSwiper = () => {
 
 
     useEffect(() => {
-        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 5, 'eth').then(r => {
+        getNft('0xAd4D85257c815A4B2C7088a664e958b035B24323', 'eth', 5).then(r => {
             setIsLoading(false);
+            console.log(r);
             setNFTs(r);
+            // getTokenId('0xED5AF388653567Af2F388E6224dC7C4b3241C544', NFTs[1].token_id);
         }).catch(() => {
             setIsLoading(false);
         })
     }, [])
+
 
     if (isLoading) {
         return (

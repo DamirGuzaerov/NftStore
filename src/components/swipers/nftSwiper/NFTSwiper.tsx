@@ -23,7 +23,8 @@ export interface INFT {
     synced_al?: string,
     token_address: string,
     token_id: string,
-    token_uri: string
+    token_uri: string,
+    price?: number
 }
 
 const NFTSwiper = () => {
@@ -32,7 +33,7 @@ const NFTSwiper = () => {
     const [NFTs, setNFTs] = useState<INFT[]>();
 
     useEffect(() => {
-        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 15, 'eth').then(r => {
+        getNft('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 'eth', 15).then(r => {
             setIsLoading(false);
             setNFTs(r);
         }).catch(() => {
