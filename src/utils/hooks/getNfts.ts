@@ -27,7 +27,6 @@ async function getImages(prom: INFT[]) {
         promises.push(
             axios.get(e.token_uri)
                 .then((data) => {
-                    console.log(data);
                     if(!data.data.image.includes('ipfs://')) {
                         e.token_uri = data.data.image;
                     } else {
@@ -44,18 +43,18 @@ async function getImages(prom: INFT[]) {
     })
 }
 
-export async function getTokenId(address: string, token_id: string, chain?: string, format?: string, offset?: number, limit?: number) {
-    axios.get(url + `/nft/${address}/${token_id}`, {
+export async function getTokenId(address: string, token_id: string, chain?: string, format?: string, limit?: number) {
+    return axios.get(url + `/nft/${address}/${token_id}`, {
         headers: {
             'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
         },
         params: {
             chain: chain,
             format: format,
-            offset: offset,
+            limit: limit
         }
     }).then((r) => {
-        console.log(r);
+        return r
     }).catch(e => {
         console.log(e);
     })
