@@ -10,6 +10,7 @@ import Collection from "./pages/collection/collection";
 import Collections from "./pages/collections/collections";
 
 function App() {
+
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>

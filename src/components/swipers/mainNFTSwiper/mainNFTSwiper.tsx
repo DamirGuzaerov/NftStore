@@ -1,13 +1,11 @@
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
-import './swiperSettings.moudle.sass';
 import {MainNFTSlide} from "./mainNFTSlide";
 import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../nftSwiper/NFTSwiper";
 import {Oval} from 'react-loader-spinner'
 import {getNft, getTokenId} from "../../../utils/hooks/getNfts";
-
 
 
 
@@ -18,7 +16,6 @@ export const MainNFTSwiper = () => {
 
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
-
 
     useEffect(() => {
         getNft('0xAd4D85257c815A4B2C7088a664e958b035B24323', 'eth', 5).then(r => {
