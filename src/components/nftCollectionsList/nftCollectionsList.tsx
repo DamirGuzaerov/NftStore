@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import NftCollectionPreviewCard from "../nftCollectionPreviewCard/nftCollectionPreviewCard";
+import NftCollectionPreviewCard from "../cards/nftCollectionPreviewCard/nftCollectionPreviewCard";
 import styles from './nftCollectionsList.module.sass'
 import {DefaultButton} from "../ui/buttons/default-button";
 import {getCollectionsByChain} from "../../helpers/tokensHelper/tokensHelper";

@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import creatorImgUrl from "../../assets/images/tempImg/creatorImg.png";
+import creatorImgUrl from "../../../assets/images/tempImg/creatorImg.png";
 import styles from "./nftCollectionLgPreviewCard.module.sass"
 import {NftCollectionPreviewCardProps} from "../nftCollectionPreviewCard/nftCollectionPreviewCard";
 

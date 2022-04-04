@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "./Swiper.module.sass"
-import NftPreviewCard from "../../nftPreviewCard/nftPreviewCard";
+import NftPreviewCard from "../../cards/nftPreviewCard/nftPreviewCard";
 import authorImg from "../../../assets/images/tempImg/creatorImg.png";
 import {Oval} from 'react-loader-spinner'
 import {getCollection} from "../../../utils/hooks/getNfts";
@@ -18,7 +18,7 @@ export interface INFT {
     token_id: string,
     image: string,
     price?: number
-    token_uri:string
+    token_uri: string
 }
 
 const NFTSwiper = () => {

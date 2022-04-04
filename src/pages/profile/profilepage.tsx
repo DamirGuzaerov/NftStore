@@ -3,7 +3,7 @@ import avatar from '../../assets/images/tempImg/creatorImg.png'
 import pic from '../../assets/images/tempImg/nftPreviewImg.png';
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import Icon from "../../components/ui/icon/icon";
-import NftPreviewCard from "../../components/nftPreviewCard/nftPreviewCard";
+import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
 
 
 export const Profile = () => {

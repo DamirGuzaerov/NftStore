@@ -1,7 +1,7 @@
 import styles from "./nftPreviewCard.module.sass"
 import {FC, useEffect} from "react";
-import Icon from "../ui/icon/icon";
-import {NftCost} from "../ui/nftCost/nftCost";
+import Icon from "../../ui/icon/icon";
+import {NftCost} from "../../ui/nftCost/nftCost";
 
 
 export interface nftPreviewProps {

@@ -1,55 +1,55 @@
 import styles from "./collection.module.sass";
 import React, {useEffect, useRef, useState} from "react";
 import {Oval} from "react-loader-spinner";
-import NftPreviewCard from "../../components/nftPreviewCard/nftPreviewCard";
+import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
 import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {getCollection} from "../../utils/hooks/getNfts";
 import {Link, useParams} from "react-router-dom";
-import {getNftCollectionByName} from "../../utils/services/nftServices/getNftAddressByName";
+import {getNftCollectionByName} from "../../utils/services/NFTservices/getNftAddressByName";
 
 const Collection = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [currentOffset,setCurrentOffset] = useState(0);
-    const [fetching,setFetching] = useState(true);
-    const {collectionName} =  useParams()
+    const [currentOffset, setCurrentOffset] = useState(0);
+    const [fetching, setFetching] = useState(true);
+    const {collectionName} = useParams()
     const limit = 25;
 
-    const collection = getNftCollectionByName(collectionName!.replaceAll('_',' '))!
+    const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
     function fetchNFTs() {
-        getCollection(collection.address,  "eth",limit,currentOffset)
+        getCollection(collection.address, "eth", limit, currentOffset)
             .then(
                 result => {
                     console.log(result)
-                    setNFTs([...NFTs,...result])
-                    setCurrentOffset(prevState => prevState+limit)
+                    setNFTs([...NFTs, ...result])
+                    setCurrentOffset(prevState => prevState + limit)
                     setIsLoading(false)
                 })
-            .finally(()=>setFetching(false));
+            .finally(() => setFetching(false));
     }
 
-    useEffect(()=>{
-        if(fetching){
+    useEffect(() => {
+        if (fetching) {
             setIsLoading(true)
             fetchNFTs();
         }
-    },[fetching])
+    }, [fetching])
 
     function scrollHandler() {
         if (
             Math.ceil(window.innerHeight + window.scrollY) >=
             document.documentElement.offsetHeight && NFTs.length < 10000
-        ){
+        ) {
             setFetching(true);
         }
     }
 
-    useEffect(()=>{
-        document.addEventListener("scroll",scrollHandler);
-        return function (){
-            document.removeEventListener("scroll",scrollHandler);
+    useEffect(() => {
+        document.addEventListener("scroll", scrollHandler);
+        return function () {
+            document.removeEventListener("scroll", scrollHandler);
         }
     })
 
@@ -74,9 +74,9 @@ const Collection = () => {
             </header>
             <div className={styles.collectionGridWrapper}>
                 <div className={styles.collectionGrid}>
-                    {NFTs.map((nft,index) => {
+                    {NFTs.map((nft, index) => {
                         return (
-                            <Link key = {index}
+                            <Link key={index}
                                   to={`/assets/${collection.address}/${nft.token_id}`}>
                                 <NftPreviewCard
                                     imgUrl={nft.image}
@@ -91,7 +91,7 @@ const Collection = () => {
                 </div>
             </div>
             {isLoading && <div className={styles.loading}>
-                <Oval color="#00BFFF" height={100} width={100} />
+                <Oval color="#00BFFF" height={100} width={100}/>
             </div>}
         </>
     );

@@ -1,7 +1,7 @@
 import styles from './MainSwiper.module.sass';
 import author from './../../../assets/images/tempImg/creatorImg.png';
 import {Link} from "react-router-dom";
-import {nftPreviewProps} from "../../nftPreviewCard/nftPreviewCard";
+import {nftPreviewProps} from "../../cards/nftPreviewCard/nftPreviewCard";
 import {FC} from "react";
 
 export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, creatorImgUrl}) => {
