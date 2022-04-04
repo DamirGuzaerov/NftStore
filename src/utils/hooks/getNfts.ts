@@ -14,19 +14,20 @@ export async function getCollection(address: string, chain: string, limit?: numb
             'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
         }
     }).then(async (response) => {
-        const arr = await setImages(response.data.result);
+        const arr = await setData(response.data.result);
         return arr;
     }).catch((er) => {
         return er;
     })
 }
 
-async function setImages(prom: INFT[]) {
+async function setData(prom: INFT[]) {
     console.log(prom);
     let promises: any[] = [];
     await prom.forEach((e) => {
         if (e.metadata != null) {
             parseImage(JSON.parse(e.metadata).image, e);
+            e.name = JSON.parse(e.metadata).name;
         } else {
             promises.push(axios.get(e.token_uri).then((r) => {
                 parseImage(r.data.image, e);
@@ -42,10 +43,11 @@ async function setImages(prom: INFT[]) {
 async function setImage(elem: INFT) {
     if (elem.metadata != null) {
         parseImage(JSON.parse(elem.metadata).image, elem);
+        elem.name = JSON.parse(elem.metadata).name
         return elem;
     } else {
-        return axios.get(elem.token_uri).then(async (r) => {
-            await parseImage(r.data.image, elem);
+        return axios.get(elem.token_uri).then((r) => {
+            parseImage(r.data.image, elem);
             elem.name = r.data.name;
             return elem;
         })

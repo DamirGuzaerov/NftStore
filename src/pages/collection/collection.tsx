@@ -6,7 +6,7 @@ import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {getCollection} from "../../utils/hooks/getNfts";
 import {Link, useParams} from "react-router-dom";
-import {getNftCollectionByName} from "../../utils/services/NFTservices/getNftAddressByName";
+import {getNftCollectionByName} from "../../utils/services/nftServices/getNftAddressByName";
 
 const Collection = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -82,7 +82,7 @@ const Collection = () => {
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={"0"}
-                                    nftName={JSON.parse(nft.metadata)?.name}
+                                    nftName={nft.name}
                                     nftLikes={'0'}
                                 />
                             </Link>
