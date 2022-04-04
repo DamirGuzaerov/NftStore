@@ -1,4 +1,6 @@
 import {FC} from "react";
+import {inspect} from "util";
+import styles from './icon.module.sass'
 
 interface IconProps {
     name: string;
@@ -21,6 +23,7 @@ const Icon: FC<IconProps> = (props) => {
                 width: `${width}px`,
                 height: `${height}px`,
             }}
+            className={styles.icon}
         >
             <use xlinkHref={`/sprite.svg#${name}`}/>
         </svg>
