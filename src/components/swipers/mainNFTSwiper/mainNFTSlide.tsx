@@ -5,19 +5,13 @@ import {nftPreviewProps} from "../../cards/nftPreviewCard/nftPreviewCard";
 import {FC} from "react";
 
 export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, creatorImgUrl}) => {
-    let name;
-    if(nftName.length > 15) {
-        name = nftName.slice(0, 15);
-        name += '...';
-    } else {
-        name = nftName;
-    }
+
     return (
         <div className={styles.mainSwiperContainer}>
             <img src={imgUrl} className={styles.image_settings}/>
 
             <div className={styles.mainSlideContent}>
-                <h1 className={styles.title_nft}>{name}</h1>
+                <h1 className={styles.title_nft}>{nftName}</h1>
                 <div className={styles.creator_container}>
                     <div className={styles.authorInfo}>
                         <div className={styles.author_avatar_wrapper}>

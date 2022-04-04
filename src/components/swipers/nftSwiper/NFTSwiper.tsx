@@ -54,6 +54,7 @@ const NFTSwiper = () => {
                     slidesPerView={4}
                     navigation
                     className={styles.customSwiper}
+
                 >
                     {NFTs?.map(nft => {
                         index++;

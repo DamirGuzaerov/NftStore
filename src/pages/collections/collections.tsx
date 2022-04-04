@@ -2,7 +2,7 @@ import styles from "../home/homepageStyles.module.sass";
 import collectionStyles from "./collections.module.sass";
 import {getCollectionsByChain} from "../../helpers/tokensHelper/tokensHelper";
 import {NFTCollectionLgPreviewCard} from "../../components/cards/nftCollectionLgPreviewCard/nftCollectionLgPreviewCard";
-import {Link, Outlet} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Collections = () => {
     return (
@@ -14,7 +14,7 @@ const Collections = () => {
                 <div className={collectionStyles.collectionsGrid}>
                     {getCollectionsByChain("eth").map((collection, index) => {
                         return (
-                            <Link to={`${collection.name.replaceAll(' ','_')}`} >
+                            <Link to={`${collection.name.replaceAll(' ', '_')}`}>
                                 <NFTCollectionLgPreviewCard
                                     key={index}
                                     collectionAddress={collection.address}

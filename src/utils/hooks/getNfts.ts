@@ -2,6 +2,7 @@ import axios from "axios";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 
 const url = 'https://deep-index.moralis.io/api/v2';
+const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
 
 export async function getCollection(address: string, chain: string, limit?: number, offset?: number) {
     return axios.get(url + `/nft/${address}`, {
@@ -11,7 +12,7 @@ export async function getCollection(address: string, chain: string, limit?: numb
             offset: offset
         },
         headers: {
-            'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
+            'X-API-KEY': apikey ?? 'update api key'
         }
     }).then(async (response) => {
         const arr = await setImages(response.data.result);
@@ -73,7 +74,7 @@ function parseImage(image: string, elem: INFT) {
 export async function getNft(address: string, token_id: string, chain?: string, format?: string, limit?: number) {
     return axios.get(url + `/nft/${address}/${token_id}`, {
         headers: {
-            'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
+            'X-API-KEY': apikey ?? 'update api key'
         },
         params: {
             chain: chain,
@@ -90,7 +91,7 @@ export async function getNft(address: string, token_id: string, chain?: string, 
 export async function getOwner(address: string, token_id: string, chain?: string) {
     return axios.get(url + `/nft/${address}/${token_id}/owners`, {
         headers: {
-            'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
+            'X-API-KEY': apikey ?? 'update api key'
         },
         params: {
             address: address,
@@ -107,7 +108,7 @@ export async function getOwner(address: string, token_id: string, chain?: string
 export async function getPrice(address: string, chain?: string, exchange?: string, e?: INFT) {
     return axios.get(url + `/erc20/${address}/price`, {
         headers: {
-            'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
+            'X-API-KEY': apikey ?? 'update api key'
         },
         params: {
             address: address

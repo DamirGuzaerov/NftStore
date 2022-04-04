@@ -6,7 +6,8 @@ import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {getCollection} from "../../utils/hooks/getNfts";
 import {Link, useParams} from "react-router-dom";
-import {getNftCollectionByName} from "../../utils/services/nftServices/getNftAddressByName";
+import {getNftCollectionByName} from "../../utils/services/NFTservices/getNftAddressByName";
+
 
 const Collection = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
