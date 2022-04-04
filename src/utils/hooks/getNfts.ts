@@ -27,11 +27,13 @@ async function setData(prom: INFT[]) {
     await prom.forEach((e) => {
         if (e.metadata != null) {
             parseImage(JSON.parse(e.metadata).image, e);
-            e.name = JSON.parse(e.metadata).name;
+            console.log(e.name)
+            e.name = JSON.parse(e.metadata).name??(e.name+" "+e.token_id);
         } else {
             promises.push(axios.get(e.token_uri).then((r) => {
                 parseImage(r.data.image, e);
-                e.name = r.data.name;
+                console.log(e.name)
+                e.name = r.data.name??(e.name+" "+e.token_id);
             }))
         }
     })
@@ -43,12 +45,14 @@ async function setData(prom: INFT[]) {
 async function setImage(elem: INFT) {
     if (elem.metadata != null) {
         parseImage(JSON.parse(elem.metadata).image, elem);
-        elem.name = JSON.parse(elem.metadata).name
+        console.log(elem.name)
+        elem.name = JSON.parse(elem.metadata).name??(elem.name+" "+elem.token_id);
         return elem;
     } else {
         return axios.get(elem.token_uri).then((r) => {
             parseImage(r.data.image, elem);
-            elem.name = r.data.name;
+            console.log(elem.name)
+            elem.name = r.data.name??(elem.name+" "+elem.token_id);
             return elem;
         })
     }
