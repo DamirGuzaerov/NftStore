@@ -10,7 +10,7 @@ import {getCollection} from "../../../utils/hooks/getNfts";
 export interface INFT {
     amount?: string,
     contract_type: string,
-    metadata: string,
+    metadata: any,
     name: string,
     symbol: string,
     synced_al?: string,
@@ -63,7 +63,7 @@ const NFTSwiper = () => {
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={'0'}
-                                    nftName={nft.name}
+                                    nftName={nft.metadata.name}
                                     nftLikes={'0'}
                                 />
                             </SwiperSlide>

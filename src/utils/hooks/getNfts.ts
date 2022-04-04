@@ -26,11 +26,14 @@ async function setImages(prom: INFT[]) {
     let promises: any[] = [];
     await prom.forEach((e) => {
         if (e.metadata != null) {
-            parseImage(JSON.parse(e.metadata).image, e);
+            const metadata = JSON.parse(e.metadata);
+            setMetadata(e, metadata);
+            parseImage(metadata.image, e);
+            console.log(e);
         } else {
-            promises.push(axios.get(e.token_uri).then((r) => {
-                parseImage(r.data.image, e);
-                e.name = r.data.name;
+            promises.push(axios.get(e.token_uri).then((metadata) => {
+                parseImage(metadata.data.image, e);
+                setMetadata(e, metadata);
             }))
         }
     })
@@ -41,15 +44,21 @@ async function setImages(prom: INFT[]) {
 
 async function setImage(elem: INFT) {
     if (elem.metadata != null) {
-        parseImage(JSON.parse(elem.metadata).image, elem);
+        const metadata = JSON.parse(elem.metadata);
+        parseImage(metadata.image, elem);
+        setMetadata(elem, metadata);
         return elem;
     } else {
-        return axios.get(elem.token_uri).then(async (r) => {
-            await parseImage(r.data.image, elem);
-            elem.name = r.data.name;
+        return axios.get(elem.token_uri).then(async (metadata) => {
+            await parseImage(metadata.data.image, elem);
+            setMetadata(elem, metadata);
             return elem;
         })
     }
+}
+
+function setMetadata(elem: INFT, metadata: any) {
+    elem.metadata = metadata;
 }
 
 function parseImage(image: string, elem: INFT) {
@@ -77,14 +86,20 @@ export async function getNft(address: string, token_id: string, chain?: string, 
     })
 }
 
-export async function getOwner(address: string, token_id: string) {
-    return axios.get(url + `nft/${address}/${token_id}/owner`, {
+export async function getOwner(address: string, token_id: string, chain?: string) {
+    return axios.get(url + `/nft/${address}/${token_id}/owners`, {
         headers: {
             'X-API-KEY': process.env.REACT_APP_X_API_KEY ?? 'update api key'
         },
         params: {
-
+            address: address,
+            token_id: token_id,
+            chain: chain
         }
+    }).then((r) => {
+        return r
+    }).catch((e) => {
+        return e;
     })
 }
 

@@ -17,9 +17,8 @@ export const MainNFTSwiper = () => {
     useEffect(() => {
         getCollection('0xAd4D85257c815A4B2C7088a664e958b035B24323', 'eth', 5).then(r => {
             setIsLoading(false);
+            console.log(NFTs[0])
             setNFTs(r);
-            console.log(getNft('0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e', '9977'));
-            console.log(getPrice('0x8a90cab2b38dba80c64b7734e58ee1db38b8992e'));
         }).catch(() => {
             setIsLoading(false);
         })
@@ -49,7 +48,7 @@ export const MainNFTSwiper = () => {
                 return (
                     <SwiperSlide key={e.token_id}>
                         <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'} nftLikes={'0'}
-                                      nftName={e.name}/>
+                                      nftName={e.metadata.name}/>
                     </SwiperSlide>
                 );
             })}

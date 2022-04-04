@@ -49,13 +49,17 @@ export const Header = () => {
                     <div className={styles.buttons_container}>
                         <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
                                        func={() => closeLogin}/>
-                        {!auth? (<DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                        func={() => openLogin()}/>) : null}
+                        {!auth ? (
+                            <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
+                                           func={() => openLogin()}/>) : null}
                     </div>
                     <div className={styles.icon_wrapper}>
                         <Icon name={'language'} width={20} height={20}/>
                     </div>
                 </div>
+                <button className={styles.mobileNavigation}>
+                    <Icon name={'burger'} width={20} height={20}/>
+                </button>
             </div>
         </header>
     );

@@ -1,6 +1,6 @@
 import styles from "./nft.module.sass"
 import {Link, useParams} from "react-router-dom";
-import {getNft} from "../../utils/hooks/getNfts";
+import {getNft, getOwner} from "../../utils/hooks/getNfts";
 import React, {useEffect, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
@@ -19,7 +19,11 @@ export const Nft = () => {
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
+        console.log(getOwner(address!, token_id!, 'eth').then((r) => {
+            return r.data;
+        }))
     }, [])
+
 
     if (isLoading) {
         return (
@@ -36,7 +40,7 @@ export const Nft = () => {
                     <img src={Nft?.image} className={styles.cardImage}/>
                 </div>
                 <div className={styles.mainCardInfo}>
-                    <h2 className={styles.name}>{Nft?.name}</h2>
+                    <h2 className={styles.name}>{Nft?.metadata.name}</h2>
                     <NftCost cost={10} currency={"ETH"}/>
                     <div className={styles.creators}>
                         <Avatar height={50} width={50} imgUrl={creator}/>

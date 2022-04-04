@@ -54,6 +54,9 @@ header
   display: flex
   margin-left: 10px
 
+.mobileNavigation
+  display: none
+
 @media (max-width: 1038px)
   .logo_name
     padding-right: 16px
@@ -68,5 +71,22 @@ header
 
     a:last-child
       margin-right: 16px
+
+@media (max-width: 650px)
+
+  .header_wrapper
+    max-width: 500px
+    margin: 0 auto
+  nav, .search_wrapper
+    display: none
+
+  .logo_name
+    padding: 0
+    border: 0
+
+  .mobileNavigation
+    display: flex
+
+
 
 

@@ -82,7 +82,7 @@ const Collection = () => {
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={"0"}
-                                    nftName={JSON.parse(nft.metadata)?.name}
+                                    nftName={nft.metadata.name}
                                     nftLikes={'0'}
                                 />
                             </Link>
