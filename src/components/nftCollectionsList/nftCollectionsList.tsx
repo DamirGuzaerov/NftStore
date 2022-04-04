@@ -23,7 +23,7 @@ const NFTCollectionsList = () => {
                     type={'action'}/>
             </h1>
             <ul className={styles.collectionsList}>
-                {nftCollections.map((nftCollection,index)=>{
+                {nftCollections.slice(0,9).map((nftCollection,index)=>{
                     return(
                         <li key = {index}>
                             <NftCollectionPreviewCard

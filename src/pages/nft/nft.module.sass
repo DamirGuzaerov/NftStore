@@ -1,3 +1,5 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
 .mainContainer
   max-width: 1440px
   width: 100%
@@ -17,8 +19,9 @@
   object-fit: contain
 
 .name
+  @include gs.oneLineDisplayText
   color: white
-  font-size: 40px
+  font-size: 2em
   margin-bottom: 10px
 
 .mainCardWrapper

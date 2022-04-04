@@ -42,7 +42,7 @@ export const Nft = () => {
                 </div>
                 <div className={styles.mainCardInfo}>
                     <div className={styles.topInfo}>
-                        <h2 className={styles.name}>{Nft?.name}</h2>
+                        <h2 className={styles.name}>{Nft?.metadata.name}</h2>
                         <button className={styles.likeBtn}>
                             <Icon height={26} width={26} name={"like"}/>
                         </button>
