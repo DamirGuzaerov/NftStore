@@ -59,6 +59,7 @@ async function setImage(elem: INFT) {
 
 function setMetadata(elem: INFT, metadata: any) {
     elem.metadata = metadata;
+    elem.metadata.name = metadata.name ?? (elem.name + " " + elem.token_id);
 }
 
 function parseImage(image: string, elem: INFT) {

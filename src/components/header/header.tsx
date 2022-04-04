@@ -58,7 +58,7 @@ export const Header = () => {
                     </div>
                 </div>
                 <button className={styles.mobileNavigation}>
-                    <Icon name={'burger'} width={20} height={20}/>
+                    <Icon name={'burger'} width={32} height={32}/>
                 </button>
             </div>
         </header>
