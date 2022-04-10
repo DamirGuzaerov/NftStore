@@ -9,7 +9,7 @@ export interface nftPreviewProps {
     nftName: string,
     nftCost: string,
     creatorImgUrl: string,
-    nftLikes: string
+    nftLikes: string,
 }
 
 const NftPreviewCard: FC<nftPreviewProps> = (props) => {
@@ -20,6 +20,8 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
         creatorImgUrl,
         nftLikes
     } = props;
+
+
 
     return (
         <div className={styles.previewCardWrapper}>

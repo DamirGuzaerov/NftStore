@@ -3,9 +3,15 @@ import NftCollectionPreviewCard from "../cards/nftCollectionPreviewCard/nftColle
 import styles from './nftCollectionsList.module.sass'
 import {DefaultButton} from "../ui/buttons/default-button";
 import {getCollectionsByChain} from "../../helpers/tokensHelper/tokensHelper";
+import {useNavigate} from "react-router-dom";
 
 const NFTCollectionsList = () => {
     const nftCollections = getCollectionsByChain('eth');
+    let navigate = useNavigate();
+
+    function toNavigate() {
+        return navigate("/collections");
+    }
 
     return (
         <div className={styles.collectionsListWrapper}>
@@ -19,7 +25,7 @@ const NFTCollectionsList = () => {
                     value={"see all"}
                     paddingRightLeft={16}
                     paddingTopBottom={12}
-                    func={() => console.log(1)}
+                    func={() => toNavigate()}
                     type={'action'}/>
             </h1>
             <ul className={styles.collectionsList}>

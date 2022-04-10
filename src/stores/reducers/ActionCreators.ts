@@ -7,6 +7,7 @@ export const fetchUser = createAsyncThunk(
     async(_, thunkAPI) => {
       try {
           return await Moralis.authenticate().then((user) => {
+              console.log(user);
               return {name: user.getUsername(), token: user.getSessionToken(), wallet: user.get('accounts')[0]}
           });
       } catch (e) {

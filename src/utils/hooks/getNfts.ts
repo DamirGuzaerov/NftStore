@@ -122,3 +122,18 @@ export async function getPrice(address: string, chain?: string, exchange?: strin
         })
 }
 
+export async function getBalance(address: string, chain?: string) {
+    return axios.get(url + `/${address}/balance`, {
+        headers: {
+            'X-API-KEY': apikey ?? 'update api key'
+        },
+        params: {
+            address: address,
+            chain: chain
+        }
+    }).then((r) => {
+        console.log(r);
+        return r.data.balance;
+    })
+}
+

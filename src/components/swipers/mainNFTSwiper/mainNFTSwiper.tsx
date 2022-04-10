@@ -1,11 +1,13 @@
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "../nftSwiper/Swiper.module.sass";
+import sliderStyles from './MainSwiper.module.sass';
 import {MainNFTSlide} from "./mainNFTSlide";
 import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../nftSwiper/NFTSwiper";
-import {Oval} from 'react-loader-spinner'
 import {getCollection, getNft, getPrice} from "../../../utils/hooks/getNfts";
+import author from "../../../assets/images/tempImg/creatorImg.png";
+import {Link} from "react-router-dom";
 
 export const MainNFTSwiper = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -24,13 +26,38 @@ export const MainNFTSwiper = () => {
         })
     }, [])
 
+
     if (isLoading) {
         return (
-            <div className={styles.loading}>
-                <Oval color="#00BFFF" height={50} width={50}/>
+            <div className={sliderStyles.mainSwiperContainer}>
+                <div className={`${sliderStyles.image_settings} ${sliderStyles.skeleton}`} style={{height: 600}}/>
+
+                <div className={sliderStyles.mainSlideContent}>
+                    <h1 className={`${sliderStyles.skeleton} ${sliderStyles.skeleton_text}`}></h1>
+                    <div className={sliderStyles.creator_container}>
+                        <div className={sliderStyles.authorInfo}>
+                            <div className={sliderStyles.author_avatar_wrapper}>
+                                <div className={`${sliderStyles.author_avatar} ${sliderStyles.skeleton}`}/>
+                            </div>
+                            <div className={sliderStyles.author_name}>
+
+                                <p>Creator</p>
+                                <p className={`${sliderStyles.skeleton} ${sliderStyles.skeleton_text}`}> </p>
+                            </div>
+                        </div>
+
+                        <div>
+
+                        </div>
+                    </div>
+                    <div className={`${sliderStyles.price_container} ${sliderStyles.skeleton}`}>
+
+                    </div>
+                </div>
             </div>
         )
     }
+
     return (
         <Swiper
             modules={[Navigation]}

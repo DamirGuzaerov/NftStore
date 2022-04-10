@@ -7,13 +7,18 @@ import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch} from "react-redux";
 import {useAuth} from "../../utils/hooks/useAuth";
-import {useEffect} from "react";
-import axios from "axios";
+import {useEffect, useState} from "react";
+import {getBalance} from "../../utils/hooks/getNfts";
+import {useAppSelector} from "../../utils/hooks/redux-hooks";
+import pic from '../../assets/images/tempImg/nftPreviewImg.png';
 
 
 export const Header = () => {
     const dispatch = useDispatch();
     const auth = useAuth();
+    const [balance, setBalance] = useState();
+
+    const selector = useAppSelector(state => state.UserReducer);
 
     const openLogin = () => {
         dispatch(addModal('Login'));
@@ -23,6 +28,14 @@ export const Header = () => {
     const closeLogin = () => {
         dispatch(removeModal());
     }
+
+    useEffect(() => {
+        if(auth) {
+            getBalance(selector.wallet).then((r) => {
+                setBalance(r);
+            })
+        }
+    }, [selector])
 
     return (
         <header>
@@ -36,9 +49,6 @@ export const Header = () => {
                         <Link to={'/'}>
                             Discover
                         </Link>
-                        <Link to={'/collections'}>
-                            NFT Collections
-                        </Link>
                         <Link to={'/'}>
                             How it works
                         </Link>
@@ -51,7 +61,19 @@ export const Header = () => {
                                        func={() => closeLogin}/>
                         {!auth ? (
                             <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                           func={() => openLogin()}/>) : null}
+                                           func={() => openLogin()}/>) :
+                            (<>
+                                <div className={styles.profile_header}>
+                                    <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
+
+                                    <p className={styles.balance}>
+                                        {balance}
+                                    </p>
+                                    <p className={styles.eth}>
+                                        ETH
+                                    </p>
+                                </div>
+                            </>)}
                     </div>
                     <div className={styles.icon_wrapper}>
                         <Icon name={'language'} width={20} height={20}/>
