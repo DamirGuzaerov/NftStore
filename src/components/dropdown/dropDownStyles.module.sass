@@ -1,0 +1,26 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+.dropDownContainer
+  display: flex
+  width: 256px
+  height: 48px
+  border: 2px solid #353945
+  justify-content: space-between
+  align-items: center
+  padding: 0 8px 0 16px
+  border-radius: 12px
+
+  p
+    @include gs.poppins-font
+    color: white
+    font-weight: 500
+    font-size: 14px
+
+.button_drop_down
+  border: 2px solid rgba(53, 57, 69, 1)
+  display: flex
+  border-radius: 50%
+  background: none
+
+.button_drop_down:hover
+  border: 2px solid rgba(53, 57, 69, 1)

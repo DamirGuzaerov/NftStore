@@ -46,7 +46,7 @@ export const Header = () => {
                         <p className={styles.logo_name}>NFT-Store</p>
                     </Link>
                     <nav>
-                        <Link to={'/'}>
+                        <Link to={'/discover'}>
                             Discover
                         </Link>
                         <Link to={'/'}>
@@ -63,7 +63,7 @@ export const Header = () => {
                             <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
                                            func={() => openLogin()}/>) :
                             (<>
-                                <div className={styles.profile_header}>
+                                <Link to={'/profile'} className={styles.profile_header}>
                                     <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
 
                                     <p className={styles.balance}>
@@ -72,7 +72,7 @@ export const Header = () => {
                                     <p className={styles.eth}>
                                         ETH
                                     </p>
-                                </div>
+                                </Link>
                             </>)}
                     </div>
                     <div className={styles.icon_wrapper}>

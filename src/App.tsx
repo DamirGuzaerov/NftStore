@@ -9,6 +9,7 @@ import {RequireAuth} from "./utils/provider/authProvider";
 import Collection from "./pages/collection/collection";
 import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
+import {DiscoverPage} from "./pages/discover/discoverPage";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<Collection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'assets/:address/:token_id'}/>
+                <Route element={<DiscoverPage/>} path={'/discover'}/>
             </Route>
         </Routes>
     );

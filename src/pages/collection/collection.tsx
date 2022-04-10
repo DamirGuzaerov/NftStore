@@ -23,7 +23,6 @@ const Collection = () => {
         getCollection(collection.address, "eth", limit, currentOffset)
             .then(
                 result => {
-                    console.log(result)
                     setNFTs([...NFTs, ...result])
                     setCurrentOffset(prevState => prevState + limit)
                     setIsLoading(false)
