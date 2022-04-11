@@ -11,21 +11,18 @@ export const DiscoverPage = () => {
 
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [attributes, setAttributes] = useState<string[]>();
+    const [attributes, setAttributes] = useState<string>('');
 
     useEffect(() => {
-        searchNFTs('video', 'eth', 15).then(r => {
+        searchNFTs(attributes, 'eth', 15).then(r => {
             setIsLoading(false);
             setNFTs(r);
             console.log(r)
         }).catch(() => {
             setIsLoading(false);
         })
-    }, [])
+    }, [attributes])
 
-    const queryString = () => {
-
-    }
 
     return (
         <div className={styles.discover_page_wrapper}>
@@ -47,25 +44,21 @@ export const DiscoverPage = () => {
 
                     <div className={styles.types_and_cards}>
                         <nav className={styles.nav_types}>
-                            <NavLink to={{pathname: '/discover'}}
-                                     className={({isActive}) => (isActive ? styles.types : styles.submited_type)}>
+                            <button id={'allitems'} className={styles.types} onClick={() => setAttributes('all')}>
                                 All items
-                            </NavLink>
+                            </button>
 
-                            <NavLink className={({isActive}) => (isActive ? styles.types : styles.submited_type)}
-                                     to={'/discover?video'}>
+                            <button id={'Video'} className={styles.types} onClick={() => setAttributes('Video')}>
                                 Video
-                            </NavLink>
+                            </button>
 
-                            <NavLink className={({isActive}) => (isActive ? styles.types : styles.submited_type)}
-                                     to={'/discover?anotherType'}>
-                                EQ
-                            </NavLink>
+                            <button id={'Game'} className={styles.types} onClick={() => setAttributes('Game')}>
+                                Game
+                            </button>
 
-                            <NavLink className={({isActive}) => (isActive ? styles.types : styles.submited_type)}
-                                     to={'/discover?other'}>
-                                Fdff
-                            </NavLink>
+                            <button id={'Art'} className={styles.types} onClick={() => setAttributes('Art')}>
+                                Art
+                            </button>
                         </nav>
 
                         {NFTs.length > 0 ? (<div className={styles.cards_container}>
