@@ -20,7 +20,9 @@ export const DiscoverPage = () => {
 
                 <div className={`${styles.rowblock_discover}`}>
                     <div className={styles.filters}>
-                        <DropDown items={['1', '2']} name={'Recently added'}/>
+                        <DropDown>
+                            <p>fdfd</p>
+                        </DropDown>
                     </div>
 
                     <div className={styles.types_and_cards}>

@@ -1,6 +1,7 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
 
 .dropDownContainer
+  position: relative
   display: flex
   width: 256px
   height: 48px
@@ -21,6 +22,52 @@
   display: flex
   border-radius: 50%
   background: none
+  z-index: 1
 
 .button_drop_down:hover
   border: 2px solid rgba(53, 57, 69, 1)
+
+.drop_down
+  position: absolute
+  width: 256px
+  top: 40px
+  left: -2px
+  background-color: gs.$dark-main-color
+  border-bottom: 2px solid rgba(53, 57, 69, 1)
+  border-right: 2px solid rgba(53, 57, 69, 1)
+  border-left: 2px solid rgba(53, 57, 69, 1)
+  border-bottom-left-radius: 12px
+  border-bottom-right-radius: 12px
+  list-style-type: none
+
+  animation: growDown 300ms ease-in-out forwards
+  transform-origin: top center
+  padding: 0 8px 0 16px
+  overflow: hidden
+
+@keyframes growDown
+  0%
+    transform: scaleY(0)
+
+  80%
+    transform: scaleY(1.1)
+
+  100%
+    transform: scaleY(1)
+
+.drop_down_item
+  margin-top: 8px
+
+.drop_down_item:hover
+  opacity: 0.8
+
+.drop_down_item:last-child
+  margin-bottom: 8px
+
+.drop_down_item_button
+  border: none
+  background: none
+
+
+
+
