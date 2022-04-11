@@ -3,13 +3,15 @@ import styles from './dropDownStyles.module.sass';
 import Icon from "../ui/icon/icon";
 
 
-export const DropDown = ({children}: any) => {
+export const DropDown = (props: {items: string[], name: string}) => {
     const [isOpened, setIsOpened] = useState(false);
+    const {items} = props;
+    const {name} = props;
     return (
         <>
             <div className={styles.dropDownContainer}>
                 <p>
-                    fdfs
+                    {name}
                 </p>
                 {!isOpened ?
                     (<button className={styles.button_drop_down} onClick={() => setIsOpened(!isOpened)}>
@@ -21,35 +23,17 @@ export const DropDown = ({children}: any) => {
                 }
                 {isOpened ?
                     (<ul className={styles.drop_down}>
-                        <li className={styles.drop_down_item}>
-                            <button className={styles.drop_down_item_button}>
-                                <p>
-                                    fdsfsd
-                                </p>
-                            </button>
-                        </li>
-
-                        <li className={styles.drop_down_item}>
-                            <button className={styles.drop_down_item_button}>
-                                <p>
-                                    fdsfsd
-                                </p>
-                            </button>
-                        </li>
-                        <li className={styles.drop_down_item}>
-                            <button className={styles.drop_down_item_button}>
-                                <p>
-                                    fdsfsd
-                                </p>
-                            </button>
-                        </li>
-                        <li className={styles.drop_down_item}>
-                            <button className={styles.drop_down_item_button}>
-                                <p>
-                                    fdsfsd
-                                </p>
-                            </button>
-                        </li>
+                        {items.map(item => {
+                            return (
+                                <li key={item} className={styles.drop_down_item}>
+                                    <button className={styles.drop_down_item_button}>
+                                        <p>
+                                            {item}
+                                        </p>
+                                    </button>
+                                </li>
+                            )
+                        })}
                     </ul>) : null
                 }
             </div>

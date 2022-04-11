@@ -137,3 +137,26 @@ export async function getBalance(address: string, chain?: string) {
     })
 }
 
+export async function searchNFTs(q: string, chain?: string, limit?: number, format?: string, filter?: string, from_date?: string, to_date?: string, offset?: number) {
+    return axios.get(url + `/nft/search`, {
+        headers: {
+            'X-API-KEY': apikey ?? 'update api key'
+        },
+        params: {
+            chain: chain,
+            q: q,
+            format: format,
+            filter: 'attributes',
+            from_date: from_date,
+            to_date: to_date,
+            offset: offset,
+            limit: limit
+        }
+    }).then(async (response) => {
+        const arr = await setImages(response.data.result);
+        return arr;
+    }).catch((er) => {
+        return er;
+    })
+}
+

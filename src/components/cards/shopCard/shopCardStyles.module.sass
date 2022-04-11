@@ -1,0 +1,106 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+.shopcard_container
+  display: flex
+  flex-direction: column
+  align-items: center
+  width: 256px
+  height: 470px
+  background-color: gs.$light-main-color
+  padding: 12px
+  box-shadow: 0px 64px 64px -48px rgba(31, 47, 70, 0.12)
+  border-radius: 20px
+  box-sizing: border-box
+
+.previewCardMainInfo
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.nft_image
+  width: 100%
+  height: 300px
+  object-fit: cover
+  border-radius: 20px
+
+.nft_image:hover
+  opacity: 0.7
+
+.previewCardSecInfo
+  @extend .previewCardMainInfo
+  width: 100%
+  margin: 12px 0
+
+.nft_content
+  display: flex
+  flex-direction: column
+  width: 100%
+
+.nft_content_row
+  @extend .previewCardMainInfo
+  margin-top: 15px
+
+  p
+    color: white
+    @include gs.poppins-font
+    font-weight: 500
+    font-size: 16px
+    text-overflow: ellipsis
+    overflow: hidden
+    white-space: nowrap
+
+.nft_content_row:last-child
+  padding-top: 12px
+  border-top: 1px solid rgba(53, 57, 69, 1)
+
+.nft_price
+  color: #45B36B
+  border: 2px solid #45B36B
+  border-radius: 4px
+  padding: 3px 6px
+
+  p
+    font-size: 12px
+    color: inherit
+    text-transform: uppercase
+    @include gs.poppins-font
+    font-weight: 700
+
+.nft_content_row:first-child
+  margin-top: 21px
+
+.creatorAvatar
+  border-radius: 100%
+  object-fit: cover
+  width: 24px
+  height: 24px
+  border: 2px solid #45B36B
+  &:hover
+    cursor: pointer
+
+.nftLikes
+  color: #ffffff
+  display: flex
+  align-items: center
+
+.iconContainer
+  margin-right: 3px
+  display: flex
+  align-items: center
+
+.bet
+  display: flex
+  align-items: center
+
+  .highest_bet
+    @include gs.poppins-font
+    font-weight: 400
+    margin-left: 7px
+    color: rgba(119, 126, 144, 1)
+    font-size: 12px
+
+  .bet_price
+    margin-left: 4px
+
+
+
+
