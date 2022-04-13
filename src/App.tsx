@@ -10,6 +10,7 @@ import Collection from "./pages/collection/collection";
 import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
 import {DiscoverPage} from "./pages/discover/discoverPage";
+import  {VirtualCollection} from "./pages/collection/virtualCollection";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
                     <Profile/>
                 </RequireAuth>}/>
                 <Route element={<Collections/>} path={'collections'}/>
-                <Route element={<Collection/>} path={'collections/:collectionName'}/>
+                <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'assets/:address/:token_id'}/>
                 <Route element={<DiscoverPage/>} path={'/discover'}/>
             </Route>

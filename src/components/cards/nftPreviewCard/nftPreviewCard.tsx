@@ -23,10 +23,13 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
 
 
 
+    function changeVisibility() {
+    }
+
     return (
         <div className={styles.previewCardWrapper}>
             <div className={styles.previewCardImgWrapper}>
-                <img className={styles.previewCardImg} src={imgUrl} alt=""/>
+                <img className={styles.previewCardImg} src={imgUrl}  alt=""/>
                 <div className={styles.hoverElements}>
                     <button className={styles.buyNftButton}>Buy Now
                         <Icon width={20} height={20} name={'rhomb'}/>

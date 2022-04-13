@@ -2,13 +2,9 @@ import styles from './MainSwiper.module.sass';
 import author from './../../../assets/images/tempImg/creatorImg.png';
 import {Link} from "react-router-dom";
 import {nftPreviewProps} from "../../cards/nftPreviewCard/nftPreviewCard";
-import { useSpring, animated } from 'react-spring'
 import {FC, useEffect} from "react";
 
 export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, creatorImgUrl}) => {
-
-
-
     return (
         <div className={styles.mainSwiperContainer}>
             <img src={imgUrl} className={styles.image_settings} alt={imgUrl}/>

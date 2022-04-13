@@ -21,6 +21,9 @@
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-virtualized": "^9.22.3",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
     "react-spring": "^9.4.4",
     "sass": "^1.49.9",
     "svgstore": "^3.0.1",
@@ -52,5 +55,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-virtualized": "^9.21.21"
   }
 }

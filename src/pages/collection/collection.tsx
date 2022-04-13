@@ -15,7 +15,7 @@ const Collection = () => {
     const [currentOffset, setCurrentOffset] = useState(0);
     const [fetching, setFetching] = useState(true);
     const {collectionName} = useParams()
-    const limit = 25;
+    const limit = 50;
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
@@ -39,7 +39,7 @@ const Collection = () => {
 
     function scrollHandler() {
         if (
-            Math.ceil(window.innerHeight + window.scrollY) >=
+            Math.ceil(window.innerHeight+200 + window.scrollY) >=
             document.documentElement.offsetHeight && NFTs.length < 10000
         ) {
             setFetching(true);
@@ -51,7 +51,7 @@ const Collection = () => {
         return function () {
             document.removeEventListener("scroll", scrollHandler);
         }
-    })
+    },[])
 
     return (
         <>
