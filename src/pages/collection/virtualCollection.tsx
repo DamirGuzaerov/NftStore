@@ -13,6 +13,7 @@ import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {current} from "@reduxjs/toolkit";
 import styles from "./collection.module.sass";
+import {DropDown} from "../../components/dropdown/dropDown";
 
 const CARD = {
     WIDTH: 350,
@@ -71,6 +72,15 @@ export const VirtualCollection = () => {
                     </div>
                 </div>
             </header>
+                <div className={styles.formWrapper}>
+                    <div className={styles.form}>
+                        <input type="text" placeholder="Search" className={styles.searchInput}>
+                        </input>
+                        <div className={styles.dropDownContainer}>
+                            <DropDown  items={['Price: Hight to Low', 'Price: Low to Hight', 'Most Favorited']} name={'Filter'}/>
+                        </div>
+                    </div>
+                </div>
                 <InfiniteLoader
                     isRowLoaded={isRowLoaded}
                     loadMoreRows={loadMoreRows}

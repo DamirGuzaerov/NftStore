@@ -17,9 +17,9 @@ function App() {
         <Routes>
             <Route path={'/'} element={<Layout/>}>
                 <Route element={<Homepage/>} index/>
-                <Route path={'/profile'} element={<RequireAuth>
+                <Route path={'/profile'} element={
                     <Profile/>
-                </RequireAuth>}/>
+                }/>
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'assets/:address/:token_id'}/>
