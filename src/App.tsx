@@ -6,7 +6,6 @@ import {Layout} from "./components/layouts/layout";
 import {Homepage} from "./pages/home/homepage";
 import {Profile} from "./pages/profile/profilepage";
 import {RequireAuth} from "./utils/provider/authProvider";
-import Collection from "./pages/collection/collection";
 import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
 import {DiscoverPage} from "./pages/discover/discoverPage";

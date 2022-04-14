@@ -14,16 +14,10 @@ import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {current} from "@reduxjs/toolkit";
 import styles from "./collection.module.sass";
 
-const limit = 1000;
-let fetchCount = 1;
-let imageId = 0;
-
 const CARD = {
     WIDTH: 350,
     HEIGHT: 460
 };
-let _masonry: any;
-let _cellPositioner: any;
 export const VirtualCollection = () => {
 
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -32,7 +26,7 @@ export const VirtualCollection = () => {
     const {collectionName} = useParams();
 
     useEffect(() => {
-        fetchNFTs();
+        fetchNFTs().then(r=>currentOffset.current+=20);
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
