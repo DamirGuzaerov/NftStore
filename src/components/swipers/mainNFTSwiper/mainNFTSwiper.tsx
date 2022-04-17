@@ -50,7 +50,7 @@ export const MainNFTSwiper = () => {
 
                         </div>
                     </div>
-                    <div className={`${sliderStyles.price_container} ${sliderStyles.skeleton}`}>
+                    <div className={`${sliderStyles.price_container} ${sliderStyles.skeleton} ${sliderStyles.price_container_loading}`}>
 
                     </div>
                 </div>

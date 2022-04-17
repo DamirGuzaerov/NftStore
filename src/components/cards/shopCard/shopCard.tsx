@@ -14,10 +14,23 @@ interface shopCardProps {
 
 
 export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id}) => {
+    const urlCheck = () => {
+        if(imgUrl.includes('mp4') || imgUrl.includes('webm')) {
+            return(
+                <video className={styles.nft_image}>
+                    <source src={imgUrl}/>
+                </video>
+            )
+        } else {
+            return (
+                <img src={imgUrl} className={styles.nft_image}/>
+            )
+        }
+    }
     return (
         <div className={styles.shopcard_container}>
             <Link to={`/assets/${address}/${token_id}`}>
-                <img src={imgUrl} className={styles.nft_image}/>
+                {urlCheck()}
             </Link>
             <div className={styles.nft_content}>
                 <div className={styles.nft_content_row}>

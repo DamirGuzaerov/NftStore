@@ -33,7 +33,7 @@ export const LoginModal = () => {
 
         setClicked(true);
     }
-    if(loading) {
+    if (loading) {
         return <p>loading</p>
     }
     return (

@@ -66,8 +66,12 @@ function setMetadata(elem: INFT, metadata: any) {
 function parseImage(image: string, elem: INFT) {
     if (!image.includes('ipfs://')) {
         elem.image = image
-    } else {
+    } else if(!image.includes('/ipfs/')) {
+        console.log(image);
         elem.image = image.replace('ipfs:/', 'https://ipfs.io/ipfs');
+    } else {
+        console.log(image);
+        elem.image = image.replace('ipfs:/', 'https://ipfs.io/');
     }
 }
 

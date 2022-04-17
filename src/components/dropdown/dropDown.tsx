@@ -3,10 +3,18 @@ import styles from './dropDownStyles.module.sass';
 import Icon from "../ui/icon/icon";
 
 
-export const DropDown = (props: {items: string[], name: string}) => {
+export const DropDown = (props: {items: string[], name: string, addParam?: Function}) => {
     const [isOpened, setIsOpened] = useState(false);
+    const type = props.name;
+    const [name, setName] = useState(props.name);
     const {items} = props;
-    const {name} = props;
+    const {addParam} = props;
+    const addAttr = (item: string) => {
+        setName(item);
+        // @ts-ignore
+        addParam(type.toLowerCase(), name.toLowerCase());
+        console.log(name);
+    }
     return (
         <>
             <div className={styles.dropDownContainer}>
@@ -26,7 +34,7 @@ export const DropDown = (props: {items: string[], name: string}) => {
                         {items.map(item => {
                             return (
                                 <li key={item} className={styles.drop_down_item}>
-                                    <button className={styles.drop_down_item_button}>
+                                    <button className={styles.drop_down_item_button} onClick={() => addAttr(item)}>
                                         <p>
                                             {item}
                                         </p>

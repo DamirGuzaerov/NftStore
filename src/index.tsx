@@ -11,7 +11,7 @@ import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-      <MoralisProvider serverUrl='https://qtqaadqffvcu.usemoralis.com:2053/server' appId="BJvgEwWE7NL0YrDFR6LE77K56awsaJQQ9IrnTqMt">
+      <MoralisProvider serverUrl='https://g12o0xvp31x1.usemoralis.com:2053/server' appId="m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua">
       <Provider store={mainStore()}>
           <BrowserRouter>
               <App/>

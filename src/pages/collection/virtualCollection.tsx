@@ -11,7 +11,6 @@ import {getCollection} from "../../utils/hooks/getNfts";
 import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
 import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
-import {current} from "@reduxjs/toolkit";
 import styles from "./collection.module.sass";
 import {DropDown} from "../../components/dropdown/dropDown";
 
@@ -27,7 +26,7 @@ export const VirtualCollection = () => {
     const {collectionName} = useParams();
 
     useEffect(() => {
-        fetchNFTs().then(r=>currentOffset.current+=20);
+        fetchNFTs().then(r => currentOffset.current += 20);
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
@@ -72,25 +71,26 @@ export const VirtualCollection = () => {
                     </div>
                 </div>
             </header>
-                <div className={styles.formWrapper}>
-                    <div className={styles.form}>
-                        <input type="text" placeholder="Search" className={styles.searchInput}>
-                        </input>
-                        <div className={styles.dropDownContainer}>
-                            <DropDown  items={['Price: Hight to Low', 'Price: Low to Hight', 'Most Favorited']} name={'Filter'}/>
-                        </div>
+            <div className={styles.formWrapper}>
+                <div className={styles.form}>
+                    <input type="text" placeholder="Search" className={styles.searchInput}>
+                    </input>
+                    <div className={styles.dropDownContainer}>
+                        <DropDown items={['Price: Hight to Low', 'Price: Low to Hight', 'Most Favorited']}
+                                  name={'Filter'}/>
                     </div>
                 </div>
-                <InfiniteLoader
-                    isRowLoaded={isRowLoaded}
-                    loadMoreRows={loadMoreRows}
-                    rowCount={Math.ceil(NFTs.length / Math.floor(window.innerWidth / CARD.WIDTH)) + 1}
-                    threshold={5}
-                >
-                    {({onRowsRendered, registerChild}: any) => (
-                        <div style={{height:"100%",width:"100%"}}>
+            </div>
+            <InfiniteLoader
+                isRowLoaded={isRowLoaded}
+                loadMoreRows={loadMoreRows}
+                rowCount={Math.ceil(NFTs.length / Math.floor(window.innerWidth / CARD.WIDTH)) + 1}
+                threshold={5}
+            >
+                {({onRowsRendered, registerChild}: any) => (
+                    <div style={{height: "100%", width: "100%"}}>
                         <AutoSizer>
-                            {({width,height}) => {
+                            {({width, height}) => {
                                 const itemsPerRow = Math.floor(width / CARD.WIDTH);
                                 rowsCount.current = Math.ceil(NFTs.length / itemsPerRow);
                                 return (
@@ -148,10 +148,9 @@ export const VirtualCollection = () => {
                                 )
                             }}
                         </AutoSizer>
-                        </div>
-                    )}
-                </InfiniteLoader>
+                    </div>
+                )}
+            </InfiniteLoader>
         </div>
     );
 };
-export default VirtualCollection;

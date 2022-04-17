@@ -52,6 +52,7 @@
   flex-direction: row
   align-items: center
   justify-content: right
+  height: 52px
 
 .types
   border: none
@@ -77,8 +78,55 @@
   margin-top: 58px
   display: grid
   grid-template-columns: repeat(auto-fill, 256px)
-  grid-gap: 32px
+  grid-column-gap: 16px
+  grid-row-gap: 32px
   width: 832px
+
+.not_found_message_wrapper
+  display: flex
+  justify-content: center
+  width: 832px
+
+
+.not_found_message
+  color: white
+  font-weight: 600
+  letter-spacing: 2px
+  font-size: 25px
+  margin-top: 50px
+
+label
+  @include gs.poppins-font
+  color: rgba(177, 181, 195, 1)
+
+.price_range
+  display: flex
+  flex-direction: column
+  max-height: 256px
+  margin-top: 58px
+
+.input_price_range
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+
+  margin-top: 4px
+  color: white
+  font-weight: 500
+  margin-bottom: 24px
+
+.filter
+  margin-top: 34px
+
+.filter:first-child
+  margin-top: 0
+
+.main_filters
+  display: flex
+  flex-direction: column
+  padding: 24px 0
+  border-bottom: 1px solid rgba(53, 57, 69, 1)
+  border-top: 1px solid rgba(53, 57, 69, 1)
 
 
 
