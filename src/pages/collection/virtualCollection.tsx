@@ -120,7 +120,7 @@ export const VirtualCollection = () => {
                                                         >
                                                             <Link
                                                                 key={NFTs[i].token_id}
-                                                                to={`/assets/${collection.address}/${NFTs[i].token_id}`}>
+                                                                to={`/assets/${collection.address}/${NFTs[i].token_id}/info`}>
                                                                 <NftPreviewCard
                                                                     key={NFTs[i].token_id}
                                                                     imgUrl={NFTs[i].image}

@@ -1,5 +1,5 @@
 import styles from "./nft.module.sass"
-import {Link, useParams} from "react-router-dom";
+import {Link, Outlet, useParams} from "react-router-dom";
 import {getNft, getOwner} from "../../utils/hooks/getNfts";
 import React, {useEffect, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
@@ -8,6 +8,7 @@ import {NftCost} from "../../components/ui/nftCost/nftCost";
 import {Avatar} from "../../components/ui/avatar/avatar";
 import creator from '../../assets/images/tempImg/creator.png'
 import Icon from "../../components/ui/icon/icon";
+import NftInfoSwitcher from "../../components/nftInfoSwitcher/nftInfoSwitcher";
 
 export const Nft = () => {
     const {address, token_id} = useParams();
@@ -60,6 +61,7 @@ export const Nft = () => {
                             </div>
                         </div>
                     </div>
+                    <NftInfoSwitcher/>
                 </div>
             </div>
         </div>

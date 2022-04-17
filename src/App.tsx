@@ -10,6 +10,10 @@ import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
 import {DiscoverPage} from "./pages/discover/discoverPage";
 import  {VirtualCollection} from "./pages/collection/virtualCollection";
+import NftInfoSwitcher from "./components/nftInfoSwitcher/nftInfoSwitcher";
+import {NftOwners} from "./components/ui/nftOwners/nftOwners";
+import {NftInfo} from "./components/ui/nftInfo/nftInfo";
+import {NftDetails} from "./components/ui/nftDetails/nftDetails";
 
 function App() {
 
@@ -17,12 +21,17 @@ function App() {
         <Routes>
             <Route path={'/'} element={<Layout/>}>
                 <Route element={<Homepage/>} index/>
-                <Route path={'/profile'} element={
+                <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
+                </RequireAuth>
                 }/>
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
-                <Route element={<Nft/>} path={'assets/:address/:token_id'}/>
+                <Route element={<Nft/>} path={'/assets/:address/:token_id'}>
+                    <Route element={<NftOwners/>} path={'/assets/:address/:token_id/owners'}/>
+                    <Route element={<NftInfo/>} path={'/assets/:address/:token_id/info'}/>
+                    <Route element={<NftDetails/>} path={'/assets/:address/:token_id/details'}/>
+                </Route>
                 <Route element={<DiscoverPage/>} path={'/discover'}/>
             </Route>
         </Routes>

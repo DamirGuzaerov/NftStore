@@ -77,7 +77,7 @@ const Collection = () => {
                     {NFTs.map((nft, index) => {
                         return (
                             <Link key={index}
-                                  to={`/assets/${collection.address}/${nft.token_id}`}>
+                                  to={`/assets/${collection.address}/${nft.token_id}/info`}>
                                 <NftPreviewCard
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
