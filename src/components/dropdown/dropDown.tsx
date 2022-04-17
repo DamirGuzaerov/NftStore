@@ -12,8 +12,7 @@ export const DropDown = (props: {items: string[], name: string, addParam?: Funct
     const addAttr = (item: string) => {
         setName(item);
         // @ts-ignore
-        addParam(type.toLowerCase(), name.toLowerCase());
-        console.log(name);
+        addParam(type.toLowerCase(), item.toLowerCase());
     }
     return (
         <>

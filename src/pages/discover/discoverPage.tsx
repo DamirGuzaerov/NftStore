@@ -5,6 +5,7 @@ import {ShopCard} from "../../components/cards/shopCard/shopCard";
 import {useEffect, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {searchNFTs} from "../../utils/hooks/getNfts";
+import {DiscoverSearch} from "../../components/ui/search/discoverSearch/discoverSearch";
 
 export const DiscoverPage = () => {
 
@@ -54,10 +55,7 @@ export const DiscoverPage = () => {
                     <h2>
                         Type your keywords
                     </h2>
-
-                    <button className={styles.searchButton}>
-                        <Icon name={'white_search'} width={16} height={16}/>
-                    </button>
+                    <DiscoverSearch setProp={updateMap}/>
                 </div>
 
                 <div className={`${styles.rowblock_discover}`}>
@@ -96,7 +94,7 @@ export const DiscoverPage = () => {
 
                     <div className={styles.types_and_cards}>
                         <nav className={styles.nav_types}>
-                            <button id={'allitems'} className={styles.types} onClick={() => updateMap('types', 'kitty')}>
+                            <button id={'allitems'} className={styles.types} onClick={() => setAttributes(new Map())}>
                                 All items
                             </button>
 
