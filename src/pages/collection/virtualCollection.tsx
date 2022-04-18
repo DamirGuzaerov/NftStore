@@ -25,6 +25,7 @@ export const VirtualCollection = () => {
     const currentOffset = useRef(0);
     const {collectionName} = useParams();
 
+
     useEffect(() => {
         fetchNFTs().then(r => currentOffset.current += 20);
     }, [])
@@ -54,7 +55,7 @@ export const VirtualCollection = () => {
 
     return (
         <div>
-            <header className={styles.collectionHeader}>
+            <header className={styles.bannerHeader}>
                 <div className={styles.bannerWrapper}>
                     <img className={styles.bannerImg} src={collection.bannerImage} alt=""/>
                 </div>

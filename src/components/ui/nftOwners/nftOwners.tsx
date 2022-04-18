@@ -27,7 +27,7 @@ export const NftOwners = () => {
           <div className={styles.owner}>
               <Avatar height={50} width={50} imgUrl={creator}/>
               <div className={styles.userInfo}>
-                  Owner
+                  Dio Brando
                   <div className={styles.userName}>
                       Dio Brando
                   </div>

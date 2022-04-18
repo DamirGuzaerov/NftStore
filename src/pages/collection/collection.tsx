@@ -55,7 +55,7 @@ const Collection = () => {
 
     return (
         <>
-            <header className={styles.collectionHeader}>
+            <header className={styles.bannerHeader}>
                 <div className={styles.bannerWrapper}>
                     <img className={styles.bannerImg} src={collection.bannerImage} alt=""/>
                 </div>

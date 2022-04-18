@@ -1,9 +1,24 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
 
+
+.bannerHeader
+  @include gs.bannerHeader
+
+.bannerWrapper
+  @include gs.bannerWrapper
+
+.bannerImg
+  @include gs.bannerImg
+
+.headerContent
+  @include gs.headerContent
+
 .profile_container_wrapper
   background-color: gs.$dark-main-color
 
 .profile_container
+  position: relative
+  top: -120px
   max-width: gs.$max-width
   margin: 0 auto
 
@@ -11,7 +26,6 @@
   display: flex
   flex-direction: row
   justify-content: space-between
-  margin-top: 140px
   margin-bottom: 136px
 
 .profile_info_block
@@ -79,9 +93,10 @@
 .buttons_edit_row
   display: flex
   justify-content: right
+  margin-top: 40px
 
 .edit_button
-  background: none
+  background: rgb(55, 114, 255)
   padding: 12px 16px
   display: flex
   justify-content: space-between
@@ -89,6 +104,9 @@
   border: 2px solid #777E91
   width: 134px
   align-items: center
+  &:hover
+    cursor: pointer
+    background: rgb(41, 82, 185)
 
   p
     font-weight: 700

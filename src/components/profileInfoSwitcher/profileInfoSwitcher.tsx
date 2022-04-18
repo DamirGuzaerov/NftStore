@@ -1,9 +1,7 @@
-import styles from "./nftInfoSwitcher.module.sass"
+import styles from "./profileInfoSwitcher.module.sass"
 import {NavLink, Outlet} from "react-router-dom";
-import {NftBidCard} from "../ui/nftBidCard/nftBidCard";
-import React from "react";
 
-export const NftInfoSwitcher = () => {
+export const ProfileInfoSwitcher = () => {
     return (
         <div className={styles.routesPanelWrapper}>
             <nav className={styles.routerPanel}>
@@ -33,10 +31,9 @@ export const NftInfoSwitcher = () => {
             </nav>
             <div className={styles.infoContainer}>
                 <Outlet/>
-                <NftBidCard/>
             </div>
         </div>
     )
 }
 
-export default NftInfoSwitcher;
+export default ProfileInfoSwitcher;

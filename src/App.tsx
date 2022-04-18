@@ -10,13 +10,11 @@ import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
 import {DiscoverPage} from "./pages/discover/discoverPage";
 import  {VirtualCollection} from "./pages/collection/virtualCollection";
-import NftInfoSwitcher from "./components/nftInfoSwitcher/nftInfoSwitcher";
 import {NftOwners} from "./components/ui/nftOwners/nftOwners";
 import {NftInfo} from "./components/ui/nftInfo/nftInfo";
 import {NftDetails} from "./components/ui/nftDetails/nftDetails";
 
 function App() {
-
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>

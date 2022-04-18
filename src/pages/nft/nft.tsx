@@ -5,8 +5,6 @@ import React, {useEffect, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
 import {NftCost} from "../../components/ui/nftCost/nftCost";
-import {Avatar} from "../../components/ui/avatar/avatar";
-import creator from '../../assets/images/tempImg/creator.png'
 import Icon from "../../components/ui/icon/icon";
 import NftInfoSwitcher from "../../components/nftInfoSwitcher/nftInfoSwitcher";
 
@@ -25,8 +23,6 @@ export const Nft = () => {
             return r.data;
         }))
     }, [])
-
-
     if (isLoading) {
         return (
             <div className={styles.loading}>
@@ -34,7 +30,6 @@ export const Nft = () => {
             </div>
         )
     }
-
     return (
         <div className={styles.mainContainer}>
             <div className={styles.mainCardWrapper}>
@@ -51,15 +46,6 @@ export const Nft = () => {
                     <div className={styles.price}>
                         <NftCost cost={10} currency={"ETH"}/>
                         <span className={styles.currentPrice}>Current price</span>
-                    </div>
-                    <div className={styles.creators}>
-                        <Avatar height={50} width={50} imgUrl={creator}/>
-                        <div className={styles.userInfo}>
-                            Creator
-                            <div className={styles.userName}>
-                                Azuki Team
-                            </div>
-                        </div>
                     </div>
                     <NftInfoSwitcher/>
                 </div>

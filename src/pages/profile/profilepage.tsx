@@ -1,10 +1,9 @@
 import styles from './profile.module.sass';
-import avatar from '../../assets/images/tempImg/creatorImg.png'
 import pic from '../../assets/images/tempImg/nftPreviewImg.png';
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import Icon from "../../components/ui/icon/icon";
 import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getCollection, getNft} from "../../utils/hooks/getNfts";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Link} from "react-router-dom";
@@ -13,6 +12,7 @@ import {Link} from "react-router-dom";
 export const Profile = () => {
     const user = useAppSelector(state => state.UserReducer);
     const [NFTs, setNFTs] = useState<INFT[]>([]);
+    const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600"
 
     useEffect(() => {
         getCollection(user.wallet, 'eth').then((r) => {
@@ -21,6 +21,11 @@ export const Profile = () => {
     }, [])
     return (
         <div className={styles.profile_container_wrapper}>
+            <header className={styles.bannerHeader}>
+                <div className={styles.bannerWrapper}>
+                    <img className={styles.bannerImg} src={img} alt=""/>
+                </div>
+            </header>
             <div className={styles.profile_container}>
                 <div className={styles.profile}>
                     <div className={styles.profile_info_block}>
@@ -62,7 +67,7 @@ export const Profile = () => {
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
                                 <button className={styles.nav_buttons}>
-                                    Collectibles
+                                    Collected
                                 </button>
                                 <button className={styles.nav_buttons}>
                                     Created
