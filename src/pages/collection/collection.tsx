@@ -8,8 +8,8 @@ import {getCollection} from "../../utils/hooks/getNfts";
 import {Link, useParams} from "react-router-dom";
 import {getNftCollectionByName} from "../../utils/services/nftServices/getNftAddressByName";
 
-
-const Collection = () => {
+let i = 0;
+export const Collection = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentOffset, setCurrentOffset] = useState(0);
@@ -31,6 +31,7 @@ const Collection = () => {
     }
 
     useEffect(() => {
+        console.log(fetching,i++)
         if (fetching) {
             setIsLoading(true)
             fetchNFTs();
@@ -42,6 +43,7 @@ const Collection = () => {
             Math.ceil(window.innerHeight+200 + window.scrollY) >=
             document.documentElement.offsetHeight && NFTs.length < 10000
         ) {
+            console.log("scrollHandler",i++,fetching)
             setFetching(true);
         }
     }

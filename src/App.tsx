@@ -13,6 +13,7 @@ import  {VirtualCollection} from "./pages/collection/virtualCollection";
 import {NftOwners} from "./components/ui/nftOwners/nftOwners";
 import {NftInfo} from "./components/ui/nftInfo/nftInfo";
 import {NftDetails} from "./components/ui/nftDetails/nftDetails";
+import Collection from "./pages/collection/collection";
 
 function App() {
     return (
