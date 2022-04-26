@@ -1,7 +1,18 @@
 import styles from "./nftDetails.module.sass"
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 
 export const NftDetails = () => {
+    const selector = useAppSelector(state => state.OwnerReducer);
+    const [details, setDetails] = useState(selector.owners[0]);
+    useEffect(() => {
+        try {
+            setDetails(selector.owners[0]);
+        } catch (e) {
+            // @ts-ignore
+            setDetails({});
+        }
+    }, [selector]);
     return (
         <div className={styles.infoWrapper}>
             <ul className={styles.nftDetails}>
@@ -10,7 +21,7 @@ export const NftDetails = () => {
                         Contract address:
                     </label>
                     <span id={"contractAddress"}>
-                        0x23581767a106ae2...6a68b
+                        {details.token_address}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -18,7 +29,7 @@ export const NftDetails = () => {
                         Token id:
                     </label>
                     <span id={"tokenId"}>
-                        766
+                        {details.token_id}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -26,7 +37,7 @@ export const NftDetails = () => {
                         Token Standard
                     </label>
                     <span id={"Token Standard"}>
-                        ERC-721
+                        {details.contract_type}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>

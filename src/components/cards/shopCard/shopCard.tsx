@@ -9,11 +9,12 @@ interface shopCardProps {
     nftCost: string | number,
     creatorImgUrl: string,
     address: string,
-    token_id: string
+    token_id: string,
+    amount: string
 }
 
 
-export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id}) => {
+export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id, amount}) => {
     const urlCheck = () => {
         if(imgUrl.includes('mp4') || imgUrl.includes('webm')) {
             return(
@@ -27,6 +28,8 @@ export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImg
             )
         }
     }
+
+    console.log(amount);
     return (
         <div className={styles.shopcard_container}>
             <Link to={`/assets/${address}/${token_id}`}>
@@ -48,7 +51,7 @@ export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImg
                 <div className={styles.nft_content_row}>
                     <img className={styles.creatorAvatar} src={creatorImgUrl} alt=""/>
                     <p>
-                        3 in stock
+                        {amount} in stock
                     </p>
                 </div>
 

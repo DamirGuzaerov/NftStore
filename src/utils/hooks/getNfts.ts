@@ -1,5 +1,6 @@
 import axios from "axios";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
+import pic from '../../../src/assets/images/tempImg/nftPreviewImg.png'
 
 const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
@@ -44,6 +45,7 @@ async function setImages(prom: INFT[]) {
 }
 
 async function setImage(elem: INFT) {
+
     if (elem.metadata != null) {
         const metadata = JSON.parse(elem.metadata);
         parseImage(metadata.image, elem);
@@ -64,13 +66,15 @@ function setMetadata(elem: INFT, metadata: any) {
 }
 
 function parseImage(image: string, elem: INFT) {
+    if(image == undefined) {
+        elem.image = pic;
+        return;
+    }
     if (!image.includes('ipfs://')) {
         elem.image = image
-    } else if(!image.includes('/ipfs/')) {
-        console.log(image);
+    } else if (!image.includes('/ipfs/')) {
         elem.image = image.replace('ipfs:/', 'https://ipfs.io/ipfs');
     } else {
-        console.log(image);
         elem.image = image.replace('ipfs:/', 'https://ipfs.io/');
     }
 }
@@ -92,38 +96,8 @@ export async function getNft(address: string, token_id: string, chain?: string, 
     })
 }
 
-export async function getOwner(address: string, token_id: string, chain?: string) {
-    return axios.get(url + `/nft/${address}/${token_id}/owners`, {
-        headers: {
-            'X-API-KEY': apikey ?? 'update api key'
-        },
-        params: {
-            address: address,
-            token_id: token_id,
-            chain: chain
-        }
-    }).then((r) => {
-        return r
-    }).catch((e) => {
-        return e;
-    })
-}
-
 export async function getPrice(address: string, chain?: string, exchange?: string, e?: INFT) {
-    return axios.get(url + `/erc20/${address}/price`, {
-        headers: {
-            'X-API-KEY': apikey ?? 'update api key'
-        },
-        params: {
-            address: address
-        }
-    })
-        .then(r => {
-            console.log(r.data);
-        })
-        .catch(e => {
-            console.log(e);
-        })
+
 }
 
 export async function getBalance(address: string, chain?: string) {
@@ -163,4 +137,23 @@ export async function searchNFTs(q: string, chain?: string, limit?: number, form
         return er;
     })
 }
+
+export async function getNFTOwners(address: string, token_id: string, chain?: string, limit?: number) {
+    return axios.get(url + `/nft/${address}/${token_id}/owners`, {
+        headers: {
+            'X-API-KEY': apikey ?? 'update api key',
+        },
+        params: {
+            chain: chain,
+            limit: limit,
+            format: 'decimal'
+        }
+    })
+        .then(r => {
+            return r;
+        }).catch((er) => {
+            return er;
+        })
+}
+
 

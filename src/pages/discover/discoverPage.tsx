@@ -1,5 +1,4 @@
 import styles from './discoverStyles.module.sass';
-import Icon from "../../components/ui/icon/icon";
 import {DropDown} from "../../components/dropdown/dropDown";
 import {ShopCard} from "../../components/cards/shopCard/shopCard";
 import {useEffect, useState} from "react";
@@ -15,7 +14,7 @@ export const DiscoverPage = () => {
 
     useEffect(() => {
         const attr = attrToString();
-        if (attributes.size == 0) {
+        if (attr.length == 1) {
             searchNFTs('kitty', 'eth', 15).then(r => {
                 setIsLoading(false);
                 setNFTs(r);
@@ -25,8 +24,8 @@ export const DiscoverPage = () => {
         } else {
             searchNFTs(attr, 'eth', 15).then(r => {
                 setIsLoading(false);
-                setNFTs(r);
                 console.log(r);
+                setNFTs(r);
             }).catch(() => {
                 setIsLoading(false);
             })
@@ -38,6 +37,7 @@ export const DiscoverPage = () => {
         attributes.forEach(i => {
             string = string + " " + i;
         })
+        console.log(string);
         return string
     }
 
@@ -81,7 +81,8 @@ export const DiscoverPage = () => {
 
                             <label className={styles.filter}>
                                 OPEN
-                                <DropDown items={['White', 'Green', 'Black', 'Red']} name={'Colors'} addParam={updateMap}/>
+                                <DropDown items={['White', 'Green', 'Black', 'Red']} name={'Colors'}
+                                          addParam={updateMap}/>
                             </label>
 
 
@@ -115,7 +116,7 @@ export const DiscoverPage = () => {
                             {NFTs.map(e => {
                                 return <ShopCard key={e.token_id} creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'}
                                                  nftName={e.metadata.name} address={e.token_address}
-                                                 token_id={e.token_id}/>
+                                                 token_id={e.token_id} amount={e.amount}/>
                             })}
                         </div>) : (<div className={styles.not_found_message_wrapper}>
                             <p className={styles.not_found_message}>

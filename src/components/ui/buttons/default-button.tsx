@@ -3,13 +3,21 @@ import styles from './buttonStyles.module.sass';
 interface props {
     value: string,
     type: string
-    paddingTopBottom: number|string,
-    paddingRightLeft?: number|string,
-    large?:boolean
+    paddingTopBottom: number | string,
+    paddingRightLeft?: number | string,
+    large?: boolean
     func: Function
 }
 
-export const DefaultButton = ({value, paddingRightLeft = "auto",large = false, paddingTopBottom, type, func}: props) => {
+
+export const DefaultButton = ({
+                                  value,
+                                  paddingRightLeft = "auto",
+                                  large = false,
+                                  paddingTopBottom,
+                                  type,
+                                  func
+                              }: props) => {
     let buttonStyle;
     if (type != 'action') {
         buttonStyle = {
@@ -19,7 +27,7 @@ export const DefaultButton = ({value, paddingRightLeft = "auto",large = false, p
             paddingBottom: paddingTopBottom,
             paddingLeft: paddingRightLeft,
             paddingRight: paddingRightLeft,
-            width: large? "100%":"auto",
+            width: large ? "100%" : "auto",
         }
     } else {
         buttonStyle = {
@@ -29,7 +37,7 @@ export const DefaultButton = ({value, paddingRightLeft = "auto",large = false, p
             paddingBottom: paddingTopBottom,
             paddingLeft: paddingRightLeft,
             paddingRight: paddingRightLeft,
-            width: large? "100%":"auto",
+            width: large ? "100%" : "auto",
         }
     }
     return (

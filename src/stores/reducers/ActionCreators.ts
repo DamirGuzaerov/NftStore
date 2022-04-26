@@ -1,6 +1,11 @@
 
 import Moralis from "moralis";
 import {createAsyncThunk} from "@reduxjs/toolkit";
+import {getNFTOwners} from "../../utils/hooks/getNfts";
+interface url {
+    address: string,
+    token_id: string
+}
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
@@ -15,3 +20,17 @@ export const fetchUser = createAsyncThunk(
       }
     }
 );
+
+export const fetchOwners = createAsyncThunk(
+    'owners/fetchOwners',
+    async({address, token_id}: url, thunkAPI) => {
+        try {
+
+            return getNFTOwners(address, token_id, 'eth').then(r => {
+                return r.data.result;
+            });
+        } catch (e) {
+            thunkAPI.rejectWithValue('Владельцев не существует');
+        }
+    }
+)

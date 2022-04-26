@@ -8,7 +8,7 @@ import {Oval} from 'react-loader-spinner'
 import {getCollection} from "../../../utils/hooks/getNfts";
 
 export interface INFT {
-    amount?: string,
+    amount: string,
     contract_type: string,
     metadata: any,
     name: string,

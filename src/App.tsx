@@ -9,10 +9,11 @@ import {RequireAuth} from "./utils/provider/authProvider";
 import Collections from "./pages/collections/collections";
 import {Nft} from "./pages/nft/nft";
 import {DiscoverPage} from "./pages/discover/discoverPage";
-import  {VirtualCollection} from "./pages/collection/virtualCollection";
+import {VirtualCollection} from "./pages/collection/virtualCollection";
 import {NftOwners} from "./components/ui/nftOwners/nftOwners";
 import {NftInfo} from "./components/ui/nftInfo/nftInfo";
 import {NftDetails} from "./components/ui/nftDetails/nftDetails";
+import {UploadNFTPage} from "./pages/uploadNFT/uploadNFT";
 
 function App() {
     return (
@@ -23,6 +24,10 @@ function App() {
                     <Profile/>
                 </RequireAuth>
                 }/>
+                <Route path={'/upload'} element={<RequireAuth>
+                    <UploadNFTPage/>
+                </RequireAuth>}/>
+
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'/assets/:address/:token_id'}>

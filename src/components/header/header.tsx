@@ -30,7 +30,7 @@ export const Header = () => {
     }
 
     useEffect(() => {
-        if(auth) {
+        if (auth) {
             getBalance(selector.wallet).then((r) => {
                 setBalance(r);
             })
@@ -57,12 +57,16 @@ export const Header = () => {
                 <div className={styles.search_wrapper}>
                     <Search/>
                     <div className={styles.buttons_container}>
-                        <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
-                                       func={() => closeLogin}/>
+
                         {!auth ? (
-                            <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
-                                           func={() => openLogin()}/>) :
+                                <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
+                                               func={() => openLogin()}/>) :
                             (<>
+                                <Link to={'/upload'} className={styles.upload_button}>
+                                    <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
+                                                   func={() => closeLogin}/>
+                                </Link>
+
                                 <Link to={'/profile'} className={styles.profile_header}>
                                     <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
 
