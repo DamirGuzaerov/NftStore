@@ -18,6 +18,7 @@ const CARD = {
     WIDTH: 350,
     HEIGHT: 460
 };
+const oneFetchLimit = 20;
 export const VirtualCollection = () => {
 
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -27,18 +28,18 @@ export const VirtualCollection = () => {
 
 
     useEffect(() => {
-        fetchNFTs().then(r => currentOffset.current += 20);
+        fetchNFTs().then(r => currentOffset.current += oneFetchLimit);
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
     async function fetchNFTs() {
         console.log(currentOffset.current)
-        getCollection(collection.address, "eth", 20, currentOffset.current)
+        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current)
             .then(
                 result => {
                     setNFTs([...NFTs, ...result])
-                    currentOffset.current += 20
+                    currentOffset.current += oneFetchLimit
                     console.log(currentOffset.current)
                 })
     }
@@ -86,24 +87,28 @@ export const VirtualCollection = () => {
                 isRowLoaded={isRowLoaded}
                 loadMoreRows={loadMoreRows}
                 rowCount={Math.ceil(NFTs.length / Math.floor(window.innerWidth / CARD.WIDTH)) + 1}
-                threshold={5}
+                threshold={24}
             >
                 {({onRowsRendered, registerChild}: any) => (
+                    <WindowScroller>
+                        {({ height, isScrolling, onChildScroll, scrollTop }) => (
                     <div style={{height: "100%", width: "100%"}}>
                         <AutoSizer>
-                            {({width, height}) => {
+                            {({width}) => {
                                 const itemsPerRow = Math.floor(width / CARD.WIDTH);
                                 rowsCount.current = Math.ceil(NFTs.length / itemsPerRow);
                                 return (
                                     <List
                                         className={styles.List}
                                         width={width}
+                                        autoHeight
                                         height={height}
                                         rowCount={rowsCount.current}
                                         onRowsRendered={onRowsRendered}
                                         ref={registerChild}
                                         rowHeight={CARD.HEIGHT}
                                         style={{color: "white"}}
+                                        scrollTop={scrollTop}
                                         rowRenderer={
                                             ({index, key, style}) => {
                                                 const items = [];
@@ -150,6 +155,8 @@ export const VirtualCollection = () => {
                             }}
                         </AutoSizer>
                     </div>
+                        )}
+                    </WindowScroller>
                 )}
             </InfiniteLoader>
         </div>

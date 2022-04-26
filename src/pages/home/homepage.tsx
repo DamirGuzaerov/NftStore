@@ -8,9 +8,9 @@ export const Homepage = () => {
         <main>
             <div className={styles.main_container}>
                 <h1>NFT of the day</h1>
-                <MainNFTSwiper/>
-                <NFTSwiper/>
-                <NFtCollectionsList/>
+                    <MainNFTSwiper/>
+                    <NFTSwiper/>
+                    <NFtCollectionsList/>
             </div>
         </main>
     );
