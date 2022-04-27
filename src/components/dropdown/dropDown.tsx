@@ -10,9 +10,11 @@ export const DropDown = (props: {items: string[], name: string, addParam?: Funct
     const {items} = props;
     const {addParam} = props;
     const addAttr = (item: string) => {
+
         setName(item);
-        // @ts-ignore
-        addParam(type.toLowerCase(), item.toLowerCase());
+        if(addParam) {
+            addParam(type.toLowerCase(), item.toLowerCase());
+        }
     }
     return (
         <>

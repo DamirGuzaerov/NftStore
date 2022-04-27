@@ -14,7 +14,8 @@ import {NftOwners} from "./components/ui/nftOwners/nftOwners";
 import {NftInfo} from "./components/ui/nftInfo/nftInfo";
 import {NftDetails} from "./components/ui/nftDetails/nftDetails";
 import Collection from "./pages/collection/collection";
-import {UploadNFTPage} from "./pages/uploadNFT/uploadNFT";
+import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
+import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 
 function App() {
     return (
@@ -25,9 +26,13 @@ function App() {
                     <Profile/>
                 </RequireAuth>
                 }/>
-                <Route path={'/upload'} element={<RequireAuth>
-                    <UploadNFTPage/>
+                <Route path={'/preUpload'} element={<RequireAuth>
+                    <PreUploadNFT/>
                 </RequireAuth>}/>
+                <Route path={'/upload'} element={<RequireAuth>
+                    <UploadNFT/>
+                </RequireAuth>}/>
+
 
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>

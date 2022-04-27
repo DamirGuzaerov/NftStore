@@ -62,7 +62,7 @@ export const Header = () => {
                                 <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12} value={'Sign in'}
                                                func={() => openLogin()}/>) :
                             (<>
-                                <Link to={'/upload'} className={styles.upload_button}>
+                                <Link to={'/preUpload'} className={styles.upload_button}>
                                     <DefaultButton type={'submit'} paddingRightLeft={16} paddingTopBottom={12} value={'Upload'}
                                                    func={() => closeLogin}/>
                                 </Link>

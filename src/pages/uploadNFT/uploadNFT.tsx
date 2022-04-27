@@ -1,47 +1,104 @@
-import styles from './uploadNFTStyles.module.sass';
-import {Link} from "react-router-dom";
+import styles from './upload.module.sass';
+import {FileInput} from "../../components/ui/inputs/dragdrop/fileInput";
+import {useState} from "react";
+import img from '../../assets/images/tempImg/nftPreviewImg.png';
 import Icon from "../../components/ui/icon/icon";
-import firstImg from '../../assets/images/tempImg/img.png';
-import secondImg from '../../assets/images/tempImg/multUpload.png';
+import {TextInput} from "../../components/ui/inputs/input/textInput";
+import {DropDown} from "../../components/dropdown/dropDown";
 import {DefaultButton} from "../../components/ui/buttons/default-button";
 
-export const UploadNFTPage = () => {
+export const UploadNFT = () => {
+    const [preview, setPreview] = useState(img);
+    const [itemName, setItemName] = useState('');
+    const [description, setDescription] = useState('');
     return (
         <div className={styles.background_uploadPage}>
             <div className={styles.uploadPage_container}>
-                <div className={styles.uploadPage_header}>
-                    <Link to={'/'}>
-                        <button className={styles.return_button}>
-                            <Icon name={'left_arrow'} width={16} height={16}/>
-                            <p>
-                                Back to home
-                            </p>
-                        </button>
-                    </Link>
-                </div>
-                <h1 className={styles.upload_label}>
-                    Upload item
-                </h1>
-                <p className={styles.upload_upper_description}>
-                    Choose <span className={styles.white_description}>“Single”</span> if you want your collectible to be one of a kind or <span className={styles.white_description}>“Multiple”</span> if you want to sell one collectible multiple times
-                </p>
+                <div className={styles.create_nft_container}>
+                    <h1>
+                        Create single collectible
+                    </h1>
 
-                <div className={styles.upload_type_container}>
-                    <div className={styles.upload_type_card}>
-                        <img src={firstImg} className={styles.upload_card_img}/>
+                    <p className={styles.input_block_main_description}>
+                        Upload file
+                    </p>
+                    <p className={styles.input_block_description}>
+                        Drag or choose your file to upload
+                    </p>
 
-                        <DefaultButton value={'Create Single'} paddingRightLeft={16} type={'action'} paddingTopBottom={12} func={console.log} />
+                    <FileInput setPreview={setPreview}/>
+
+                    <p className={styles.input_block_main_description}>
+                        Item details
+                    </p>
+
+                    <TextInput placeholder={'e. g. "Redeemable Bitcoin Card with logo"'} globalPlaceholder={'ITEM NAME'}
+                               setValue={setItemName}/>
+
+                    <TextInput placeholder={'e. g. “After purchasing you will able to recived the logo...”'}
+                               globalPlaceholder={'description'} setValue={setDescription}/>
+
+                    <label>
+                        <p className={styles.label_font_description}>
+                            Royalties
+                        </p>
+                        <DropDown items={['10%', '20%', '30%', '40%']} name={'Royalties'}/>
+                    </label>
+                    <div className={styles.subsettings}>
+                        <TextInput placeholder={'e. g. Size'}
+                                   globalPlaceholder={'size'} setValue={setDescription}/>
+
+                        <TextInput placeholder={'e. g. Propertie'}
+                                   globalPlaceholder={'propertie'} setValue={setDescription}/>
+
                     </div>
-                    <div className={styles.upload_type_card}>
-                        <img src={secondImg} className={styles.upload_card_img}/>
+                    <div className={styles.createButton_container}>
+                        <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'} paddingTopBottom={16} func={console.log} />
+                    </div>
 
-                        <DefaultButton value={'Create Multiple'} paddingRightLeft={16} type={'submit'} paddingTopBottom={12} func={console.log} />
+                </div>
+
+                <div className={styles.preview_container}>
+                    <div className={styles.preview_card}>
+                        <h2>Preview</h2>
+
+                        <img src={preview} className={styles.preview_img}/>
+
+                        <div className={styles.nft_content}>
+                            <div className={styles.nft_content_row}>
+                                <p>
+                                    {itemName}
+                                </p>
+
+                                <div className={styles.nft_price}>
+                                    <p>
+                                        {''} ETH
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className={styles.nft_content_row}>
+                                <img className={styles.creatorAvatar} src={''} alt=""/>
+                                <p>
+                                    {''} in stock
+                                </p>
+                            </div>
+
+                            <div className={styles.nft_content_row}>
+                                <span className={styles.bet}>
+                                    <Icon name={'nftbet'} width={20} height={20}/>
+                                    <p className={styles.highest_bet}>
+                                        Highest bid
+                                    </p>
+                                    <p className={styles.bet_price}>
+                                        0.04 ETH
+                                    </p>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p className={styles.upload_lower_description}>
-                We do not own your private keys and cannot access your funds without your confirmation.
-            </p>
         </div>
     );
-}
+};
