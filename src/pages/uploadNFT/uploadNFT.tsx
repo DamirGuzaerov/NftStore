@@ -8,6 +8,8 @@ import {DropDown} from "../../components/dropdown/dropDown";
 import {DefaultButton} from "../../components/ui/buttons/default-button";
 import Moralis from "moralis";
 import Web3 = Moralis.Web3;
+import {useAppSelector} from "../../utils/hooks/redux-hooks";
+
 const web3 = new Web3(Web3.givenProvider);
 
 
@@ -18,6 +20,8 @@ export const UploadNFT = () => {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [propertie, setPropertie] = useState('');
+    const [royalty, setRoyalty] = useState(5);
+    const selector = useAppSelector(state => state.UserReducer);
 
     async function upload() {
         const imageFile = new Moralis.File(itemName, file);
@@ -31,10 +35,18 @@ export const UploadNFT = () => {
         };
         const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
         await metadataFile.saveIPFS();
-        const metadataUri= metadataFile.url();
+        const metadataUri = metadataFile.url();
+
+        let res = Moralis.Plugins.rarible.lazyMint({
+            chain: 'eth',
+            userAddress: selector.wallet,
+            tokenType: 'ERC721',
+            tokenUri: imageUrl,
+            royaltiesAmout: royalty
+        })
+        console.log(res);
 
     }
-
 
 
     return (
@@ -52,7 +64,7 @@ export const UploadNFT = () => {
                         Drag or choose your file to upload
                     </p>
 
-                    <FileInput  setFile={setFile} setPreview={setPreview}/>
+                    <FileInput setFile={setFile} setPreview={setPreview}/>
 
                     <p className={styles.input_block_main_description}>
                         Item details
@@ -79,7 +91,8 @@ export const UploadNFT = () => {
 
                     </div>
                     <div className={styles.createButton_container}>
-                        <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'} paddingTopBottom={16} func={() => upload()} />
+                        <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'} paddingTopBottom={16}
+                                       func={() => upload()}/>
                     </div>
 
                 </div>
