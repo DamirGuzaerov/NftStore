@@ -27,6 +27,8 @@ export const UploadNFT = () => {
         const imageFile = new Moralis.File(itemName, file);
         await imageFile.saveIPFS();
         const imageUrl = imageFile.url();
+        console.log(imageFile);
+        console.log(imageUrl);
 
         const metadata = {
             'name': itemName,
@@ -36,12 +38,14 @@ export const UploadNFT = () => {
         const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
         await metadataFile.saveIPFS();
         const metadataUri = metadataFile.url();
+        console.log(metadataFile);
+        console.log(metadataUri)
 
         let res = Moralis.Plugins.rarible.lazyMint({
             chain: 'eth',
             userAddress: selector.wallet,
             tokenType: 'ERC721',
-            tokenUri: imageUrl,
+            tokenUri: metadataUri,
             royaltiesAmout: royalty
         })
         console.log(res);
