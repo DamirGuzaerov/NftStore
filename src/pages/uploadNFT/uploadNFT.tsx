@@ -6,11 +6,37 @@ import Icon from "../../components/ui/icon/icon";
 import {TextInput} from "../../components/ui/inputs/input/textInput";
 import {DropDown} from "../../components/dropdown/dropDown";
 import {DefaultButton} from "../../components/ui/buttons/default-button";
+import Moralis from "moralis";
+import Web3 = Moralis.Web3;
+const web3 = new Web3(Web3.givenProvider);
+
 
 export const UploadNFT = () => {
     const [preview, setPreview] = useState(img);
+    const [file, setFile] = useState([]);
     const [itemName, setItemName] = useState('');
     const [description, setDescription] = useState('');
+    const [amount, setAmount] = useState('');
+    const [propertie, setPropertie] = useState('');
+
+    async function upload() {
+        const imageFile = new Moralis.File(itemName, file);
+        await imageFile.saveIPFS();
+        const imageUrl = imageFile.url();
+
+        const metadata = {
+            'name': itemName,
+            'description': description,
+            'image': imageUrl
+        };
+        const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
+        await metadataFile.saveIPFS();
+        const metadataUri= metadataFile.url();
+
+    }
+
+
+
     return (
         <div className={styles.background_uploadPage}>
             <div className={styles.uploadPage_container}>
@@ -26,7 +52,7 @@ export const UploadNFT = () => {
                         Drag or choose your file to upload
                     </p>
 
-                    <FileInput setPreview={setPreview}/>
+                    <FileInput  setFile={setFile} setPreview={setPreview}/>
 
                     <p className={styles.input_block_main_description}>
                         Item details
@@ -53,7 +79,7 @@ export const UploadNFT = () => {
 
                     </div>
                     <div className={styles.createButton_container}>
-                        <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'} paddingTopBottom={16} func={console.log} />
+                        <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'} paddingTopBottom={16} func={() => upload()} />
                     </div>
 
                 </div>
@@ -80,7 +106,7 @@ export const UploadNFT = () => {
                             <div className={styles.nft_content_row}>
                                 <img className={styles.creatorAvatar} src={''} alt=""/>
                                 <p>
-                                    {''} in stock
+                                    {amount} in stock
                                 </p>
                             </div>
 
@@ -91,7 +117,7 @@ export const UploadNFT = () => {
                                         Highest bid
                                     </p>
                                     <p className={styles.bet_price}>
-                                        0.04 ETH
+                                        0.00 ETH
                                     </p>
                                 </span>
                             </div>

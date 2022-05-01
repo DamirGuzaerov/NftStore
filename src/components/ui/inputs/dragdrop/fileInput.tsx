@@ -3,9 +3,10 @@ import styles from './fileInput.module.sass';
 import Icon from "../../icon/icon";
 
 interface props {
-    setPreview: Function
+    setPreview: Function,
+    setFile: Function
 }
-export const FileInput:FC<props> = ({setPreview}) => {
+export const FileInput:FC<props> = ({setPreview, setFile}) => {
     const [drag, setDrag] = useState(false);
 
     function dragStartHandler(e: any) {
@@ -21,6 +22,7 @@ export const FileInput:FC<props> = ({setPreview}) => {
     function onDropHandler(e: any) {
         e.preventDefault();
         const files = [...e.dataTransfer.files];
+        setFile(files[0]);
         setPreview(URL.createObjectURL(files[0]));
         console.log(files);
         setDrag(false);
