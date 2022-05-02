@@ -48,9 +48,11 @@ export const Profile = () => {
                                 <Icon name={'share'} width={20} height={20}/>
                             </button>
 
-                            <button>
-                                <Icon name={'options'} width={20} height={20}/>
-                            </button>
+                            <Link to={'/settings'}>
+                                <button>
+                                    <Icon name={'options'} width={20} height={20}/>
+                                </button>
+                            </Link>
                         </div>
                     </div>
 
@@ -92,7 +94,8 @@ export const Profile = () => {
                                 </div>) : (
                                 <>
                                     <p className={styles.empty_list_title}> Your NFTs list is empty!</p>
-                                    <Link className={styles.empty_list_link} to={'/'}>Find something for yourself!</Link>
+                                    <Link className={styles.empty_list_link} to={'/'}>Find something for
+                                        yourself!</Link>
                                 </>
                             )}
                         </div>

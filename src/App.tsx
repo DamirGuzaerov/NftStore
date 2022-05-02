@@ -16,6 +16,7 @@ import {NftDetails} from "./components/ui/nftDetails/nftDetails";
 import Collection from "./pages/collection/collection";
 import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
 import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
+import {SettingsPage} from "./pages/settings/settingsPage";
 
 function App() {
     return (
@@ -31,6 +32,9 @@ function App() {
                 </RequireAuth>}/>
                 <Route path={'/upload'} element={<RequireAuth>
                     <UploadNFT/>
+                </RequireAuth>}/>
+                <Route path={'/settings'} element={<RequireAuth>
+                    <SettingsPage/>
                 </RequireAuth>}/>
 
 

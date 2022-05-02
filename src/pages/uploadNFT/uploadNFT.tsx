@@ -14,7 +14,7 @@ const web3 = new Web3(Web3.givenProvider);
 
 
 export const UploadNFT = () => {
-    const [preview, setPreview] = useState(img);
+    const [preview, setPreview] = useState(null);
     const [file, setFile] = useState([]);
     const [itemName, setItemName] = useState('');
     const [description, setDescription] = useState('');
@@ -24,32 +24,30 @@ export const UploadNFT = () => {
     const selector = useAppSelector(state => state.UserReducer);
 
     async function upload() {
-        const imageFile = new Moralis.File(itemName, file);
-        await imageFile.saveIPFS();
-        const imageUrl = imageFile.url();
-        console.log(imageFile);
-        console.log(imageUrl);
+        if(!preview == null) {
+            const imageFile = new Moralis.File(itemName, file);
+            await imageFile.saveIPFS();
+            const imageUrl = imageFile.url();
 
-        const metadata = {
-            'name': itemName,
-            'description': description,
-            'image': imageUrl
-        };
-        const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
-        await metadataFile.saveIPFS();
-        const metadataUri = metadataFile.url();
-        console.log(metadataFile);
-        console.log(metadataUri)
+            const metadata = {
+                'name': itemName,
+                'description': description,
+                'image': imageUrl
+            };
+            const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
+            await metadataFile.saveIPFS();
+            const metadataUri = metadataFile.url();
 
-        let res = Moralis.Plugins.rarible.lazyMint({
-            chain: 'eth',
-            userAddress: selector.wallet,
-            tokenType: 'ERC721',
-            tokenUri: metadataUri,
-            royaltiesAmout: royalty
-        })
-        console.log(res);
-
+            let res = Moralis.Plugins.rarible.lazyMint({
+                chain: 'eth',
+                userAddress: selector.wallet,
+                tokenType: 'ERC721',
+                tokenUri: metadataUri,
+                royaltiesAmout: royalty
+            })
+        } else {
+            alert('enter all values');
+        }
     }
 
 
@@ -88,10 +86,10 @@ export const UploadNFT = () => {
                     </label>
                     <div className={styles.subsettings}>
                         <TextInput placeholder={'e. g. Size'}
-                                   globalPlaceholder={'size'} setValue={setDescription}/>
+                                   globalPlaceholder={'size'} setValue={setAmount}/>
 
                         <TextInput placeholder={'e. g. Propertie'}
-                                   globalPlaceholder={'propertie'} setValue={setDescription}/>
+                                   globalPlaceholder={'propertie'} setValue={setPropertie}/>
 
                     </div>
                     <div className={styles.createButton_container}>
@@ -104,8 +102,10 @@ export const UploadNFT = () => {
                 <div className={styles.preview_container}>
                     <div className={styles.preview_card}>
                         <h2>Preview</h2>
-
-                        <img src={preview} className={styles.preview_img}/>
+                        {preview ? (<img src={preview} className={styles.preview_img}/>)
+                            : (<div className={styles.preview_img}>
+                                <p>Upload image</p>
+                            </div>)}
 
                         <div className={styles.nft_content}>
                             <div className={styles.nft_content_row}>
