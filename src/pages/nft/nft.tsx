@@ -10,6 +10,7 @@ import NftInfoSwitcher from "../../components/nftInfoSwitcher/nftInfoSwitcher";
 import {useAppDispatch} from "../../utils/hooks/redux-hooks";
 import {fetchOwners} from "../../stores/reducers/ActionCreators";
 import {useMoralisWeb3Api} from "react-moralis";
+import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 
 export const Nft = () => {
     const {address, token_id} = useParams();
@@ -39,6 +40,8 @@ export const Nft = () => {
         const NFTLowestPrice = await Web3Api.token.getNFTLowestPrice(options);
         console.log(NFTLowestPrice);
     };
+
+
 
     useEffect(() => {
         getNft(address!, token_id!)

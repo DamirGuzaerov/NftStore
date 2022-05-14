@@ -2,8 +2,20 @@ import styles from "./nftBidCard.module.sass"
 import {Avatar} from "../avatar/avatar";
 import user from "../../../assets/images/tempImg/creator.png";
 import {DefaultButton} from "../buttons/default-button";
+import {addModal, removeModal} from "../../../stores/reducers/modalSlice";
+import {useAppDispatch} from "../../../utils/hooks/redux-hooks";
 
 export const NftBidCard = () => {
+
+    const dispatch = useAppDispatch();
+    const openModal = (modal: string) => {
+        dispatch(addModal(modal));
+        console.log('opened')
+    }
+
+    const closeModal = () => {
+        dispatch(removeModal());
+    }
     return (
         <>
             <div className={styles.bidCardWrapper}>
@@ -33,7 +45,7 @@ export const NftBidCard = () => {
                         </div>
                         <div className={styles.btnWrapper}>
                             <DefaultButton
-                                func={() => alert("Пока не реализовано")}
+                                func={() => openModal('PlaceBid')}
                                 paddingTopBottom={16}
                                 type={"action"}
                                 value={"Place a bid"}

@@ -67,6 +67,8 @@ export const UploadNFT = () => {
             await metadataFile.saveIPFS();
             const metadataUri = metadataFile.url();
 
+
+
             let res = Moralis.Plugins.rarible.lazyMint({
                 chain: 'eth',
                 userAddress: selector.wallet,
