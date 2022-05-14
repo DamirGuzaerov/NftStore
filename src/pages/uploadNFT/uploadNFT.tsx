@@ -24,7 +24,7 @@ export const UploadNFT = () => {
     const selector = useAppSelector(state => state.UserReducer);
 
     async function upload() {
-        if(!preview == null) {
+        if(preview != null) {
             const imageFile = new Moralis.File(itemName, file);
             await imageFile.saveIPFS();
             const imageUrl = imageFile.url();
@@ -106,7 +106,6 @@ export const UploadNFT = () => {
                             : (<div className={styles.preview_img}>
                                 <p>Upload image</p>
                             </div>)}
-
                         <div className={styles.nft_content}>
                             <div className={styles.nft_content_row}>
                                 <p>
@@ -119,14 +118,12 @@ export const UploadNFT = () => {
                                     </p>
                                 </div>
                             </div>
-
                             <div className={styles.nft_content_row}>
                                 <img className={styles.creatorAvatar} src={''} alt=""/>
                                 <p>
                                     {amount} in stock
                                 </p>
                             </div>
-
                             <div className={styles.nft_content_row}>
                                 <span className={styles.bet}>
                                     <Icon name={'nftbet'} width={20} height={20}/>

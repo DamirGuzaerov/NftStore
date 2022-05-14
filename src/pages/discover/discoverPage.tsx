@@ -40,14 +40,11 @@ export const DiscoverPage = () => {
         console.log(string);
         return string
     }
-
     const updateMap = (key: string, value: string) => {
         setAttributes(attributes.set(key, value))
         setAttributes(new Map(JSON.parse(
             JSON.stringify(Array.from(attributes)))));
     }
-
-
     return (
         <div className={styles.discover_page_wrapper}>
             <div className={styles.discover_page}>

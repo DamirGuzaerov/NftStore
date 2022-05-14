@@ -3,6 +3,7 @@ import {Avatar} from "../avatar/avatar";
 import creator from "../../../assets/images/tempImg/creator.png";
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
+import {Link} from "react-router-dom";
 
 
 export const NftOwners = () => {
@@ -20,15 +21,17 @@ export const NftOwners = () => {
                 {owners.map(item => {
 
                     return (
-                        <div key={item.owner_of} className={styles.owner}>
-                            <Avatar height={50} width={50} imgUrl={creator}/>
-                            <div className={styles.userInfo}>
-                                Owner
-                                <div className={styles.userName}>
-                                    {item.owner_of}
+                        <Link to={"/pageUser/"+item.owner_of}>
+                            <div key={item.owner_of} className={styles.owner}>
+                                <Avatar height={50} width={50} imgUrl={creator}/>
+                                <div className={styles.userInfo}>
+                                    Owner
+                                    <div className={styles.userName}>
+                                        {item.owner_of}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     )
                 })}
             </div>

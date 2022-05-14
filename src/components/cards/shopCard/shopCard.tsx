@@ -2,6 +2,7 @@ import styles from './shopCardStyles.module.sass';
 import Icon from "../../ui/icon/icon";
 import {FC} from "react";
 import {Link} from "react-router-dom";
+import defaulImg from "../../../assets/images/tempImg/nftPreviewImg.png"
 
 interface shopCardProps {
     imgUrl: string,
@@ -13,7 +14,6 @@ interface shopCardProps {
     amount: string
 }
 
-
 export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id, amount}) => {
     const urlCheck = () => {
         if(imgUrl.includes('mp4') || imgUrl.includes('webm')) {
@@ -24,7 +24,10 @@ export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImg
             )
         } else {
             return (
-                <img src={imgUrl} className={styles.nft_image}/>
+                <img src={imgUrl}  onError={({ currentTarget }) => {
+                    currentTarget.src = defaulImg;
+                    currentTarget.onerror = null;
+                }} className={styles.nft_image}/>
             )
         }
     }

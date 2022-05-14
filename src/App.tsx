@@ -17,12 +17,17 @@ import Collection from "./pages/collection/collection";
 import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
 import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 import {SettingsPage} from "./pages/settings/settingsPage";
+import {UserPage} from "./pages/userPage/userPage";
+import Moralis from "moralis";
 
 function App() {
+    Moralis.start({serverUrl:'https://bsnaqump47ti.usemoralis.com:2053/server', appId:"xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt"})
+
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>
                 <Route element={<Homepage/>} index/>
+                <Route element={<UserPage/>} path={"/pageUser/:wallet"}/>
                 <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
                 </RequireAuth>

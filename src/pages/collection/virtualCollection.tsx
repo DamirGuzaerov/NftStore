@@ -26,7 +26,6 @@ export const VirtualCollection = () => {
     const currentOffset = useRef(0);
     const {collectionName} = useParams();
 
-
     useEffect(() => {
         fetchNFTs().then(r => currentOffset.current += oneFetchLimit);
     }, [])
