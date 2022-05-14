@@ -1,0 +1,45 @@
+.container
+  font-size: 14px
+  z-index: 10
+  position: fixed
+
+.bottom_right
+  bottom: 1rem
+  right: 1rem
+  animation: toast_in_right 1s
+
+.notification
+  margin-bottom: 1rem
+  border-radius: 4px
+  box-shadow: 0 0 10px black
+  opacity: 0.9
+  transition: .3s ease
+
+.notification:hover
+  box-shadow: 0 0 12px #262626
+  opacity: 1
+
+.toast
+  height: auto
+  width: 365px
+  color: white
+  padding: 10px
+
+  button
+    background: none
+    border: none
+    color: white
+    float: right
+    font-weight: 700
+
+.title
+  font-weight: 700
+  font-size: 16px
+  margin-bottom: 6px
+  width: 300px
+
+@keyframes toast_in_right
+  from
+    transform: translateX(100%)
+  to
+    transform: translateX(0)
