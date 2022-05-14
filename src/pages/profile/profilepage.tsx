@@ -7,12 +7,14 @@ import React, {useEffect, useState} from "react";
 import {getCollection, getNft} from "../../utils/hooks/getNfts";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Link} from "react-router-dom";
+import {useMoralis} from "react-moralis";
 
 
 export const Profile = () => {
     const user = useAppSelector(state => state.UserReducer);
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600"
+
 
     useEffect(() => {
         getCollection(user.wallet, 'eth').then((r) => {
