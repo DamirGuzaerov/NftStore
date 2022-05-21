@@ -13,7 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
         <Provider store={mainStore()}>
              <BrowserRouter>
-                 <MoralisProvider serverUrl='https://bsnaqump47ti.usemoralis.com:2053/server' appId="xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt">
+                 <MoralisProvider serverUrl='https://g12o0xvp31x1.usemoralis.com:2053/server' appId="m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua">
                     <App/>
                  </MoralisProvider>
                  <ModalConstructor/>

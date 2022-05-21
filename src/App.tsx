@@ -19,6 +19,7 @@ import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 import {SettingsPage} from "./pages/settings/settingsPage";
 import Moralis from "moralis";
 import {NftBids} from "./components/ui/nftBids/nftBids";
+import {UserPage} from "./pages/userPage/userPage";
 
 function App() {
     Moralis.start({serverUrl: 'https://g12o0xvp31x1.usemoralis.com:2053/server', appId: 'm9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua'})
