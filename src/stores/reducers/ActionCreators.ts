@@ -2,6 +2,7 @@
 import Moralis from "moralis";
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import {getNFTOwners} from "../../utils/hooks/getNfts";
+import {write} from "fs";
 interface url {
     address: string,
     token_id: string

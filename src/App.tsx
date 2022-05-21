@@ -26,6 +26,7 @@ function App() {
         <Routes>
             <Route path={'/'} element={<Layout/>}>
                 <Route element={<Homepage/>} index/>
+                <Route element={<UserPage/>} path={"/pageUser/:wallet"}/>
                 <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
                 </RequireAuth>

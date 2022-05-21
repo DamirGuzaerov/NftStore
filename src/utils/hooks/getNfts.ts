@@ -6,7 +6,6 @@ const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
 
 export async function getCollection(address: string, chain: string, limit?: number, offset?: number) {
-    console.log(offset);
     return axios.get(url + `/nft/${address}`, {
         params: {
             chain: chain,
@@ -18,7 +17,6 @@ export async function getCollection(address: string, chain: string, limit?: numb
         }
     }).then(async (response) => {
         const arr = await setImages(response.data.result);
-        console.log(arr);
         return arr;
     }).catch((er) => {
         return er;
@@ -124,7 +122,7 @@ export async function searchNFTs(q: string, chain?: string, limit?: number, form
             chain: chain,
             q: q,
             format: format,
-            filter: 'attributes',
+            filter: 'name',
             from_date: from_date,
             to_date: to_date,
             offset: offset,

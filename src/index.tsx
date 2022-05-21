@@ -11,14 +11,14 @@ import App from "./App";
 
 ReactDOM.render(
   <React.StrictMode>
-      <MoralisProvider serverUrl='https://g12o0xvp31x1.usemoralis.com:2053/server' appId="m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua">
-      <Provider store={mainStore()}>
-          <BrowserRouter>
-              <App/>
-              <ModalConstructor/>
-          </BrowserRouter>
-      </Provider>
-      </MoralisProvider>
+        <Provider store={mainStore()}>
+             <BrowserRouter>
+                 <MoralisProvider serverUrl='https://bsnaqump47ti.usemoralis.com:2053/server' appId="xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt">
+                    <App/>
+                 </MoralisProvider>
+                 <ModalConstructor/>
+            </BrowserRouter>
+        </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

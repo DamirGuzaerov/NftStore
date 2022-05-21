@@ -18,6 +18,7 @@ export const userSlice = createSlice({
     },
     extraReducers: {
         [fetchUser.fulfilled.type]: (state, action: PayloadAction<IUser>) => {
+            console.log(action)
             state.isLoading = false;
             state.name = action.payload.name;
             state.wallet = action.payload.wallet;

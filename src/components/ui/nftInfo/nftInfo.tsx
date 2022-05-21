@@ -3,6 +3,7 @@ import {Avatar} from "../avatar/avatar";
 import creator from "../../../assets/images/tempImg/creator.png";
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
+import {Link} from "react-router-dom";
 
 export const NftInfo = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
@@ -17,6 +18,7 @@ export const NftInfo = () => {
     }, [selector]);
   return(
       <div className={styles.infoWrapper}>
+          <Link to={"/pageUser/"+creatorInfo}>
           <div className={styles.creators}>
               <Avatar height={50} width={50} imgUrl={creator}/>
               <div className={styles.userInfo}>
@@ -26,6 +28,7 @@ export const NftInfo = () => {
                   </div>
               </div>
           </div>
+          </Link>
       </div>
   )
 }
