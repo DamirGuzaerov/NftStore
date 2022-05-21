@@ -17,8 +17,11 @@ import Collection from "./pages/collection/collection";
 import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
 import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 import {SettingsPage} from "./pages/settings/settingsPage";
+import Moralis from "moralis";
+import {NftBids} from "./components/ui/nftBids/nftBids";
 
 function App() {
+    Moralis.start({serverUrl: 'https://g12o0xvp31x1.usemoralis.com:2053/server', appId: 'm9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua'})
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>
@@ -38,12 +41,14 @@ function App() {
                 </RequireAuth>}/>
 
 
+
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'/assets/:address/:token_id'}>
                     <Route element={<NftOwners/>} path={'/assets/:address/:token_id/owners'}/>
                     <Route element={<NftInfo/>} path={'/assets/:address/:token_id/info'}/>
                     <Route element={<NftDetails/>} path={'/assets/:address/:token_id/details'}/>
+                    <Route element={<NftBids/>} path={'/assets/:address/:token_id/bids'}/>
                 </Route>
                 <Route element={<DiscoverPage/>} path={'/discover'}/>
             </Route>

@@ -29,6 +29,14 @@ export const NftInfoSwitcher = () => {
                             Details
                         </NavLink>
                     </li>
+
+                    <li className={styles.navLink}>
+                        <NavLink
+                            className={({isActive}) => isActive ? styles.linkActive : styles.link}
+                            to={'bids'}>
+                            Bids
+                        </NavLink>
+                    </li>
                 </ul>
             </nav>
             <div className={styles.infoContainer}>

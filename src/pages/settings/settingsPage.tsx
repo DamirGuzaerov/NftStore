@@ -45,6 +45,7 @@ export const SettingsPage = () => {
 
 
     const handleSaveUser = () => {
+        console.log('works');
         setUserData({
             name: name === "" ? undefined : name,
             email: email === "" ? undefined : email,

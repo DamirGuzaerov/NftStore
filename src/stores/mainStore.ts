@@ -2,11 +2,13 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import ModalReducer from './reducers/modalSlice'
 import UserReducer from "./reducers/userSlice";
 import OwnerReducer from './reducers/ownerSlice'
+import BidReducer from './reducers/bidSlice';
 
 const rootReducer = combineReducers({
     ModalReducer,
     UserReducer,
-    OwnerReducer
+    OwnerReducer,
+    BidReducer
 });
 export const mainStore = () => {
     return configureStore({

@@ -3,15 +3,45 @@ import {Avatar} from "../avatar/avatar";
 import user from "../../../assets/images/tempImg/creator.png";
 import {DefaultButton} from "../buttons/default-button";
 import {addModal, removeModal} from "../../../stores/reducers/modalSlice";
-import {useAppDispatch} from "../../../utils/hooks/redux-hooks";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/redux-hooks";
+import {useEffect, useState} from "react";
+import Moralis from "moralis";
+import {IBid} from "../nftBids/nftBids";
 
 export const NftBidCard = () => {
 
     const dispatch = useAppDispatch();
+    const [bid, setBid] = useState<IBid>();
+    const selector = useAppSelector(state => state.BidReducer)
     const openModal = (modal: string) => {
         dispatch(addModal(modal));
         console.log('opened')
     }
+
+    useEffect(() => {
+        const transaction = Moralis.Object.extend("Transaction");
+        const query = new Moralis.Query(transaction);
+        query.containedIn("address", [
+            selector.address
+        ])
+        query.containedIn("token", [
+            selector.token
+        ])
+        query.descending("price");
+        const fetchTransaction = async () => {
+            return await query.first();
+        }
+
+        fetchTransaction().then(r => {
+            const val = r?.attributes;
+            setBid({
+                price: val?.price,
+                user: val?.user,
+                createdAt: val?.createdAt
+            })
+        })
+
+    }, [])
 
     const closeModal = () => {
         dispatch(removeModal());
@@ -23,11 +53,11 @@ export const NftBidCard = () => {
                     <div className={styles.highestBidUser}>
                         <Avatar width={50} height={50} imgUrl={user}/>
                         <div className={styles.highestBidInfo}>
-                            <p>
-                                Highest bid by <span className={styles.userName}>Darth Vader</span>
+                            <p className={styles.bid_eth}>
+                                Highest bid by <span className={styles.userName}>{bid?.user}</span>
                             </p>
                             <p className={styles.bid}>
-                                <span>1.46 ETH </span>
+                                <span>{bid?.price} ETH </span>
                                 <span className={styles.bidDollars}>
                                      $2,764.89
                                 </span>
