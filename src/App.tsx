@@ -13,7 +13,6 @@ import {VirtualCollection} from "./pages/collection/virtualCollection";
 import {NftOwners} from "./components/ui/nftOwners/nftOwners";
 import {NftInfo} from "./components/ui/nftInfo/nftInfo";
 import {NftDetails} from "./components/ui/nftDetails/nftDetails";
-import Collection from "./pages/collection/collection";
 import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
 import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 import {SettingsPage} from "./pages/settings/settingsPage";
@@ -22,7 +21,7 @@ import {NftBids} from "./components/ui/nftBids/nftBids";
 import {UserPage} from "./pages/userPage/userPage";
 
 function App() {
-    Moralis.start({serverUrl:'https://bsnaqump47ti.usemoralis.com:2053/server', appId:"xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt"})
+    Moralis.start({serverUrl:'https://g12o0xvp31x1.usemoralis.com:2053/server', appId:"m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua"})
 
     return (
         <Routes>

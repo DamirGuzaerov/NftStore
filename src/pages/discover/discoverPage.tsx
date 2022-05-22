@@ -87,18 +87,6 @@ export const DiscoverPage = () => {
             <div className={styles.discover_page}>
                 <div className={`${styles.rowblock_discover}`}>
                     <div className={styles.filters}>
-                        {/* <label className={styles.price_range}>
-                            PRICE RANGE
-                            <input type={"range"} min="1" max="100"/>
-                            <span className={styles.input_price_range}>
-                                    <span>
-                                        0.01 ETH
-                                    </span>
-                                    <span>
-                                        10 ETH
-                                    </span>
-                                </span>
-                        </label>*/}
                         <div className={styles.main_filters}>
                             <label className={styles.filter}>
                                 <div className={styles.filter_body}>

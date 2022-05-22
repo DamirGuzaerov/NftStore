@@ -2,11 +2,11 @@ import styles from './settingsPage.module.sass';
 import {Link} from "react-router-dom";
 import Icon from "../../components/ui/icon/icon";
 import profileImage from '../../assets/images/tempImg/nftPreviewImg.png';
-import {TextInput} from "../../components/ui/inputs/input/textInput";
 import {useState} from "react";
 import {DefaultButton} from "../../components/ui/buttons/default-button";
 import {useMoralis, useMoralisCloudFunction} from "react-moralis";
 import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
+import {SettingsTextInput} from "../../components/ui/inputs/settingsTextInput/settingsTextInput";
 
 export const SettingsPage = () => {
 
@@ -15,6 +15,8 @@ export const SettingsPage = () => {
     const [email, setEmail] = useState();
     const [bio, setBio] = useState();
     const {user, setUserData} = useMoralis();
+    const [isEmail, setIsEmail] = useState(false);
+    const [isBio, setIsBio] = useState(false);
     let toastProperties = null;
 
     const showToast = (type: string) => {
@@ -35,6 +37,15 @@ export const SettingsPage = () => {
                     backgroundColor: '#d9534f'
                 }
                 break;
+
+            case 'emailFail':
+                toastProperties = {
+                    id: 3,
+                    title: 'Failed!',
+                    description: 'Invalid email or bio',
+                    backgroundColor: '#d9534f'
+                }
+                break;
             default:
                 toastProperties = [];
         }
@@ -45,16 +56,19 @@ export const SettingsPage = () => {
 
 
     const handleSaveUser = () => {
-        console.log('works');
-        setUserData({
-            name: name === "" ? undefined : name,
-            email: email === "" ? undefined : email,
-            bio: bio === "" ? undefined : bio
-        }).then(r => {
-            showToast('success');
-        }).catch(e => {
-            showToast('failed');
-        })
+        if(isBio && isEmail) {
+            setUserData({
+                name: name === "" ? undefined : name,
+                email: email === "" ? undefined : email,
+                bio: bio === "" ? undefined : bio
+            }).then(r => {
+                showToast('success');
+            }).catch(e => {
+                showToast('fail');
+            })
+        } else {
+            showToast('emailFail');
+        }
     }
 
     return (
@@ -104,11 +118,12 @@ export const SettingsPage = () => {
                                 Account info
                             </p>
                             <div className={styles.inputs_container}>
-                                <TextInput setValue={setName} placeholder={'Enter your display name'}
-                                           globalPlaceholder={'display name'}/>
-                                <TextInput setValue={setEmail} placeholder={'Enter your email'}
-                                           globalPlaceholder={'display email'}/>
-                                <TextInput setValue={setBio} placeholder={'Enter your bio '} globalPlaceholder={'bio'}/>
+                                <SettingsTextInput setValue={setName} placeholder={'Enter your display name'}
+                                                   globalPlaceholder={'display name'} setFlag={() => console.log}/>
+                                <SettingsTextInput setValue={setEmail} placeholder={'Enter your email'}
+                                                   globalPlaceholder={'display email'} setFlag={() => setIsEmail}/>
+                                <SettingsTextInput setValue={setBio} placeholder={'Enter your bio '}
+                                                   globalPlaceholder={'bio'} setFlag={() => setIsBio}/>
 
                                 <p className={styles.desc_inputs}>
                                     To update your settings you should sign message through your wallet. Click 'Update
@@ -117,8 +132,7 @@ export const SettingsPage = () => {
                             </div>
                             <div className={styles.submit_button_wrapper}>
                                 <DefaultButton value={'Update Profile'} type={'submit'} paddingRightLeft={24}
-                                               paddingTopBottom={16}
-                                               func={handleSaveUser}/>
+                                               paddingTopBottom={16} func={handleSaveUser}/>
                             </div>
                         </div>
 

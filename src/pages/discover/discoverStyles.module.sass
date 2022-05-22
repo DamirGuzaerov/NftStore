@@ -1,6 +1,7 @@
-@use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
+
 .discover_page_wrapper
-  max-width: gs.$max-width
+  max-width: $max-width
   margin: 0px auto
   padding: 0 24px
   width: 100%
@@ -12,7 +13,7 @@
 
   h2
     color: white
-    @include gs.poppins-font
+    @include poppins-font
     font-weight: 400
     font-size: 24px
     line-height: 32px
@@ -20,13 +21,13 @@
 
 .searchButton
   display: flex
-  background-color: gs.$button-submit-color
+  background-color: $button-submit-color
   padding: 12px
   border: none
   border-radius: 50%
 
 .searchButton:hover
-  background-color: gs.$button-submit-hover-color
+  background-color: $button-submit-hover-color
 
 .first_line
   padding-bottom: 40px
@@ -51,6 +52,7 @@
   flex-direction: column
 
 .nav_types
+  margin-top: 25px
   display: flex
   flex-direction: row
   align-items: center
@@ -60,7 +62,7 @@
   border: none
   background: none
   margin-left: 36px
-  @include gs.links-settings
+  @include links-settings
 
 .types:hover
   color: white
@@ -102,7 +104,7 @@
   margin-top: 50px
 
 label
-  @include gs.poppins-font
+  @include poppins-font
   color: rgba(177, 181, 195, 1)
 
 .price_range

@@ -18,11 +18,11 @@ export const NftOwners = () => {
     } else {
         return (
             <div className={styles.owners}>
-                {owners.map(item => {
+                {owners.map((item, counter) => {
 
                     return (
-                        <Link to={"/pageUser/"+item.owner_of}>
-                            <div key={item.owner_of} className={styles.owner}>
+                        <Link key={counter} to={"/pageUser/"+item.owner_of}>
+                            <div className={styles.owner}>
                                 <Avatar height={50} width={50} imgUrl={creator}/>
                                 <div className={styles.userInfo}>
                                     Owner
