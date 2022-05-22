@@ -1,6 +1,7 @@
 import axios from "axios";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import pic from '../../../src/assets/images/tempImg/nftPreviewImg.png'
+import Moralis from "moralis";
 
 const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
@@ -10,14 +11,17 @@ export async function getCollection(address: string, chain: string, limit?: numb
         params: {
             chain: chain,
             limit: limit,
-            offset: offset
+            offset: offset,
         },
         headers: {
-            'X-API-KEY': apikey ?? 'update api key'
+            'X-API-KEY': apikey ?? 'update api key',
         }
     }).then(async (response) => {
+        console.log(response.data)
         const arr = await setImages(response.data.result);
+        console.log(arr);
         return arr;
+
     }).catch((er) => {
         return er;
     })
@@ -113,7 +117,7 @@ export async function getBalance(address: string, chain?: string) {
     })
 }
 
-export async function searchNFTs(q: string, chain?: string, limit?: number, format?: string, filter?: string, from_date?: string, to_date?: string, offset?: number) {
+export async function searchNFTs(q: string, chain?: string, limit?: number, offset?: number, format?: string, filter?: string, from_date?: string, to_date?: string) {
     return axios.get(url + `/nft/search`, {
         headers: {
             'X-API-KEY': apikey ?? 'update api key'

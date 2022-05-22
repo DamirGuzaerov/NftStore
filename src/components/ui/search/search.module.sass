@@ -3,6 +3,7 @@
 .search_input_wrapper
   position: relative
   display: flex
+  padding-bottom: 16px
   align-items: center
 
 .search_icon
@@ -18,12 +19,6 @@
   padding: 3% 4% 3% 5%
   width: 256px
 
-.search_discover
-  @extend .search_input
-  width: 400px
-  font-size: 20px
-
-
 label:before
   background-image: url("../../../assets/search.svg")
 
@@ -34,3 +29,13 @@ label:before
 @media (max-width: 800px)
   .search_input
     width: 100px
+
+.search_discover
+  @extend .search_input
+  width: 80%
+  font-size: 20px
+  padding: 10px 15px
+
+@media (max-width: 560px)
+  .search_input_wrapper
+    justify-content: center

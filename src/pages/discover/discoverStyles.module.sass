@@ -1,7 +1,8 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
 .discover_page_wrapper
   max-width: gs.$max-width
-  margin: 80px auto
+  margin: 0px auto
+  padding: 0 24px
   width: 100%
 
 .discover_page
@@ -15,6 +16,7 @@
     font-weight: 400
     font-size: 24px
     line-height: 32px
+    margin-bottom: 16px
 
 .searchButton
   display: flex
@@ -34,7 +36,7 @@
 
 .rowblock_discover
   display: flex
-  flex-direction: row
+  flex-direction: column
   justify-content: space-between
 
 .rowblock_discover:last-child
@@ -52,8 +54,7 @@
   display: flex
   flex-direction: row
   align-items: center
-  justify-content: right
-  height: 52px
+  justify-content: space-between
 
 .types
   border: none
@@ -73,15 +74,19 @@
   border-radius: 15px
   background: white
 
+.collectionGridWrapper
+  max-width: 1980px
+  width: 100%
+  height: 100%
+  margin: 0 auto
 
 .cards_container
-  justify-content: center
-  margin-top: 58px
+  margin: 30px 0
   display: grid
   grid-template-columns: repeat(auto-fill, 256px)
-  grid-column-gap: 16px
-  grid-row-gap: 32px
-  width: 832px
+  grid-column-gap: 15px
+  grid-row-gap: 1em
+  justify-content: center
 
 .not_found_message_wrapper
   display: flex
@@ -117,18 +122,49 @@ label
   margin-bottom: 24px
 
 .filter
-  margin-top: 34px
-
-.filter:first-child
-  margin-top: 0
+  margin-right: 24px
+  width: 100%
 
 .main_filters
   display: flex
-  flex-direction: column
+  flex-direction: row
+  align-items: center
+  justify-content: space-around
   padding: 24px 0
   border-bottom: 1px solid rgba(53, 57, 69, 1)
   border-top: 1px solid rgba(53, 57, 69, 1)
 
+.loading
+  width: 100%
+  padding: 100px
+  display: flex
+  box-sizing: border-box
+  justify-content: center
+
+.filter_body
+  display: flex
+  flex-direction: column
+  max-width: 560px
+  width: 100%
+
+@media (max-width: 900px)
+  .main_filters
+    flex-direction: column
+
+  .filter
+    display: flex
+    justify-content: center
+    max-width: 560px
+    margin-bottom: 16px
 
 
+.searchContainer
+  width: 100%
+.navItemContainer
+  display: flex
+  justify-content: right
 
+@media (max-width: 560px)
+  .nav_types
+    flex-direction: column
+    align-items: center

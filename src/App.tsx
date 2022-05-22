@@ -42,7 +42,6 @@ function App() {
                     <SettingsPage/>
                 </RequireAuth>}/>
 
-
                 <Route element={<Collections/>} path={'collections'}/>
                 <Route element={<VirtualCollection/>} path={'collections/:collectionName'}/>
                 <Route element={<Nft/>} path={'/assets/:address/:token_id'}>

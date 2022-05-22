@@ -1,4 +1,4 @@
-import styles from './profile.module.sass';
+import styles from '../profile/profile.module.sass';
 import pic from '../../assets/images/tempImg/nftPreviewImg.png';
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import Icon from "../../components/ui/icon/icon";
@@ -32,24 +32,20 @@ export const Profile = () => {
                 <div className={styles.profile}>
                     <div className={styles.profile_info_block}>
                         <img className={styles.profile_avatar} src={pic}/>
-
                         <p className={styles.profile_name}>
                             {user.name}
                         </p>
                         <p className={styles.wallet}>
-                            {user.wallet}
+                            {user}
                             <Icon height={16} name={'wallet-link'} width={16}/>
                         </p>
-
                         <p className={styles.description_profile}>
                             A wholesome farm owner in Montana. Upcoming gallery solo show in Germany
                         </p>
-
                         <div className={styles.buttons_profile}>
                             <button>
                                 <Icon name={'share'} width={20} height={20}/>
                             </button>
-
                             <Link to={'/settings'}>
                                 <button>
                                     <Icon name={'options'} width={20} height={20}/>
@@ -57,7 +53,6 @@ export const Profile = () => {
                             </Link>
                         </div>
                     </div>
-
                     <div className={styles.profile_nfts_container}>
                         <div className={styles.buttons_edit_row}>
                             <button className={styles.edit_button}>
@@ -67,7 +62,6 @@ export const Profile = () => {
                                 <Icon name={'edit'} width={16} height={16}/>
                             </button>
                         </div>
-
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
                                 <button className={styles.nav_buttons}>
@@ -79,14 +73,7 @@ export const Profile = () => {
                                 <button className={styles.nav_buttons}>
                                     Likes
                                 </button>
-                                <button className={styles.nav_buttons}>
-                                    Following
-                                </button>
-                                <button className={styles.nav_buttons}>
-                                    Followers
-                                </button>
                             </nav>
-
                             {NFTs.length > 0 ? (
                                 <div className={styles.nft_list}>
                                     {NFTs.map(item => {

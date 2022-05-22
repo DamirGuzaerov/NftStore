@@ -32,7 +32,6 @@ export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImg
         }
     }
 
-    console.log(amount);
     return (
         <div className={styles.shopcard_container}>
             <Link to={`/assets/${address}/${token_id}`}>

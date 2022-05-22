@@ -9,6 +9,7 @@ import {DefaultButton} from "../../components/ui/buttons/default-button";
 import Moralis from "moralis";
 import Web3 = Moralis.Web3;
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
+import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
 
 const web3 = new Web3(Web3.givenProvider);
 
@@ -66,8 +67,6 @@ export const UploadNFT = () => {
             await metadataFile.saveIPFS();
             const metadataUri = metadataFile.url();
 
-
-
             let res = Moralis.Plugins.rarible.lazyMint({
                 chain: 'eth',
                 userAddress: selector.wallet,
@@ -123,10 +122,8 @@ export const UploadNFT = () => {
                         <div className={styles.subsettings}>
                             <TextInput placeholder={'e. g. Size'}
                                        globalPlaceholder={'size'} setValue={setAmount}/>
-
                             <TextInput placeholder={'e. g. Propertie'}
                                        globalPlaceholder={'propertie'} setValue={setPropertie}/>
-
                         </div>
                         <div className={styles.createButton_container}>
                             <DefaultButton value={'Create item'} paddingRightLeft={24} type={'fdf'}

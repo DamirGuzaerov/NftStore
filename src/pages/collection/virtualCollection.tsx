@@ -18,7 +18,7 @@ const CARD = {
     WIDTH: 350,
     HEIGHT: 460
 };
-const oneFetchLimit = 20;
+const oneFetchLimit = 50;
 export const VirtualCollection = () => {
 
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -27,24 +27,23 @@ export const VirtualCollection = () => {
     const {collectionName} = useParams();
 
     useEffect(() => {
-        fetchNFTs().then(r => currentOffset.current += oneFetchLimit);
+        fetchNFTs();
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
     async function fetchNFTs() {
         console.log(currentOffset.current)
-        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current)
+        getCollection(collection.address, "eth", oneFetchLimit)
             .then(
                 result => {
                     setNFTs([...NFTs, ...result])
+                    console.log(result);
                     currentOffset.current += oneFetchLimit
-                    console.log(currentOffset.current)
                 })
     }
 
     function isRowLoaded({index}: any) {
-        console.log(index, rowsCount.current, index < rowsCount.current)
         return index < rowsCount.current
     }
 
@@ -86,11 +85,10 @@ export const VirtualCollection = () => {
                 isRowLoaded={isRowLoaded}
                 loadMoreRows={loadMoreRows}
                 rowCount={Math.ceil(NFTs.length / Math.floor(window.innerWidth / CARD.WIDTH)) + 1}
-                threshold={24}
             >
                 {({onRowsRendered, registerChild}: any) => (
                     <WindowScroller>
-                        {({ height, isScrolling, onChildScroll, scrollTop }) => (
+                        {({ height, scrollTop }) => (
                     <div style={{height: "100%", width: "100%"}}>
                         <AutoSizer>
                             {({width}) => {

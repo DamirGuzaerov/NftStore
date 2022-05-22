@@ -5,22 +5,23 @@ import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import {mainStore} from "./stores/mainStore";
-import { MoralisProvider } from 'react-moralis';
+import {MoralisProvider} from 'react-moralis';
 import {ModalConstructor} from "./components/modals/modalConstructor/modalConstructor";
 import App from "./App";
 
 ReactDOM.render(
-  <React.StrictMode>
-        <Provider store={mainStore()}>
-             <BrowserRouter>
-                 <MoralisProvider serverUrl='https://bsnaqump47ti.usemoralis.com:2053/server' appId="xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt">
+    <React.StrictMode>
+        <MoralisProvider serverUrl='https://bsnaqump47ti.usemoralis.com:2053/server'
+                         appId="xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt">
+            <Provider store={mainStore()}>
+                <BrowserRouter>
                     <App/>
-                 </MoralisProvider>
-                 <ModalConstructor/>
-            </BrowserRouter>
-        </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+                    <ModalConstructor/>
+                </BrowserRouter>
+            </Provider>
+        </MoralisProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
