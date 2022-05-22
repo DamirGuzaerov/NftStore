@@ -36,7 +36,7 @@ export const Profile = () => {
                             {user.name}
                         </p>
                         <p className={styles.wallet}>
-                            {user}
+                            {user.wallet}
                             <Icon height={16} name={'wallet-link'} width={16}/>
                         </p>
                         <p className={styles.description_profile}>
