@@ -9,55 +9,51 @@ import Icon from "../../components/ui/icon/icon";
 import NftInfoSwitcher from "../../components/nftInfoSwitcher/nftInfoSwitcher";
 import {useAppDispatch} from "../../utils/hooks/redux-hooks";
 import {fetchOwners} from "../../stores/reducers/ActionCreators";
-import {useMoralisWeb3Api} from "react-moralis";
-import {addModal, removeModal} from "../../stores/reducers/modalSlice";
+import {useMoralisQuery, useMoralisWeb3Api} from "react-moralis";
+import {addBid} from "../../stores/reducers/bidSlice";
 
 export const Nft = () => {
     const {address, token_id} = useParams();
     const [Nft, setNft] = useState<INFT>();
     const [isLoading, setIsLoading] = useState(true);
-    const Web3Api = useMoralisWeb3Api();
     const dispatch = useAppDispatch();
+    const {fetch} = useMoralisQuery(
+        'Transaction',
+        q => q.equalTo("address", '0xfbeef911dc5821886e1dda71586d90ed28174b7d'),
+        [],
+        {autoFetch: false}
+    );
 
-    const fetchTokenPrice = async () => {
-        //Get token price on PancakeSwap v2 BSC
-        const options = {
-            address: address,
-            chain: "bsc",
-            exchange: "pancakeswapV2",
-        };
-        // @ts-ignore
-        const price = await Web3Api.token.getTokenPrice(options);
-        console.log(price);
+    const objectIdQuery = () => {
+        fetch({
+            onSuccess: (r) => {
+                console.log(r);
+            },
+            onError: (error) => {
+                console.log(error);
+            },
+        });
     };
-
-    const fetchNFTLowestPrice = async () => {
-        const options = {
-            address: address,
-            days: "3",
-        };
-        // @ts-ignore
-        const NFTLowestPrice = await Web3Api.token.getNFTLowestPrice(options);
-        console.log(NFTLowestPrice);
-    };
-
 
 
     useEffect(() => {
         getNft(address!, token_id!)
             .then((r) => {
                 setNft(r);
+                const data = {
+                    address: address,
+                    token: token_id
+                }
+                dispatch(addBid(data))
                 console.log(r);
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
-        // fetchTokenPrice().then(r => console.log(r));
-        // fetchNFTLowestPrice().then(r => console.log(r))
-
 
 
         //@ts-ignore
         dispatch(fetchOwners({address, token_id}));
+        objectIdQuery();
 
     }, [])
     if (isLoading) {

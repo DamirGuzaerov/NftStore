@@ -17,8 +17,9 @@ import Collection from "./pages/collection/collection";
 import {PreUploadNFT} from "./pages/preUploadNFT/preUploadNFT";
 import {UploadNFT} from "./pages/uploadNFT/uploadNFT";
 import {SettingsPage} from "./pages/settings/settingsPage";
-import {UserPage} from "./pages/userPage/userPage";
 import Moralis from "moralis";
+import {NftBids} from "./components/ui/nftBids/nftBids";
+import {UserPage} from "./pages/userPage/userPage";
 
 function App() {
     Moralis.start({serverUrl:'https://bsnaqump47ti.usemoralis.com:2053/server', appId:"xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt"})
@@ -48,6 +49,7 @@ function App() {
                     <Route element={<NftOwners/>} path={'/assets/:address/:token_id/owners'}/>
                     <Route element={<NftInfo/>} path={'/assets/:address/:token_id/info'}/>
                     <Route element={<NftDetails/>} path={'/assets/:address/:token_id/details'}/>
+                    <Route element={<NftBids/>} path={'/assets/:address/:token_id/bids'}/>
                 </Route>
                 <Route element={<DiscoverPage/>} path={'/discover'}/>
             </Route>

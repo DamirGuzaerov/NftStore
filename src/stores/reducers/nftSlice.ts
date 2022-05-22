@@ -10,6 +10,8 @@ const initialState: NFTState = {
     isLoading: false,
     error: ''
 }
+
+
 export const nftSlice = createSlice({
     name: 'nftsSlider',
     initialState,

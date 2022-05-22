@@ -7,16 +7,50 @@ import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {DefaultButton} from "../../ui/buttons/default-button";
 import {useDispatch} from "react-redux";
 import {removeModal} from "../../../stores/reducers/modalSlice";
+import {useNewMoralisObject} from "react-moralis";
+import {useParams} from "react-router-dom";
+import {ToastProperties} from "../../ui/toaster/Toast";
 
 export const PlaceBidModal = () => {
     const auth = useAuth();
     const [balance, setBalance] = useState();
     const selector = useAppSelector(state => state.UserReducer);
+    const bidSelector = useAppSelector(state => state.BidReducer);
     const dispatch = useDispatch();
+    const {save} = useNewMoralisObject("Transaction");
+    const [list, setList] = useState<ToastProperties[]>([]);
+    let toastProperties = null;
 
     const closeModal = () => {
         dispatch(removeModal());
     }
+
+    const showToast = (type: string) => {
+        switch (type) {
+            case 'success':
+                toastProperties = {
+                    id: 1,
+                    title: 'Success!',
+                    description: 'Your bid is accepted!',
+                    backgroundColor: '#5cb85c'
+                }
+                break;
+            case 'fail':
+                toastProperties = {
+                    id: 2,
+                    title: 'Failed!',
+                    description: 'Something went wrong...',
+                    backgroundColor: '#d9534f'
+                }
+                break;
+            default:
+                toastProperties = [];
+        }
+
+        // @ts-ignore
+        setList([toastProperties]);
+    }
+
 
     const [bid, setBid] = useState('');
 
@@ -27,6 +61,26 @@ export const PlaceBidModal = () => {
             })
         }
     }
+
+    const makeBid = async () => {
+        const data = {
+            token: bidSelector.token,
+            address: bidSelector.address,
+            price: bid,
+            user: selector.wallet
+        }
+        await save(data, {
+            onSuccess: (item) => {
+                closeModal();
+                showToast('success');
+            },
+            onError: (item) => {
+                closeModal();
+                showToast('fail');
+            }
+        })
+    }
+
 
     useEffect(() => {
         getUserBalance();
@@ -78,8 +132,12 @@ export const PlaceBidModal = () => {
                         {balance} ETH
                     </p>
                 </span>
-                    <DefaultButton value={'Place a bid'} paddingRightLeft={60} type={'f'} paddingTopBottom={16} func={console.log}/>
-                    <DefaultButton paddingRightLeft={60} value={'Cancel'} type={'action'} paddingTopBottom={16} func={closeModal}/>
+                <div className={styles.button_wrapper}>
+                    <DefaultButton value={'Place a bid'} paddingRightLeft={60} type={'f'} paddingTopBottom={16}
+                                   func={makeBid}/>
+                    <DefaultButton paddingRightLeft={60} value={'Cancel'} type={'action'} paddingTopBottom={16}
+                                   func={closeModal}/>
+                </div>
             </div>
 
         </ModalTemplate>
