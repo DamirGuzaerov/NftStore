@@ -26,19 +26,18 @@ export const VirtualCollection = () => {
     const currentOffset = useRef(0);
     const {collectionName} = useParams();
 
+
     useEffect(() => {
-        fetchNFTs();
+        fetchNFTs().then(r => currentOffset.current += oneFetchLimit);
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
     async function fetchNFTs() {
-        console.log(currentOffset.current)
-        getCollection(collection.address, "eth", oneFetchLimit)
+        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current)
             .then(
                 result => {
                     setNFTs([...NFTs, ...result])
-                    console.log(result);
                     currentOffset.current += oneFetchLimit
                 })
     }
@@ -48,7 +47,6 @@ export const VirtualCollection = () => {
     }
 
     function loadMoreRows({startIndex, stopIndex}: any) {
-        console.log("loadMoreRows")
         return fetchNFTs()
     }
 
@@ -85,73 +83,74 @@ export const VirtualCollection = () => {
                 isRowLoaded={isRowLoaded}
                 loadMoreRows={loadMoreRows}
                 rowCount={Math.ceil(NFTs.length / Math.floor(window.innerWidth / CARD.WIDTH)) + 1}
+                threshold={24}
             >
                 {({onRowsRendered, registerChild}: any) => (
                     <WindowScroller>
-                        {({ height, scrollTop }) => (
-                    <div style={{height: "100%", width: "100%"}}>
-                        <AutoSizer>
-                            {({width}) => {
-                                const itemsPerRow = Math.floor(width / CARD.WIDTH);
-                                rowsCount.current = Math.ceil(NFTs.length / itemsPerRow);
-                                return (
-                                    <List
-                                        className={styles.List}
-                                        width={width}
-                                        autoHeight
-                                        height={height}
-                                        rowCount={rowsCount.current}
-                                        onRowsRendered={onRowsRendered}
-                                        ref={registerChild}
-                                        rowHeight={CARD.HEIGHT}
-                                        style={{color: "white"}}
-                                        scrollTop={scrollTop}
-                                        rowRenderer={
-                                            ({index, key, style}) => {
-                                                const items = [];
-                                                const fromIndex = index * itemsPerRow;
-                                                const toIndex = Math.min(fromIndex + itemsPerRow, NFTs.length);
-                                                for (let i = fromIndex; i < toIndex; i++) {
-                                                    items.push(
-                                                        <div
-                                                            key={NFTs[i].token_id}
-                                                            className={styles.Item}
-                                                            style={{
-                                                                width: CARD.WIDTH,
-                                                                height: CARD.HEIGHT
-                                                            }}
-                                                        >
-                                                            <Link
-                                                                key={NFTs[i].token_id}
-                                                                to={`/assets/${collection.address}/${NFTs[i].token_id}/info`}>
-                                                                <NftPreviewCard
+                        {({ height, isScrolling, onChildScroll, scrollTop }) => (
+                            <div style={{height: "100%", width: "100%"}}>
+                                <AutoSizer>
+                                    {({width}) => {
+                                        const itemsPerRow = Math.floor(width / CARD.WIDTH);
+                                        rowsCount.current = Math.ceil(NFTs.length / itemsPerRow);
+                                        return (
+                                            <List
+                                                className={styles.List}
+                                                width={width}
+                                                autoHeight
+                                                height={height}
+                                                rowCount={rowsCount.current}
+                                                onRowsRendered={onRowsRendered}
+                                                ref={registerChild}
+                                                rowHeight={CARD.HEIGHT}
+                                                style={{color: "white"}}
+                                                scrollTop={scrollTop}
+                                                rowRenderer={
+                                                    ({index, key, style}) => {
+                                                        const items = [];
+                                                        const fromIndex = index * itemsPerRow;
+                                                        const toIndex = Math.min(fromIndex + itemsPerRow, NFTs.length);
+                                                        for (let i = fromIndex; i < toIndex; i++) {
+                                                            items.push(
+                                                                <div
                                                                     key={NFTs[i].token_id}
-                                                                    imgUrl={NFTs[i].image}
-                                                                    creatorImgUrl={authorImg}
-                                                                    nftCost={"0"}
-                                                                    nftName={NFTs[i].metadata.name}
-                                                                    nftLikes={'0'}
-                                                                />
-                                                            </Link>
-                                                        </div>
-                                                    )
+                                                                    className={styles.Item}
+                                                                    style={{
+                                                                        width: CARD.WIDTH,
+                                                                        height: CARD.HEIGHT
+                                                                    }}
+                                                                >
+                                                                    <Link
+                                                                        key={NFTs[i].token_id}
+                                                                        to={`/assets/${collection.address}/${NFTs[i].token_id}/info`}>
+                                                                        <NftPreviewCard
+                                                                            key={NFTs[i].token_id}
+                                                                            imgUrl={NFTs[i].image}
+                                                                            creatorImgUrl={authorImg}
+                                                                            nftCost={"0"}
+                                                                            nftName={NFTs[i].metadata.name}
+                                                                            nftLikes={'0'}
+                                                                        />
+                                                                    </Link>
+                                                                </div>
+                                                            )
+                                                        }
+                                                        return (
+                                                            <div
+                                                                className={styles.Row}
+                                                                key={key}
+                                                                style={style}
+                                                            >
+                                                                {items}
+                                                            </div>
+                                                        )
+                                                    }
                                                 }
-                                                return (
-                                                    <div
-                                                        className={styles.Row}
-                                                        key={key}
-                                                        style={style}
-                                                    >
-                                                        {items}
-                                                    </div>
-                                                )
-                                            }
-                                        }
-                                    />
-                                )
-                            }}
-                        </AutoSizer>
-                    </div>
+                                            />
+                                        )
+                                    }}
+                                </AutoSizer>
+                            </div>
                         )}
                     </WindowScroller>
                 )}

@@ -5,40 +5,6 @@ header
   background-color: gs.$dark-main-color
   @include gs.divider
 
-.header_wrapper
-  max-width: gs.$max-width
-  margin: 0 auto
-  display: flex
-  align-items: center
-  justify-content: space-between
-  padding: 20px 0px
-
-.logo
-  display: flex
-  flex-direction: row
-
-.logo_name
-  font-family: 'Poppins'
-  font-style: normal
-  font-weight: 600
-  font-size: 24px
-  color: white
-  margin-left: 8px
-  padding-right: 32px
-  border-right: 2px solid #353945
-
-.header__left_content
-  display: flex
-  flex-direction: row
-  align-items: center
-
-  nav
-    a
-      margin-left: 32px
-      @include gs.links-settings
-
-    a:hover
-      color: white
 
 .search_wrapper
   display: flex
@@ -59,10 +25,10 @@ header
 .profile_header
   display: flex
   align-items: center
-  padding: 4px 12px 3px 4px
   border: 2px solid rgba(119, 126, 144, 1)
   border-radius: 30px
   margin-left: 12px
+  padding: 4px 8px !important
 
 .balance
   color: white
@@ -83,36 +49,48 @@ header
   display: flex
   margin-right: 5px
 
-
-@media (max-width: 1038px)
-  .logo_name
-    padding-right: 16px
+.header__content
   nav
     display: flex
     align-items: center
 
     a
-      font-size: 12px
+      width: 100%
+      font-size: 24px
       text-align: center
-      margin-left: 16px
+      color: #777e90
+      padding: 14px 0
 
-    a:last-child
-      margin-right: 16px
+    a:not(:last-child)
+      @include gs.divider
 
 @media (max-width: 675px)
-
   .header_wrapper
     max-width: 90%
     margin: 0 auto
   nav, .search_wrapper
     display: none
 
-  .logo_name
-    padding: 0
-    border: 0
-
   .mobileNavigation
     display: flex
     border: none
     background: none
+
+
+.header__nav
+  display: flex
+  flex-direction: column
+
+.menu_wrapper
+  position: absolute
+  width: 100%
+  top: 77px
+  background-color: #1d1d1f
+  @include gs.divider
+  z-index: 2
+
+.profile_header_wrapper
+  display: flex
+  align-items: center
+
 

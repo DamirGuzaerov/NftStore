@@ -14,6 +14,7 @@ export const Collection = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [currentOffset, setCurrentOffset] = useState(0);
     const [fetching, setFetching] = useState(true);
+    const [searchValue, setSearchValue] = useState("")
     const {collectionName} = useParams()
     const limit = 50;
 
@@ -24,6 +25,12 @@ export const Collection = () => {
             .then(
                 result => {
                     setNFTs([...NFTs, ...result])
+                    if (searchValue !== "") {
+                        setNFTs([...NFTs.filter((nft) => {
+                            nft.name.includes(searchValue) ||
+                            nft.token_id.includes(searchValue)
+                        })])
+                    }
                     setCurrentOffset(prevState => prevState + limit)
                     setIsLoading(false)
                 })
@@ -31,7 +38,7 @@ export const Collection = () => {
     }
 
     useEffect(() => {
-        console.log(fetching,i++)
+        console.log(fetching, i++)
         if (fetching) {
             setIsLoading(true)
             fetchNFTs();
@@ -40,10 +47,10 @@ export const Collection = () => {
 
     function scrollHandler() {
         if (
-            Math.ceil(window.innerHeight+200 + window.scrollY) >=
+            Math.ceil(window.innerHeight + 200 + window.scrollY) >=
             document.documentElement.offsetHeight && NFTs.length < 10000
         ) {
-            console.log("scrollHandler",i++,fetching)
+            console.log("scrollHandler", i++, fetching)
             setFetching(true);
         }
     }
@@ -53,7 +60,7 @@ export const Collection = () => {
         return function () {
             document.removeEventListener("scroll", scrollHandler);
         }
-    },[])
+    }, [])
 
     return (
         <>
