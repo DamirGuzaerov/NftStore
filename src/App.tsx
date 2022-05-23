@@ -19,19 +19,31 @@ import {SettingsPage} from "./pages/settings/settingsPage";
 import Moralis from "moralis";
 import {NftBids} from "./components/ui/nftBids/nftBids";
 import {UserPage} from "./pages/userPage/userPage";
+import {LikedList} from "./pages/profile/subPagesProfile/liked/LikedList";
+import {CollectedList} from "./pages/profile/subPagesProfile/collected/CollectedList";
+import {CreatedList} from "./pages/profile/subPagesProfile/created/CreatedList";
+import {NotFoundPage} from "./pages/notfound/NotFoundPage";
 
 function App() {
-    Moralis.start({serverUrl:'https://g12o0xvp31x1.usemoralis.com:2053/server', appId:"m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua"})
+    Moralis.start({
+        serverUrl: 'https://g12o0xvp31x1.usemoralis.com:2053/server',
+        appId: "m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua"
+    })
 
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>
+                <Route path='*' element={<NotFoundPage/>} />
                 <Route element={<Homepage/>} index/>
                 <Route element={<UserPage/>} path={"/pageUser/:wallet"}/>
                 <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
-                </RequireAuth>
-                }/>
+                </RequireAuth>}>
+                    <Route path={'liked'} element={<LikedList/>}/>
+                    <Route path={'collected'} element={<CollectedList/>}/>
+                    <Route path={'created'} element={<CreatedList/>}/>
+                </Route>
+
                 <Route path={'/preUpload'} element={<RequireAuth>
                     <PreUploadNFT/>
                 </RequireAuth>}/>

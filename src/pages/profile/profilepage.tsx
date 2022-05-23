@@ -6,21 +6,44 @@ import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard
 import React, {useEffect, useState} from "react";
 import {getCollection, getNft} from "../../utils/hooks/getNfts";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
-import {Link} from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import {useMoralis} from "react-moralis";
+import Moralis from "moralis";
 
 
 export const Profile = () => {
     const user = useAppSelector(state => state.UserReducer);
     const [NFTs, setNFTs] = useState<INFT[]>([]);
-    const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600"
+    const [isLoading, setIsLoading] = useState(true);
+    const [userData, setUserData] = useState<any>();
+    const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600";
+    const userObj = Moralis.Object.extend("_User");
+    const query = new Moralis.Query(userObj);
+    query.containedIn("ethAddress", [
+        user.wallet
+    ]);
+
 
 
     useEffect(() => {
+
+        query.first().then((r) => {
+            console.log(r?.attributes);
+            setUserData(r?.attributes);
+            console.log(userData);
+            setIsLoading(false);
+        })
         getCollection(user.wallet, 'eth').then((r) => {
             setNFTs(r);
         })
     }, [])
+
+    if(isLoading) {
+        return(
+            <>
+            </>
+        )
+    }
     return (
         <div className={styles.profile_container_wrapper}>
             <header className={styles.bannerHeader}>
@@ -33,14 +56,14 @@ export const Profile = () => {
                     <div className={styles.profile_info_block}>
                         <img className={styles.profile_avatar} src={pic}/>
                         <p className={styles.profile_name}>
-                            {user.name}
+                            {userData.name}
                         </p>
                         <p className={styles.wallet}>
                             {user.wallet}
                             <Icon height={16} name={'wallet-link'} width={16}/>
                         </p>
                         <p className={styles.description_profile}>
-                            A wholesome farm owner in Montana. Upcoming gallery solo show in Germany
+                            {userData.bio}
                         </p>
                         <div className={styles.buttons_profile}>
                             <button>
@@ -64,29 +87,27 @@ export const Profile = () => {
                         </div>
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
-                                <button className={styles.nav_buttons}>
+                                <Link to={'/profile/collected'} className={styles.nav_buttons}>
                                     Collected
-                                </button>
-                                <button className={styles.nav_buttons}>
+                                </Link>
+                                <Link to={'/profile/created'} className={styles.nav_buttons}>
                                     Created
-                                </button>
-                                <button className={styles.nav_buttons}>
+                                </Link>
+                                <Link to={'/profile/liked'} className={styles.nav_buttons}>
                                     Likes
-                                </button>
+                                </Link>
                             </nav>
-                            {NFTs.length > 0 ? (
-                                <div className={styles.nft_list}>
-                                    {NFTs.map(item => {
-                                        return (<NftPreviewCard creatorImgUrl={user.wallet} imgUrl={item.image}
-                                                                nftCost={'0'} nftLikes={'0'} nftName={item.name}/>)
-                                    })}
-                                </div>) : (
-                                <>
-                                    <p className={styles.empty_list_title}> Your NFTs list is empty!</p>
-                                    <Link className={styles.empty_list_link} to={'/'}>Find something for
-                                        yourself!</Link>
-                                </>
-                            )}
+                            {/*{NFTs.length > 0 ? (*/}
+                            {/*    <div className={styles.nft_list}>*/}
+                            {/*        {NFTs.map(item => {*/}
+                            {/*            return (<NftPreviewCard creatorImgUrl={user.wallet} imgUrl={item.image}*/}
+                            {/*                                    nftCost={'0'} nftLikes={'0'} nftName={item.name}/>)*/}
+                            {/*        })}*/}
+                            {/*    </div>) : (*/}
+                            {/*    <>*/}
+                            {/*    </>*/}
+                            {/*)}*/}
+                            <Outlet/>
                         </div>
                     </div>
                 </div>

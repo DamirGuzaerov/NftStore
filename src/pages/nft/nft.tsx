@@ -12,6 +12,7 @@ import {fetchOwners} from "../../stores/reducers/ActionCreators";
 import {useMoralisQuery, useMoralisWeb3Api, useNewMoralisObject} from "react-moralis";
 import {addBid} from "../../stores/reducers/bidSlice";
 import Moralis from "moralis";
+import {useAuth} from "../../utils/hooks/useAuth";
 
 export const Nft = () => {
     const {address, token_id} = useParams();
@@ -19,6 +20,7 @@ export const Nft = () => {
     const selector = useAppSelector(state => state.UserReducer);
     const [isLoading, setIsLoading] = useState(true);
     const dispatch = useAppDispatch();
+    const auth = useAuth();
     const {save} = useNewMoralisObject("Likes");
     const {fetch} = useMoralisQuery(
         'Transaction',
@@ -26,21 +28,22 @@ export const Nft = () => {
         [],
         {autoFetch: false}
     );
+    const [isLiked, setIsLiked] = useState(false);
+    const like = Moralis.Object.extend("Likes");
+    const query = new Moralis.Query(like);
+
+    query.containedIn("UserAddress", [
+        selector.wallet
+    ])
+    query.containedIn("Address", [
+        address
+    ])
+    query.containedIn("Token", [
+        token_id
+    ])
 
     const subscribeToNft = async () => {
-        const like = Moralis.Object.extend("Likes");
-        const query = new Moralis.Query(like);
-
-        query.containedIn("UserAddress", [
-            selector.wallet
-        ])
-        query.containedIn("Address", [
-            address
-        ])
-        query.containedIn("Token", [
-            token_id
-        ])
-
+        setIsLiked(!isLiked);
         await query.first().then(async (r) => {
             console.log(r);
             if (r === undefined) {
@@ -51,15 +54,15 @@ export const Nft = () => {
                 }
                 await save(data, {
                     onSuccess: (r) => {
-                        console.log(r);
+                        setIsLiked(true)
                     },
                     onError: (e) => {
-                        console.log(e);
+                        setIsLiked(false)
                     }
                 })
             } else {
                 r.destroy().then(() => {
-                    console.log('deleted');
+                    setIsLiked(false);
                 })
             }
         }).catch((e) => {
@@ -90,7 +93,14 @@ export const Nft = () => {
                     token: token_id
                 }
                 dispatch(addBid(data))
-                console.log(r);
+                query.first().then((r) => {
+                    if (r) {
+                        setIsLiked(true)
+                    } else {
+                        setIsLiked(false);
+                    }
+                })
+
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
@@ -99,6 +109,8 @@ export const Nft = () => {
         objectIdQuery();
 
     }, [])
+
+
     if (isLoading) {
         return (
             <div className={styles.loading}>
@@ -115,9 +127,10 @@ export const Nft = () => {
                 <div className={styles.mainCardInfo}>
                     <div className={styles.topInfo}>
                         <h2 className={styles.name}>{Nft?.metadata.name}</h2>
-                        <button className={styles.likeBtn} onClick={subscribeToNft}>
-                            <Icon height={26} width={26} name={"like"}/>
-                        </button>
+                        {auth ? <button className={styles.likeBtn} onClick={subscribeToNft}>
+                            {isLiked ? <Icon height={26} width={26} name={"like"}/> :
+                                <Icon height={26} width={26} name={"empty-like"}/>}
+                        </button> : null}
                     </div>
                     <div className={styles.price}>
                         <NftCost cost={10} currency={"ETH"}/>

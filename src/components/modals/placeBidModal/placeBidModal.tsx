@@ -10,6 +10,7 @@ import {removeModal} from "../../../stores/reducers/modalSlice";
 import {useNewMoralisObject} from "react-moralis";
 import {useParams} from "react-router-dom";
 import {ToastProperties} from "../../ui/toaster/Toast";
+import Moralis from "moralis";
 
 export const PlaceBidModal = () => {
     const auth = useAuth();
@@ -19,6 +20,20 @@ export const PlaceBidModal = () => {
     const dispatch = useDispatch();
     const {save} = useNewMoralisObject("Transaction");
     const [list, setList] = useState<ToastProperties[]>([]);
+    const Transaction = Moralis.Object.extend("Transaction");
+    const query = new Moralis.Query(Transaction);
+    query.containedIn("user", [
+        selector.wallet
+    ]);
+
+    query.containedIn("address", [
+        bidSelector.address
+    ]);
+
+    query.containedIn("token", [
+        bidSelector.token
+    ]);
+
     let toastProperties = null;
 
     const closeModal = () => {
@@ -63,22 +78,42 @@ export const PlaceBidModal = () => {
     }
 
     const makeBid = async () => {
-        const data = {
-            token: bidSelector.token,
-            address: bidSelector.address,
-            price: bid,
-            user: selector.wallet
-        }
-        await save(data, {
-            onSuccess: (item) => {
-                closeModal();
-                showToast('success');
-            },
-            onError: (item) => {
-                closeModal();
-                showToast('fail');
+
+        query.first().then(async (r) => {
+            if (r) {
+                console.log('saved');
+                const queryResult = await query.first();
+                // @ts-ignore
+                queryResult.set("price", parseFloat(bid));
+                // @ts-ignore
+                queryResult.save().then(() => {
+                    closeModal();
+                    showToast('success');
+                }).catch(() => {
+                    closeModal();
+                    showToast('fail');
+                })
+
+            } else {
+                const data = {
+                    token: bidSelector.token,
+                    address: bidSelector.address,
+                    price: parseFloat(bid),
+                    user: selector.wallet
+                }
+                await save(data, {
+                    onSuccess: (item) => {
+                        closeModal();
+                        showToast('success');
+                    },
+                    onError: (item) => {
+                        closeModal();
+                        showToast('fail');
+                    }
+                })
             }
         })
+
     }
 
 

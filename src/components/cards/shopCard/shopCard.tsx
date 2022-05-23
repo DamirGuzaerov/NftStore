@@ -1,8 +1,9 @@
 import styles from './shopCardStyles.module.sass';
 import Icon from "../../ui/icon/icon";
-import {FC} from "react";
+import {FC, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import defaulImg from "../../../assets/images/tempImg/nftPreviewImg.png"
+import Moralis from "moralis";
 
 interface shopCardProps {
     imgUrl: string,
@@ -14,17 +15,44 @@ interface shopCardProps {
     amount: string
 }
 
-export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id, amount}) => {
+export const ShopCard: FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImgUrl, address, token_id, amount}) => {
+    const [highestBid, setHighestBid] = useState("");
+
+    useEffect(() => {
+        const transaction = Moralis.Object.extend("Transaction");
+        const query = new Moralis.Query(transaction);
+        query.containedIn("address", [
+            address
+        ])
+        query.containedIn("token", [
+            token_id
+        ])
+        query.descending("price");
+        const fetchTransaction = async () => {
+            return await query.first();
+        }
+
+        fetchTransaction().then(r => {
+            const val = r?.attributes;
+            if(r) {
+                setHighestBid(val?.price);
+            } else {
+                setHighestBid("0");
+            }
+        })
+
+    }, [])
+
     const urlCheck = () => {
-        if(imgUrl.includes('mp4') || imgUrl.includes('webm')) {
-            return(
+        if (imgUrl.includes('mp4') || imgUrl.includes('webm')) {
+            return (
                 <video className={styles.nft_image}>
                     <source src={imgUrl}/>
                 </video>
             )
         } else {
             return (
-                <img src={imgUrl}  onError={({ currentTarget }) => {
+                <img src={imgUrl} onError={({currentTarget}) => {
                     currentTarget.src = defaulImg;
                     currentTarget.onerror = null;
                 }} className={styles.nft_image}/>
@@ -64,7 +92,7 @@ export const ShopCard:FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorImg
                             Highest bid
                         </p>
                         <p className={styles.bet_price}>
-                            0.04 ETH
+                            {highestBid} ETH
                         </p>
                     </span>
                 </div>

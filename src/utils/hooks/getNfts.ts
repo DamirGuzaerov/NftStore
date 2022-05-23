@@ -68,7 +68,7 @@ function setMetadata(elem: INFT, metadata: any) {
 }
 
 function parseImage(image: string, elem: INFT) {
-    if(image == undefined) {
+    if (image == undefined) {
         elem.image = pic;
         return;
     }

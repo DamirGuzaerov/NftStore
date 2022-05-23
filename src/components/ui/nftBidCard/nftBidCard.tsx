@@ -2,7 +2,7 @@ import styles from "./nftBidCard.module.sass"
 import {Avatar} from "../avatar/avatar";
 import user from "../../../assets/images/tempImg/creator.png";
 import {DefaultButton} from "../buttons/default-button";
-import {addModal, removeModal} from "../../../stores/reducers/modalSlice";
+import {addModal} from "../../../stores/reducers/modalSlice";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {useEffect, useState} from "react";
 import Moralis from "moralis";
@@ -24,7 +24,6 @@ export const NftBidCard = () => {
 
 
     useEffect(() => {
-        console.log(bid);
         const transaction = Moralis.Object.extend("Transaction");
         const query = new Moralis.Query(transaction);
         query.containedIn("address", [
@@ -53,42 +52,46 @@ export const NftBidCard = () => {
         <>
             <div className={styles.bidCardWrapper}>
                 <div className={styles.bidCard}>
-                    {bid?.user !== undefined ? (<>
-                        <div className={styles.highestBidUser}>
-                            <Avatar width={50} height={50} imgUrl={user}/>
-                            <div className={styles.highestBidInfo}>
-                                <p className={styles.bid_eth}>
-                                    Highest bid by <span className={styles.userName}>{bid?.user}</span>
-                                </p>
-                                <p className={styles.bid}>
-                                    <span>{bid?.price} ETH </span>
-                                    <span className={styles.bidDollars}>
+                    {bid?.user !== undefined ? (
+                        <>
+                            <div className={styles.highestBidUser}>
+                                <Avatar width={50} height={50} imgUrl={user}/>
+                                <div className={styles.highestBidInfo}>
+                                    <p className={styles.bid_eth}>
+                                        Highest bid by <span className={styles.userName}>{bid?.user}</span>
+                                    </p>
+                                    <p className={styles.bid}>
+                                        <span>{bid?.price} ETH </span>
+                                        <span className={styles.bidDollars}>
                         $2,764.89
                         </span>
-                                </p>
+                                    </p>
+                                </div>
                             </div>
+                        </>) : <h2>Nobody made a bid</h2>
+                    }
+
+                    {auth ? (<div className={styles.purchaseButtons}>
+                        <div className={styles.btnWrapper}>
+                            <DefaultButton
+                                func={() => alert("Пока не реализовано")}
+                                paddingTopBottom={16}
+                                type={"default"}
+                                value={"Purchase now"}
+                                large={true}/>
                         </div>
+                        <div className={styles.btnWrapper}>
+                            <DefaultButton
+                                func={() => openModal('PlaceBid')}
+                                paddingTopBottom={16}
+                                type={"action"}
+                                value={"Place a bid"}
+                                large={true}/>
+                        </div>
+                    </div>) : null
+                    }
 
-                        {auth ? (<div className={styles.purchaseButtons}>
-                            <div className={styles.btnWrapper}>
-                                <DefaultButton
-                                    func={() => alert("Пока не реализовано")}
-                                    paddingTopBottom={16}
-                                    type={"default"}
-                                    value={"Purchase now"}
-                                    large={true}/>
-                            </div>
-                            <div className={styles.btnWrapper}>
-                                <DefaultButton
-                                    func={() => openModal('PlaceBid')}
-                                    paddingTopBottom={16}
-                                    type={"action"}
-                                    value={"Place a bid"}
-                                    large={true}/>
-                            </div>
-                        </div>) : null
-                        }
-
+                    {bid?.user !== undefined ? (
                         <div className={styles.serviceFeeInfo}>
                         <span className={styles.serviceFeeInfoText}>
                         service fee:
@@ -100,8 +103,7 @@ export const NftBidCard = () => {
                             <span className={styles.serviceFeeInfoText}>
                         $4,540.62
                         </span>
-                        </div>
-                    </>) : <h2>Nobody made a bid</h2>
+                        </div>) : null
                     }
 
                 </div>
