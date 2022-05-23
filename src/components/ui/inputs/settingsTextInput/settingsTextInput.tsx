@@ -9,19 +9,23 @@ interface props {
 }
 
 export const SettingsTextInput: FC<props> = ({setValue, placeholder, globalPlaceholder, setFlag}) => {
-
     const emailValidation = (e: any) => {
+        console.log(e.target.value)
         if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e.target.value)) {
+            console.log("VALID EMAIL")
             setFlag(true);
         } else {
+            console.log("INVALID EMAIL")
             setFlag(false);
         }
     }
 
     const bioValidation = (e: any) => {
         if (e.target.value.length > 150) {
+            console.log("INVALID bio")
             setFlag(false)
         } else {
+            console.log("VALID bio")
             setFlag(true)
         }
     }

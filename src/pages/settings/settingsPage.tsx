@@ -56,7 +56,9 @@ export const SettingsPage = () => {
 
 
     const handleSaveUser = () => {
+        console.log(isBio,isEmail,bio,email,name)
         if(isBio && isEmail) {
+            console.log(name,email,bio)
             setUserData({
                 name: name === "" ? undefined : name,
                 email: email === "" ? undefined : email,
@@ -85,16 +87,12 @@ export const SettingsPage = () => {
                             </button>
                         </Link>
                     </div>
-
                     <h1 className={styles.page_label}>
                         Edit profile
                     </h1>
-
                     <p className={styles.page_label_description}>
                         You can set preferred display name and manage other personal settings.
                     </p>
-
-
                     <div className={styles.profile_settings_container}>
                         <div className={styles.profile_image_container}>
                             <img src={profileImage} className={styles.profile_image}/>
@@ -121,9 +119,9 @@ export const SettingsPage = () => {
                                 <SettingsTextInput setValue={setName} placeholder={'Enter your display name'}
                                                    globalPlaceholder={'display name'} setFlag={() => console.log}/>
                                 <SettingsTextInput setValue={setEmail} placeholder={'Enter your email'}
-                                                   globalPlaceholder={'display email'} setFlag={() => setIsEmail}/>
-                                <SettingsTextInput setValue={setBio} placeholder={'Enter your bio '}
-                                                   globalPlaceholder={'bio'} setFlag={() => setIsBio}/>
+                                                   globalPlaceholder={'display email'} setFlag={setIsEmail}/>
+                                <SettingsTextInput setValue={setBio} placeholder={'Enter your bio'}
+                                                   globalPlaceholder={'bio'} setFlag={setIsBio}/>
 
                                 <p className={styles.desc_inputs}>
                                     To update your settings you should sign message through your wallet. Click 'Update
