@@ -1,25 +1,24 @@
-@use 'src/assets/globalStyles/globalStyles' as gs
-
+@import 'src/assets/globalStyles/globalStyles.sass'
 
 .bannerHeader
-  @include gs.bannerHeader
+  @include bannerHeader
 
 .bannerWrapper
-  @include gs.bannerWrapper
+  @include bannerWrapper
 
 .bannerImg
-  @include gs.bannerImg
+  @include bannerImg
 
 .headerContent
-  @include gs.headerContent
+  @include headerContent
 
 .profile_container_wrapper
-  background-color: gs.$dark-main-color
+  background-color: $dark-main-color
 
 .profile_container
   position: relative
   top: -120px
-  max-width: gs.$max-width
+  max-width: $max-width
   margin: 0 auto
 
 .profile
@@ -28,15 +27,23 @@
   justify-content: space-between
   margin-bottom: 136px
 
+  @include _700
+    flex-direction: column
+    align-items: center
+
 .profile_info_block
   display: flex
   flex-direction: column
   align-items: center
   padding: 32px 35px
-  background-color: gs.$light-main-color
+  background-color: $light-main-color
   box-shadow: 0px 40px 32px -24px rgba(15, 15, 15, 0.12)
   border-radius: 16px
-  max-width: 256px
+  width: 256px
+  max-height: 600px
+
+  @include _700
+    width: 311px
 
   &
     word-break: break-word
@@ -49,13 +56,13 @@
 
     .profile_name
       margin-top: 32px
-      @include gs.poppins-font
+      @include poppins-font
       font-size: 24px
       color: white
       max-width: 186px
 
     .wallet
-      @include gs.links-settings
+      @include links-settings
       margin-top: 8px
       color: white
       display: flex
@@ -65,7 +72,7 @@
       text-decoration: white
 
     .description_profile
-      @include gs.poppins-font
+      @include poppins-font
       margin-top: 20px
       color: rgba(119, 126, 144, 1)
 
@@ -75,6 +82,8 @@
       justify-content: space-between
       width: 80%
       margin-top: 48px
+
+
 
       button
         display: flex
@@ -90,10 +99,19 @@
   max-width: 800px
   width: 100%
 
+  @include _700
+    margin-left: 0
+
 .buttons_edit_row
   display: flex
   justify-content: right
   margin-top: 40px
+
+  @include _700
+    max-height: 311px
+    margin: 0 auto
+    margin-top: 40px
+    justify-content: space-evenly
 
 .edit_button
   background: rgb(55, 114, 255)
@@ -122,6 +140,9 @@
 .profile_nav
   display: flex
 
+  @include _700
+    justify-content: center
+
   .nav_buttons
     padding: 6px 12px
     background: none
@@ -132,7 +153,7 @@
 
   .nav_buttons:hover
     background-color: white
-    color: gs.$dark-main-color
+    color: $dark-main-color
 
 .nft_list
   display: flex

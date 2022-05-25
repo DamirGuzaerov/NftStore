@@ -23,6 +23,7 @@ import {LikedList} from "./pages/profile/subPagesProfile/liked/LikedList";
 import {CollectedList} from "./pages/profile/subPagesProfile/collected/CollectedList";
 import {CreatedList} from "./pages/profile/subPagesProfile/created/CreatedList";
 import {NotFoundPage} from "./pages/notfound/NotFoundPage";
+import {BitsList} from "./pages/profile/subPagesProfile/bits/bits";
 
 function App() {
     Moralis.start({
@@ -42,6 +43,7 @@ function App() {
                     <Route path={'liked'} element={<LikedList/>}/>
                     <Route path={'collected'} element={<CollectedList/>}/>
                     <Route path={'created'} element={<CreatedList/>}/>
+                    <Route path={'bids'} element={<BitsList/>}/>
                 </Route>
 
                 <Route path={'/preUpload'} element={<RequireAuth>

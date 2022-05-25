@@ -59,3 +59,12 @@ h1
 @mixin headerContent
   text-align: center
   color: white
+
+
+@mixin _700
+  @media (max-width: 700px)
+    @content
+
+@mixin _375
+  @media (max-width: 375px)
+    @content

@@ -96,6 +96,9 @@ export const Profile = () => {
                                 <Link to={'/profile/liked'} className={styles.nav_buttons}>
                                     Likes
                                 </Link>
+                                <Link to={'/profile/bids'} className={styles.nav_buttons}>
+                                    Bids
+                                </Link>
                             </nav>
                             {/*{NFTs.length > 0 ? (*/}
                             {/*    <div className={styles.nft_list}>*/}
