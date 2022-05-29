@@ -25,7 +25,6 @@ import {CreatedList} from "./pages/profile/subPagesProfile/created/CreatedList";
 import {NotFoundPage} from "./pages/notfound/NotFoundPage";
 import {BitsList} from "./pages/profile/subPagesProfile/bits/bits";
 import {useAuth} from "./utils/hooks/useAuth";
-import {fetchUser} from "./stores/reducers/ActionCreators";
 import {useDispatch} from "react-redux";
 import {getUser} from "./stores/reducers/userSlice";
 import {TooManyRequests} from "./pages/errorPages/tooManyRequests/tooManyRequests";

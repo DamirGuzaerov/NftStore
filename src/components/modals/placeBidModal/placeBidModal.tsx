@@ -95,7 +95,7 @@ export const PlaceBidModal = () => {
             } else {
                 const data = {
                     token: bidSelector.token,
-                    address: bidSelector.address,
+                    address: bidSelector.address?.toLowerCase(),
                     price: parseFloat(bid),
                     user: selector.wallet
                 }

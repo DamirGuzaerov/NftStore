@@ -63,7 +63,7 @@ export const ShopCard: FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorIm
 
     return (
         <div className={styles.shopcard_container}>
-            <Link to={`/assets/${address}/${token_id}`}>
+            <Link to={`/assets/${address}/${token_id}/info`}>
                 {urlCheck()}
             </Link>
             <div className={styles.nft_content}>

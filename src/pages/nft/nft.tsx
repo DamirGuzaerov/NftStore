@@ -1,7 +1,7 @@
 import styles from "./nft.module.sass"
 import {Link, Outlet, useParams} from "react-router-dom";
-import {getNft, getNFTOwners, getPrice} from "../../utils/hooks/getNfts";
-import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
+import {getNft} from "../../utils/hooks/getNfts";
+import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
 import {NftCost} from "../../components/ui/nftCost/nftCost";
@@ -43,18 +43,18 @@ export const Nft = () => {
 
     let toastProperties = null;
 
-    const subscribeToNft = async () => {
+    const subscribeToNft =  () => {
         setIsLiked(!isLiked);
         setDisable(true);
-        await query.first().then(async (r) => {
+        query.first().then((r) => {
             console.log(r);
             if (r === undefined) {
                 const data = {
                     Token: token_id,
-                    Address: address,
+                    Address: address?.toLowerCase(),
                     UserAddress: selector.wallet
                 }
-                await save(data, {
+                save(data, {
                     onSuccess: (r) => {
                         setIsLiked(true);
                         removeDisable();
@@ -110,11 +110,7 @@ export const Nft = () => {
             .finally(() => setIsLoading(false))
         //@ts-ignore
         dispatch(fetchOwners({address, token_id}));
-        return () => {
-            abortController.abort();
-        }
     }, [])
-
     const showToast = (type: string) => {
         switch (type) {
             case 'success':
@@ -142,7 +138,6 @@ export const Nft = () => {
         setList([toastProperties]);
     }
 
-
     if (isLoading) {
         return (
             <div className={styles.loading}>
@@ -154,12 +149,12 @@ export const Nft = () => {
         <div className={styles.mainContainer}>
             <div className={styles.mainCardWrapper}>
                 <div className={styles.imageWrapper}>
-                    <img src={Nft?.image} className={styles.cardImage}/>
+                    <img src={Nft?.image ?? img} className={styles.cardImage}/>
                 </div>
                 <div className={styles.mainCardInfo}>
                     <div className={styles.topInfo}>
                         <h2 className={styles.name}>{Nft?.metadata.name}</h2>
-                        {auth ? <button className={styles.likeBtn} onClick={subscribeToNft}>
+                        {auth ? <button disabled={disable} className={styles.likeBtn} onClick={subscribeToNft}>
                             {isLiked ? <Icon height={26} width={26} name={"like"}/> :
                                 <Icon height={26} width={26} name={"empty-like"}/>}
                         </button> : null}
@@ -171,6 +166,8 @@ export const Nft = () => {
                     <NftInfoSwitcher/>
                 </div>
             </div>
+            <Toast list={list} position={'bottom_right'} setList={setList}/>
         </div>
+
     )
 }

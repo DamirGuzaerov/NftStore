@@ -16,8 +16,6 @@ import {MobileNav} from "../mobileNav/mobileNav";
 export const Header = () => {
     const dispatch = useDispatch();
     const auth = useAuth();
-    const [balance, setBalance] = useState();
-    const selector = useAppSelector(state => state.UserReducer);
     const [isOpen, setIsOpen] = useState(false)
     const openLogin = () => {
         dispatch(removeModal())
@@ -69,13 +67,7 @@ export const Header = () => {
 
                                     <Link to={'/profile'} className={styles.profile_header}>
                                         <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
-
-                                        <p className={styles.balance}>
-                                            {balance}
-                                        </p>
-                                        <p className={styles.eth}>
-                                            ETH
-                                        </p>
+                                        Profile
                                     </Link>
                                 </>)}
                         </div>
