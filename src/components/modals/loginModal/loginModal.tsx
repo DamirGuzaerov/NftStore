@@ -28,6 +28,7 @@ export const LoginModal = () => {
         try {
             dispatch(fetchUser());
         } catch (e) {
+            dispatch(removeModal());
             setClicked(false);
         }
         setClicked(true);

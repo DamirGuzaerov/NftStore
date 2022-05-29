@@ -1,19 +1,21 @@
-@use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles.sass'
 
-.background_uploadPage
-  background-color: gs.$dark-main-color
 
-.uploadPage_container
-  max-width: gs.$max-width
-  margin: 0 auto
-  margin-bottom: 136px
+.upload_page
+  &_background
+    background-color: $dark-main-color
 
-.uploadPage_header
-  display: flex
-  flex-direction: row
-  align-items: center
-  padding-bottom: 24px
-  border-bottom: 1px solid #353945
+  &__container
+    max-width: $max-width
+    margin: 0 auto
+    margin-bottom: 136px
+
+  &__header
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding-bottom: 24px
+    border-bottom: 1px solid #353945
 
 .return_button
   display: flex
@@ -28,89 +30,109 @@
   p
     margin-left: 15px
     color: white
-    @include gs.poppins-font
+    @include poppins-font
 
-.return_button:hover
-  opacity: 0.7
+  &:hover
+    opacity: 0.7
+
+
 
 .page_label
   margin-top: 64px
   text-align: left
 
-.page_label_description
-  @include gs.poppins-font
-  color: gs.$Neutrals4
-  font-weight: 500
-  margin-top: 16px
+  &__description
+    @include poppins-font
+    color: $Neutrals4
+    font-weight: 500
+    margin-top: 16px
 
-.profile_settings_container
-  display: flex
-  flex-direction: row
-  margin-top: 30px
-  justify-content: space-between
 
-.profile_image_container
-  display: flex
-  flex-direction: row
+.profile
+  &__settings_container
+    display: flex
+    flex-direction: row
+    margin-top: 30px
+    justify-content: space-between
 
-.profile_image_description_container
-  display: flex
-  flex-direction: column
-  margin-left: 32px
+    @include _700
+      flex-direction: column
 
-.profile_image
-  height: 128px
-  width: 128px
-  border-radius: 50%
+  &__image
+    height: 128px
+    width: 128px
+    border-radius: 50%
 
-.image_title
-  @include gs.poppins-font
-  color: white
+    &_container
+      display: flex
+      flex-direction: row
+      margin: 15px auto
 
-.image_description
-  max-width: 192px
-  margin-top: 8px
-  @include gs.poppins-font
-  font-weight: 400
-  font-size: 14px
-  line-height: 22px
-  color: gs.$Neutrals4
+    &__description_container
+      display: flex
+      flex-direction: column
+      margin-left: 32px
 
-.image_upload
-  margin-top: 10px
-  display: flex
-  justify-content: center
-  align-items: center
 
-  width: 80px
-  height: 40px
-  background: none
-  border: 2px solid gs.$Neutrals3
-  border-radius: 90px
 
-  input[type="file"]
-    display: none
+.image
 
-  p
+  &__title
+    @include poppins-font
     color: white
 
-.image_upload:hover
-  opacity: 0.8
+  &__description
+    max-width: 192px
+    margin-top: 8px
+    @include poppins-font
+    font-weight: 400
+    font-size: 14px
+    line-height: 22px
+    color: $Neutrals4
 
-.account_info_container
+  &__upload
+    margin-top: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+
+    width: 80px
+    height: 40px
+    background: none
+    border: 2px solid $Neutrals3
+    border-radius: 90px
+
+    input[type="file"]
+      display: none
+
+    p
+      color: white
+
+    &:hover
+      opacity: 0.8
+
+
+.account__info_container
   display: flex
   flex-direction: column
+
+  @include _700
+    margin: 0 auto
 
 .inputs_container
   display: flex
   flex-direction: column
   width: 400px
-  border-bottom: 1px solid gs.$Neutrals3
+  border-bottom: 1px solid $Neutrals3
 
+  @include _700
+    max-width: 400px
+    width: 100%
+    margin: 0 auto
 
 .desc_inputs
   margin: 40px 0
-  color: gs.$Neutrals4
+  color: $Neutrals4
   line-height: 24px
 
 .submit_button_wrapper

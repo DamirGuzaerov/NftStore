@@ -158,4 +158,16 @@ export async function getNFTOwners(address: string, token_id: string, chain?: st
         })
 }
 
+export async function getEthPrice() {
+    return axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD', {
+        headers: {
+            authorization: 'Apikey 2a1f0a0ce40d0ccda19b2f1cfdc13a922d2d724fd27d81df0964272906243ac1'
+        }
+    }).then((r) => {
+        return r;
+    }).catch((e) => {
+        return e;
+    })
+}
+
 

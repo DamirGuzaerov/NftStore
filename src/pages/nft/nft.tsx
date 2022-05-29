@@ -1,6 +1,6 @@
 import styles from "./nft.module.sass"
-import {Link, Outlet, useParams} from "react-router-dom";
-import {getNft, getNFTOwners, getPrice} from "../../utils/hooks/getNfts";
+import {useParams} from "react-router-dom";
+import {getNft} from "../../utils/hooks/getNfts";
 import React, {useEffect, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
@@ -13,6 +13,7 @@ import {useMoralisQuery, useMoralisWeb3Api, useNewMoralisObject} from "react-mor
 import {addBid} from "../../stores/reducers/bidSlice";
 import Moralis from "moralis";
 import {useAuth} from "../../utils/hooks/useAuth";
+import img from './../../assets/images/tempImg/nftPreviewImg.png';
 
 export const Nft = () => {
     const {address, token_id} = useParams();
@@ -101,6 +102,7 @@ export const Nft = () => {
                     }
                 })
 
+
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
@@ -122,7 +124,10 @@ export const Nft = () => {
         <div className={styles.mainContainer}>
             <div className={styles.mainCardWrapper}>
                 <div className={styles.imageWrapper}>
-                    <img src={Nft?.image} className={styles.cardImage}/>
+                    {
+
+                    }
+                    <img src={Nft?.image ?? img} className={styles.cardImage}/>
                 </div>
                 <div className={styles.mainCardInfo}>
                     <div className={styles.topInfo}>

@@ -57,6 +57,7 @@ export const SettingsPage = () => {
 
     const handleSaveUser = () => {
         console.log(isBio,isEmail,bio,email,name)
+        console.log(user);
         if(isBio && isEmail) {
             console.log(name,email,bio)
             setUserData({
@@ -66,6 +67,7 @@ export const SettingsPage = () => {
             }).then(r => {
                 showToast('success');
             }).catch(e => {
+                console.log(e);
                 showToast('fail');
             })
         } else {
@@ -75,9 +77,9 @@ export const SettingsPage = () => {
 
     return (
         <>
-            <div className={styles.background_uploadPage}>
-                <div className={styles.uploadPage_container}>
-                    <div className={styles.uploadPage_header}>
+            <div className={styles.upload_page_background}>
+                <div className={styles.upload_page__container}>
+                    <div className={styles.upload_page__header}>
                         <Link to={'/profile'}>
                             <button className={styles.return_button}>
                                 <Icon name={'left_arrow'} width={16} height={16}/>
@@ -90,29 +92,29 @@ export const SettingsPage = () => {
                     <h1 className={styles.page_label}>
                         Edit profile
                     </h1>
-                    <p className={styles.page_label_description}>
+                    <p className={styles.page_label__description}>
                         You can set preferred display name and manage other personal settings.
                     </p>
-                    <div className={styles.profile_settings_container}>
-                        <div className={styles.profile_image_container}>
-                            <img src={profileImage} className={styles.profile_image}/>
-                            <div className={styles.profile_image_description_container}>
-                                <p className={styles.image_title}>
+                    <div className={styles.profile__settings_container}>
+                        <div className={styles.profile__image_container}>
+                            <img src={profileImage} className={styles.profile__image}/>
+                            <div className={styles.profile__image__description_container}>
+                                <p className={styles.image__title}>
                                     Profile photo
                                 </p>
 
-                                <p className={styles.image_description}>
+                                <p className={styles.image__description}>
                                     We recommend an image
                                     of at least 400x400.Gifs work too 🙌
                                 </p>
-                                <label className={styles.image_upload}>
+                                <label className={styles.image__upload}>
                                     <p>Upload</p>
                                     <input type={"file"} accept={'image/*'}/>
                                 </label>
                             </div>
                         </div>
-                        <div className={styles.account_info_container}>
-                            <p className={styles.image_title}>
+                        <div className={styles.account__info_container}>
+                            <p className={styles.image__title}>
                                 Account info
                             </p>
                             <div className={styles.inputs_container}>

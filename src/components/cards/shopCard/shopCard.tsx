@@ -4,6 +4,7 @@ import {FC, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import defaulImg from "../../../assets/images/tempImg/nftPreviewImg.png"
 import Moralis from "moralis";
+import img from "./../../../assets/images/tempImg/creator.png";
 
 interface shopCardProps {
     imgUrl: string,
@@ -79,7 +80,7 @@ export const ShopCard: FC<shopCardProps> = ({imgUrl, nftName, nftCost, creatorIm
                 </div>
 
                 <div className={styles.nft_content_row}>
-                    <img className={styles.creatorAvatar} src={creatorImgUrl} alt=""/>
+                    <img className={styles.creatorAvatar} src={img} alt=""/>
                     <p>
                         {amount} in stock
                     </p>

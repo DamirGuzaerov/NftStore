@@ -1,9 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IUser} from "../../utils/models/iuser";
-import {fetchUser} from "./ActionCreators";
-import {useNavigate} from "react-router-dom";
-import {a} from "react-spring";
-import {modalSlice} from "./modalSlice";
 
 interface IBid {
     address?: string,
