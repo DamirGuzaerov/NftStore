@@ -1,3 +1,4 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
 .bannerHeader
   width: 100%
 
@@ -70,12 +71,7 @@
   justify-content: center
 
 .loading
-  width: 100%
-  padding: 100px
-  display: flex
-  box-sizing: border-box
-  justify-content: center
-
+  @include loader
 .List
   border: 1px solid black
   box-sizing: border-box

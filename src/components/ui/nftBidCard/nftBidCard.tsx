@@ -22,7 +22,6 @@ export const NftBidCard = () => {
         console.log('opened')
     }
 
-
     useEffect(() => {
         const transaction = Moralis.Object.extend("Transaction");
         const query = new Moralis.Query(transaction);

@@ -25,7 +25,8 @@ export const bidSlice = createSlice({
         addBid(state, action: PayloadAction<IBid>) {
             state.token = action.payload.token;
             state.address = action.payload.address;
-        }
+            state.isLoading = true
+        },
     }
 });
 

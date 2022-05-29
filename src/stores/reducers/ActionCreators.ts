@@ -34,3 +34,17 @@ export const fetchOwners = createAsyncThunk(
         }
     }
 )
+
+export const fetchBid = createAsyncThunk(
+    'user/fetchBid',
+    async(_, thunkAPI) => {
+        try {
+            return await Moralis.authenticate().then((user) => {
+                console.log(user);
+                return {}
+            });
+        } catch (e) {
+            thunkAPI.rejectWithValue('Ошибка ');
+        }
+    }
+);

@@ -6,7 +6,7 @@ import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch} from "react-redux";
 import {useAuth} from "../../utils/hooks/useAuth";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {getBalance} from "../../utils/hooks/getNfts";
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import pic from '../../assets/images/tempImg/nftPreviewImg.png';
@@ -35,13 +35,6 @@ export const Header = () => {
     const checkWindowSize = ()=>{
         if (window.innerWidth>675) setIsOpen(false)
     }
-    useEffect(() => {
-        if (auth) {
-            getBalance(selector.wallet).then((r) => {
-                setBalance(r);
-            })
-        }
-    }, [selector])
 
     return (
         <div>
@@ -78,9 +71,6 @@ export const Header = () => {
                                     <Link to={'/profile'} className={styles.profile_header}>
                                         <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
 
-                                        <p className={styles.balance}>
-                                            {balance}
-                                        </p>
                                         <p className={styles.eth}>
                                             ETH
                                         </p>

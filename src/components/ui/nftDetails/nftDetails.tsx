@@ -1,18 +1,26 @@
 import styles from "./nftDetails.module.sass"
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
+import {Oval} from "react-loader-spinner";
 
 export const NftDetails = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
+    const [isLoading,setIsLoading] = useState(true);
     const [details, setDetails] = useState(selector.owners[0]);
     useEffect(() => {
         try {
             setDetails(selector.owners[0]);
+            setIsLoading(false)
         } catch (e) {
             // @ts-ignore
             setDetails({});
+            setIsLoading(false)
         }
     }, [selector]);
+    if(isLoading) return <div className={styles.loading}>
+        <Oval color="#00BFFF" height={100} width={100}/>
+    </div>
+
     return (
         <div className={styles.infoWrapper}>
             <ul className={styles.nftDetails}>

@@ -4,7 +4,7 @@ import {
     List, WindowScroller
 } from "react-virtualized";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {getNftCollectionByName} from "../../utils/services/nftServices/getNftAddressByName";
 import {Link, useParams} from "react-router-dom";
 import {getCollection} from "../../utils/hooks/getNfts";
@@ -44,6 +44,7 @@ export const VirtualCollection = () => {
         getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current, controller)
             .then(
                 result => {
+                    console.log(result);
                     setNFTs([...NFTs, ...result])
                     currentOffset.current += oneFetchLimit
                     setIsLoading(false)

@@ -8,9 +8,9 @@ import {DefaultButton} from "../../ui/buttons/default-button";
 import {useDispatch} from "react-redux";
 import {removeModal} from "../../../stores/reducers/modalSlice";
 import {useNewMoralisObject} from "react-moralis";
-import {useParams} from "react-router-dom";
 import {ToastProperties} from "../../ui/toaster/Toast";
 import Moralis from "moralis";
+import {update} from "react-spring";
 
 export const PlaceBidModal = () => {
     const auth = useAuth();
@@ -61,11 +61,9 @@ export const PlaceBidModal = () => {
             default:
                 toastProperties = [];
         }
-
         // @ts-ignore
         setList([toastProperties]);
     }
-
 
     const [bid, setBid] = useState('');
 
@@ -78,7 +76,6 @@ export const PlaceBidModal = () => {
     }
 
     const makeBid = async () => {
-
         query.first().then(async (r) => {
             if (r) {
                 console.log('saved');
@@ -87,13 +84,14 @@ export const PlaceBidModal = () => {
                 queryResult.set("price", parseFloat(bid));
                 // @ts-ignore
                 queryResult.save().then(() => {
+                    console.log("SUCCSESS")
+                    dispatch("")
                     closeModal();
                     showToast('success');
                 }).catch(() => {
                     closeModal();
                     showToast('fail');
                 })
-
             } else {
                 const data = {
                     token: bidSelector.token,
@@ -113,9 +111,7 @@ export const PlaceBidModal = () => {
                 })
             }
         })
-
     }
-
 
     useEffect(() => {
         getUserBalance();
@@ -124,7 +120,6 @@ export const PlaceBidModal = () => {
     useEffect(() => {
         getUserBalance();
     }, [selector])
-
 
     return (
         <ModalTemplate title={"Place a bid"}>
@@ -153,7 +148,6 @@ export const PlaceBidModal = () => {
                     <p className={styles.p_description}>
                         Your balance
                     </p>
-
                     <p>
                         {balance} ETH
                     </p>

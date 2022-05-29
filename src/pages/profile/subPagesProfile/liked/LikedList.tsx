@@ -10,6 +10,7 @@ import {Oval} from "react-loader-spinner";
 export const LikedList = () => {
     const [likedNfts, setLikedNfts] = useState<INFT[]>([]);
     const userSelector = useAppSelector(state => state.UserReducer);
+    let contoller = new AbortController()
     const like = Moralis.Object.extend("Likes");
     const query = new Moralis.Query(like);
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +27,7 @@ export const LikedList = () => {
         fetchLikes().then((r) => {
             r.map(async (i) => {
                 const val = i.attributes;
-                promises.push(getNft(val.Address, val.Token).then(r => {
+                promises.push(getNft(val.Address, val.Token,contoller).then(r => {
                     nfts.push(r);
                 }));
             })
@@ -35,6 +36,9 @@ export const LikedList = () => {
                 setIsLoading(false)
             })
         })
+        return ()=>{
+            contoller.abort()
+        }
     }, []);
     return (<>
             {isLoading && <div className={styles.loading}>

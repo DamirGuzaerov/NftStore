@@ -1,7 +1,7 @@
 import styles from "./nft.module.sass"
 import {Link, Outlet, useParams} from "react-router-dom";
 import {getNft, getNFTOwners, getPrice} from "../../utils/hooks/getNfts";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
 import {NftCost} from "../../components/ui/nftCost/nftCost";

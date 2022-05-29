@@ -15,6 +15,7 @@ export const NftInfo = () => {
             setCreatorInfo('author')
         }
     }, [selector]);
+
   return(
       <div className={styles.infoWrapper}>
           <Link to={"/pageUser/"+creatorInfo}>

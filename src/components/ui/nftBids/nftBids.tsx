@@ -4,6 +4,7 @@ import creator from "../../../assets/images/tempImg/creator.png";
 import React, {useEffect, useState} from "react";
 import Moralis from "moralis";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
+import {Oval} from "react-loader-spinner";
 
 export interface IBid {
     user: string,
@@ -13,37 +14,43 @@ export interface IBid {
 
 export const NftBids = () => {
     const selector = useAppSelector(state => state.BidReducer);
+    const [isLoading,setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<IBid[]>([]);
 
     useEffect(() => {
+        console.log(selector.isLoading);
         const transaction = Moralis.Object.extend("Transaction");
-        const query = new Moralis.Query(transaction);
-        query.containedIn("address", [
-            selector.address
-        ])
-        query.containedIn("token", [
-            selector.token
-        ])
-        const fetchTransaction = async () => {
-            return await query.find();
-        }
+            const query = new Moralis.Query(transaction);
+            query.containedIn("address", [
+                selector.address
+            ])
+            query.containedIn("token", [
+                selector.token
+            ])
+            const fetchTransaction = async () => {
+                return await query.find();
+            }
 
-        fetchTransaction().then(r => {
-            const list: IBid[] = [];
-            r.forEach(i => {
-                const val = i.attributes;
-                list.push({
-                    user: val.user,
-                    price: val.price,
-                    createdAt: val.createdAt
+            fetchTransaction().then(r => {
+                const list: IBid[] = [];
+                r.forEach(i => {
+                    const val = i.attributes;
+                    list.push({
+                        user: val.user,
+                        price: val.price,
+                        createdAt: val.createdAt
+                    })
                 })
+                setTransactions(list);
+                setIsLoading(false)
+                console.log(transactions);
             })
-            setTransactions(list);
-            console.log(transactions);
-        })
+        console.log(selector.isLoading);
+    }, [selector.isLoading])
 
-    }, [])
-
+    if(isLoading) return <div className={styles.loading}>
+        <Oval color="#00BFFF" height={100} width={100}/>
+    </div>
 
     return (
         <div className={styles.owners}>
