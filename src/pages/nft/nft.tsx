@@ -9,11 +9,12 @@ import Icon from "../../components/ui/icon/icon";
 import NftInfoSwitcher from "../../components/nftInfoSwitcher/nftInfoSwitcher";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/redux-hooks";
 import {fetchOwners} from "../../stores/reducers/ActionCreators";
-import {useMoralisQuery, useMoralisWeb3Api, useNewMoralisObject} from "react-moralis";
+import {useNewMoralisObject} from "react-moralis";
 import {addBid} from "../../stores/reducers/bidSlice";
 import Moralis from "moralis";
 import {useAuth} from "../../utils/hooks/useAuth";
-import axios from "axios";
+import img from './../../assets/images/tempImg/nftPreviewImg.png';
+import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
 
 export const Nft = () => {
     const {current: abortController} = useRef(new AbortController());
@@ -24,15 +25,11 @@ export const Nft = () => {
     const dispatch = useAppDispatch();
     const auth = useAuth();
     const {save} = useNewMoralisObject("Likes");
-    const {fetch} = useMoralisQuery(
-        'Transaction',
-        q => q.equalTo("address", '0xfbeef911dc5821886e1dda71586d90ed28174b7d'),
-        [],
-        {autoFetch: false}
-    );
     const [isLiked, setIsLiked] = useState(false);
     const like = Moralis.Object.extend("Likes");
     const query = new Moralis.Query(like);
+    const [disable, setDisable] = useState(false);
+    const [list, setList] = useState<ToastProperties[]>([]);
 
     query.containedIn("UserAddress", [
         selector.wallet
@@ -44,8 +41,11 @@ export const Nft = () => {
         token_id
     ])
 
+    let toastProperties = null;
+
     const subscribeToNft = async () => {
         setIsLiked(!isLiked);
+        setDisable(true);
         await query.first().then(async (r) => {
             console.log(r);
             if (r === undefined) {
@@ -56,35 +56,40 @@ export const Nft = () => {
                 }
                 await save(data, {
                     onSuccess: (r) => {
-                        setIsLiked(true)
+                        setIsLiked(true);
+                        removeDisable();
                     },
                     onError: (e) => {
                         setIsLiked(false)
+                        removeDisable();
+                        showToast('fail');
                     }
                 })
             } else {
                 r.destroy().then(() => {
                     setIsLiked(false);
+                    removeDisable();
+                }).catch(() => {
+                    setIsLiked(true);
+                    removeDisable();
+                    showToast('fail');
+
                 })
             }
         }).catch((e) => {
-            console.log(e)
+            setIsLiked(!isLiked);
+            showToast('fail');
+            setDisable(false);
         })
     }
 
-    const objectIdQuery = () => {
-        fetch({
-            onSuccess: (r) => {
-                console.log(r);
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
-    };
+    const removeDisable = () => {
+        setTimeout(() => setDisable(false), 500);
+    }
+
 
     useEffect(() => {
-        getNft(address!, token_id!,abortController)
+        getNft(address!, token_id!, abortController)
             .then((r) => {
                 console.log(r);
                 setNft(r);
@@ -105,11 +110,38 @@ export const Nft = () => {
             .finally(() => setIsLoading(false))
         //@ts-ignore
         dispatch(fetchOwners({address, token_id}));
-        objectIdQuery();
-        return ()=>{
+        return () => {
             abortController.abort();
         }
     }, [])
+
+    const showToast = (type: string) => {
+        switch (type) {
+            case 'success':
+                toastProperties = {
+                    id: 1,
+                    title: 'Success!',
+                    description: 'User data were updated successfully',
+                    backgroundColor: '#5cb85c'
+                }
+                break;
+            case 'fail':
+                toastProperties = {
+                    id: 2,
+                    title: 'Failed!',
+                    description: 'Something went wrong...',
+                    backgroundColor: '#d9534f'
+                }
+                break;
+
+            default:
+                toastProperties = [];
+        }
+
+        // @ts-ignore
+        setList([toastProperties]);
+    }
+
 
     if (isLoading) {
         return (

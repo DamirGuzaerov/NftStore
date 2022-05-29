@@ -5,7 +5,7 @@ import pic from '../../../src/assets/images/tempImg/nftPreviewImg.png'
 const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
 
-export async function getCollection(address: string, chain: string, limit?: number, offset?: number,controller?: AbortController) {
+export async function getCollection(address: string, chain: string, limit?: number, offset?: number, controller?: AbortController) {
     return axios.get(url + `/nft/${address}`, {
         signal: controller?.signal,
         params: {
@@ -19,13 +19,11 @@ export async function getCollection(address: string, chain: string, limit?: numb
     }).then(async (response) => {
         const arr = await setImages(response.data.result);
         return arr;
-    }).catch((error)=>{
-        if(axios.isCancel(error)){
+    }).catch((error) => {
+        if (axios.isCancel(error)) {
             console.error(error)
-        }
-        else
-        if(error.response){
-            if(error.response.status == 429){
+        } else if (error.response) {
+            if (error.response.status == 429) {
                 window.location.replace("/tooManyRequests")
             }
         }
@@ -33,7 +31,7 @@ export async function getCollection(address: string, chain: string, limit?: numb
     });
 }
 
-export async function getNft(address: string, token_id: string, contoller?: AbortController,chain?: string, format?: string, limit?: number,) {
+export async function getNft(address: string, token_id: string, contoller?: AbortController, chain?: string, format?: string, limit?: number,) {
     return axios.get(url + `/nft/${address}/${token_id}`, {
         signal: contoller?.signal,
         headers: {
@@ -46,9 +44,9 @@ export async function getNft(address: string, token_id: string, contoller?: Abor
         }
     }).then((r) => {
         return setImage(r.data);
-    }).catch((error)=>{
-        if(error.response){
-            if(error.response.status == 429){
+    }).catch((error) => {
+        if (error.response) {
+            if (error.response.status == 429) {
                 window.location.replace("/tooManyRequests")
             }
         }
@@ -110,7 +108,6 @@ function parseImage(image: string, elem: INFT) {
 }
 
 
-
 export async function getPrice(address: string, chain?: string, exchange?: string, e?: INFT) {
 
 }
@@ -168,6 +165,18 @@ export async function getNFTOwners(address: string, token_id: string, chain?: st
         }).catch((er) => {
             return er;
         })
+}
+
+export async function getEthPrice() {
+    return axios.get('https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD', {
+        headers: {
+            authorization: 'Apikey 2a1f0a0ce40d0ccda19b2f1cfdc13a922d2d724fd27d81df0964272906243ac1'
+        }
+    }).then((r) => {
+        return r;
+    }).catch((e) => {
+        return e;
+    })
 }
 
 

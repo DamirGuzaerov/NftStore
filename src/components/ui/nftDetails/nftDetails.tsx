@@ -5,8 +5,9 @@ import {Oval} from "react-loader-spinner";
 
 export const NftDetails = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
-    const [isLoading,setIsLoading] = useState(true);
     const [details, setDetails] = useState(selector.owners[0]);
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         try {
             setDetails(selector.owners[0]);
@@ -14,9 +15,10 @@ export const NftDetails = () => {
         } catch (e) {
             // @ts-ignore
             setDetails({});
-            setIsLoading(false)
+            setIsLoading(false);
         }
-    }, [selector]);
+    }, [selector.owners.length]);
+
     if(isLoading) return <div className={styles.loading}>
         <Oval color="#00BFFF" height={100} width={100}/>
     </div>
@@ -29,7 +31,7 @@ export const NftDetails = () => {
                         Contract address:
                     </label>
                     <span id={"contractAddress"}>
-                        {details.token_address}
+                        {details?.token_address}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -37,7 +39,7 @@ export const NftDetails = () => {
                         Token id:
                     </label>
                     <span id={"tokenId"}>
-                        {details.token_id}
+                        {details?.token_id}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -45,7 +47,7 @@ export const NftDetails = () => {
                         Token Standard
                     </label>
                     <span id={"Token Standard"}>
-                        {details.contract_type}
+                        {details?.contract_type}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -59,4 +61,5 @@ export const NftDetails = () => {
             </ul>
         </div>
     )
+
 }

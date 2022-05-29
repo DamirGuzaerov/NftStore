@@ -9,6 +9,7 @@ import Moralis from "moralis";
 import {IBid} from "../nftBids/nftBids";
 import {Toast, ToastProperties} from "../toaster/Toast";
 import {useAuth} from "../../../utils/hooks/useAuth";
+import {getEthPrice} from "../../../utils/hooks/getNfts";
 
 export const NftBidCard = () => {
 
@@ -17,9 +18,9 @@ export const NftBidCard = () => {
     const [list, setList] = useState<ToastProperties[]>([]);
     const auth = useAuth();
     const selector = useAppSelector(state => state.BidReducer)
+    const [ethPrice, setEthPrice] = useState(0);
     const openModal = (modal: string) => {
         dispatch(addModal(modal));
-        console.log('opened')
     }
 
     useEffect(() => {
@@ -45,6 +46,12 @@ export const NftBidCard = () => {
             })
         })
 
+        getEthPrice().then(r => {
+            setEthPrice(r?.data.USD);
+        }).catch(e => {
+            setEthPrice(1800);
+        })
+
     }, [])
 
     return (
@@ -62,7 +69,7 @@ export const NftBidCard = () => {
                                     <p className={styles.bid}>
                                         <span>{bid?.price} ETH </span>
                                         <span className={styles.bidDollars}>
-                        $2,764.89
+                        ${parseInt(bid?.price) * ethPrice}
                         </span>
                                     </p>
                                 </div>
@@ -97,10 +104,10 @@ export const NftBidCard = () => {
                         </span>
                             <span className={styles.percent}>1.5%</span>
                             <span className={styles.serviceFeeInfoText}>
-                        2.563 ETH
+                        1 ETH
                         </span>
                             <span className={styles.serviceFeeInfoText}>
-                        $4,540.62
+                        ${ethPrice}
                         </span>
                         </div>) : null
                     }

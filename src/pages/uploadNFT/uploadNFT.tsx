@@ -78,6 +78,7 @@ export const UploadNFT = () => {
             }).catch(() => {
                 showToast('fail');
             })
+            console.log(res);
         } else {
             alert('enter all values');
         }
@@ -138,7 +139,7 @@ export const UploadNFT = () => {
                             <h2>Preview</h2>
                             {preview ? (<img src={preview} className={styles.preview_img}/>)
                                 : (<div className={styles.preview_img}>
-                                    <p>Upload image</p>
+                                    <div className={`${styles.preview_img} ${styles.preview__img_plug}`}></div>
                                 </div>)}
 
                             <div className={styles.nft_content}>

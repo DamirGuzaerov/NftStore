@@ -26,16 +26,15 @@ export const Header = () => {
     const closeModal = () => {
         dispatch(removeModal());
     }
-    useEffect(()=>{
-        window.addEventListener("resize",checkWindowSize)
-        return ()=>{
-            window.removeEventListener("resize",checkWindowSize)
+    useEffect(() => {
+        window.addEventListener("resize", checkWindowSize)
+        return () => {
+            window.removeEventListener("resize", checkWindowSize)
         }
-    },[])
-    const checkWindowSize = ()=>{
-        if (window.innerWidth>675) setIsOpen(false)
+    }, [])
+    const checkWindowSize = () => {
+        if (window.innerWidth > 675) setIsOpen(false)
     }
-
     return (
         <div>
             <header>
@@ -71,6 +70,9 @@ export const Header = () => {
                                     <Link to={'/profile'} className={styles.profile_header}>
                                         <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
 
+                                        <p className={styles.balance}>
+                                            {balance}
+                                        </p>
                                         <p className={styles.eth}>
                                             ETH
                                         </p>
