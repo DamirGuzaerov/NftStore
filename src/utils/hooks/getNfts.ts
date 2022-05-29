@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios, {CancelTokenSource} from "axios";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import pic from '../../../src/assets/images/tempImg/nftPreviewImg.png'
-import Moralis from "moralis";
 
 const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
 
-export async function getCollection(address: string, chain: string, limit?: number, offset?: number) {
+export async function getCollection(address: string, chain: string, limit?: number, offset?: number,controller?: AbortController) {
     return axios.get(url + `/nft/${address}`, {
+        signal: controller?.signal,
         params: {
             chain: chain,
             limit: limit,
@@ -17,14 +17,43 @@ export async function getCollection(address: string, chain: string, limit?: numb
             'X-API-KEY': apikey ?? 'update api key',
         }
     }).then(async (response) => {
-        console.log(response.data)
         const arr = await setImages(response.data.result);
-        console.log(arr);
         return arr;
+    }).catch((error)=>{
+        if(axios.isCancel(error)){
+            console.error(error)
+        }
+        else
+        if(error.response){
+            if(error.response.status == 429){
+                window.location.replace("/tooManyRequests")
+            }
+        }
+        return error
+    });
+}
 
-    }).catch((er) => {
-        return er;
-    })
+export async function getNft(address: string, token_id: string, contoller?: AbortController,chain?: string, format?: string, limit?: number,) {
+    return axios.get(url + `/nft/${address}/${token_id}`, {
+        signal: contoller?.signal,
+        headers: {
+            'X-API-KEY': apikey ?? 'update api key'
+        },
+        params: {
+            chain: chain,
+            format: format,
+            limit: limit
+        }
+    }).then((r) => {
+        return setImage(r.data);
+    }).catch((error)=>{
+        if(error.response){
+            if(error.response.status == 429){
+                window.location.replace("/tooManyRequests")
+            }
+        }
+        return error
+    });
 }
 
 async function setImages(prom: INFT[]) {
@@ -47,7 +76,6 @@ async function setImages(prom: INFT[]) {
 }
 
 async function setImage(elem: INFT) {
-
     if (elem.metadata != null) {
         const metadata = JSON.parse(elem.metadata);
         parseImage(metadata.image, elem);
@@ -81,22 +109,7 @@ function parseImage(image: string, elem: INFT) {
     }
 }
 
-export async function getNft(address: string, token_id: string, chain?: string, format?: string, limit?: number) {
-    return axios.get(url + `/nft/${address}/${token_id}`, {
-        headers: {
-            'X-API-KEY': apikey ?? 'update api key'
-        },
-        params: {
-            chain: chain,
-            format: format,
-            limit: limit
-        }
-    }).then((r) => {
-        return setImage(r.data);
-    }).catch(e => {
-        return e;
-    })
-}
+
 
 export async function getPrice(address: string, chain?: string, exchange?: string, e?: INFT) {
 
@@ -112,7 +125,6 @@ export async function getBalance(address: string, chain?: string) {
             chain: chain
         }
     }).then((r) => {
-        console.log(r);
         return r.data.balance;
     })
 }

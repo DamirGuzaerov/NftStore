@@ -8,7 +8,6 @@ import {Link} from "react-router-dom";
 export const NftInfo = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
     const [creatorInfo, setCreatorInfo] = useState('');
-    console.log(selector.owners[0]);
     useEffect(() => {
         try {
             setCreatorInfo(selector.owners[0].token_address);

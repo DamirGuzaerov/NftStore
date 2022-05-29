@@ -14,7 +14,6 @@ import {MobileNav} from "../mobileNav/mobileNav";
 
 
 export const Header = () => {
-    const isMobileWindow = useRef(false);
     const dispatch = useDispatch();
     const auth = useAuth();
     const [balance, setBalance] = useState();

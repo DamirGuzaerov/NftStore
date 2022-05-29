@@ -1,7 +1,7 @@
 import styles from "./nft.module.sass"
-import {useParams} from "react-router-dom";
-import {getNft} from "../../utils/hooks/getNfts";
-import React, {useEffect, useState} from "react";
+import {Link, Outlet, useParams} from "react-router-dom";
+import {getNft, getNFTOwners, getPrice} from "../../utils/hooks/getNfts";
+import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
 import {NftCost} from "../../components/ui/nftCost/nftCost";
@@ -13,6 +13,7 @@ import {useMoralisQuery, useMoralisWeb3Api, useNewMoralisObject} from "react-mor
 import {addBid} from "../../stores/reducers/bidSlice";
 import Moralis from "moralis";
 import {useAuth} from "../../utils/hooks/useAuth";
+import axios from "axios";
 import img from './../../assets/images/tempImg/nftPreviewImg.png';
 
 export const Nft = () => {
@@ -86,8 +87,9 @@ export const Nft = () => {
 
 
     useEffect(() => {
-        getNft(address!, token_id!)
+        getNft(address!, token_id!,abortController)
             .then((r) => {
+                console.log(r);
                 setNft(r);
                 const data = {
                     address: address,
@@ -101,15 +103,15 @@ export const Nft = () => {
                         setIsLiked(false);
                     }
                 })
-
-
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
         //@ts-ignore
         dispatch(fetchOwners({address, token_id}));
         objectIdQuery();
-
+        return ()=>{
+            abortController.abort();
+        }
     }, [])
 
 

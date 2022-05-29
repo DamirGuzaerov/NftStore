@@ -12,33 +12,41 @@ import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard
 import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import styles from "./collection.module.sass";
-import {DropDown} from "../../components/dropdown/dropDown";
+import {Oval} from "react-loader-spinner";
 
 const CARD = {
     WIDTH: 350,
     HEIGHT: 460
 };
-const oneFetchLimit = 50;
-export const VirtualCollection = () => {
 
+const oneFetchLimit = 40;
+
+export const VirtualCollection = () => {
+    const {current: abortController} = useRef(new AbortController());
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const rowsCount = useRef(0);
     const currentOffset = useRef(0);
     const {collectionName} = useParams();
-
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetchNFTs().then(r => currentOffset.current += oneFetchLimit);
+        fetchNFTs(abortController).then(r => {
+            currentOffset.current += oneFetchLimit
+        });
+        return () => {
+            abortController.abort();
+        }
     }, [])
 
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
-    async function fetchNFTs() {
-        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current)
+    async function fetchNFTs(controller: AbortController) {
+        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current, controller)
             .then(
                 result => {
                     setNFTs([...NFTs, ...result])
                     currentOffset.current += oneFetchLimit
+                    setIsLoading(false)
                 })
     }
 
@@ -47,8 +55,12 @@ export const VirtualCollection = () => {
     }
 
     function loadMoreRows({startIndex, stopIndex}: any) {
-        return fetchNFTs()
+        return fetchNFTs(abortController)
     }
+
+    if (isLoading) return <div className={styles.loading}>
+        <Oval color="#00BFFF" height={100} width={100}/>
+    </div>
 
     return (
         <div>
@@ -77,7 +89,7 @@ export const VirtualCollection = () => {
             >
                 {({onRowsRendered, registerChild}: any) => (
                     <WindowScroller>
-                        {({ height, scrollTop }) => (
+                        {({height, scrollTop}) => (
                             <div style={{height: "100%", width: "100%"}}>
                                 <AutoSizer>
                                     {({width}) => {
