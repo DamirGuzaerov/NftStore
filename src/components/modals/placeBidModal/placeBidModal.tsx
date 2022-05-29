@@ -174,7 +174,8 @@ export const PlaceBidModal = () => {
                                    func={closeModal}/>
                 </div>
             </div>
-
         </ModalTemplate>
+
+
     );
 }

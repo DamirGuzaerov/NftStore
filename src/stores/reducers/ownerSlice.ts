@@ -35,12 +35,14 @@ export const ownerSlice = createSlice({
     extraReducers: {
         [fetchOwners.fulfilled.type]: (state, action: PayloadAction<IOwner[]>) => {
             state.owners = action.payload;
+            state.loading = false;
         },
         [fetchOwners.pending.type]: (state) => {
-
+            state.loading = true;
         },
         [fetchOwners.rejected.type]: (state, action: PayloadAction<string>) => {
             state.error = action.payload;
+            state.loading = false;
         }
     }
 })

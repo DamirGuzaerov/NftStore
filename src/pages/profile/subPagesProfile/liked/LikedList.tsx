@@ -36,9 +36,10 @@ export const LikedList = () => {
             })
         })
     }, []);
+
     return (<>
             {isLoading && <div className={styles.loading}>
-                <Oval color="#00BFFF" height={100} width={100}/>
+                <Oval color="rgba(200, 83, 109, 1)" height={100} width={100}/>
             </div>}
             {!isLoading && <div className={styles.liked_container}>
                 {likedNfts.map((e, counter) => {

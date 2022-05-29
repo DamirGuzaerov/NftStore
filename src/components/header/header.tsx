@@ -26,16 +26,17 @@ export const Header = () => {
     const closeModal = () => {
         dispatch(removeModal());
     }
-    useEffect(()=>{
-        window.addEventListener("resize",checkWindowSize)
-        return ()=>{
-            window.removeEventListener("resize",checkWindowSize)
+    useEffect(() => {
+        window.addEventListener("resize", checkWindowSize)
+        return () => {
+            window.removeEventListener("resize", checkWindowSize)
         }
-    },[])
-    const checkWindowSize = ()=>{
-        if (window.innerWidth>675) setIsOpen(false)
+    }, [])
+    const checkWindowSize = () => {
+        if (window.innerWidth > 675) setIsOpen(false)
     }
     useEffect(() => {
+        console.log('balance updated');
         if (auth) {
             getBalance(selector.wallet).then((r) => {
                 setBalance(r);
