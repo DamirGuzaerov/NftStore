@@ -11,7 +11,6 @@ export interface IBid {
     createdAt: any
 }
 
-
 export const NftBids = () => {
     const selector = useAppSelector(state => state.BidReducer);
     const [transactions, setTransactions] = useState<IBid[]>([]);

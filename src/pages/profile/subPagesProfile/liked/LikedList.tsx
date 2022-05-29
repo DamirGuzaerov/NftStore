@@ -4,7 +4,6 @@ import {useAppSelector} from "../../../../utils/hooks/redux-hooks";
 import {INFT} from "../../../../components/swipers/nftSwiper/NFTSwiper";
 import {getNft} from "../../../../utils/hooks/getNfts";
 import styles from "../SubPagesStyles.module.sass"
-import {Link} from "react-router-dom";
 import {ShopCard} from "../../../../components/cards/shopCard/shopCard";
 import {Oval} from "react-loader-spinner";
 
@@ -37,24 +36,13 @@ export const LikedList = () => {
             })
         })
     }, []);
-
-    // if (likedNfts.length === 0) {
-    //     return (
-    //         <>
-    //             <p className={styles.empty_list_title}> Your NFTs list is empty!</p>
-    //             <Link className={styles.empty_list_link} to={'/'}>Find something for
-    //                 yourself!
-    //             </Link>
-    //         </>
-    //     )
-    // }
     return (<>
             {isLoading && <div className={styles.loading}>
                 <Oval color="#00BFFF" height={100} width={100}/>
             </div>}
             {!isLoading && <div className={styles.liked_container}>
                 {likedNfts.map((e, counter) => {
-                    return <ShopCard key={counter} creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'}
+                    return <ShopCard key={counter} creatorImgUrl={e.metadata.name} imgUrl={e.image} nftCost={'0'}
                                      nftName={e.metadata.name} address={e.token_address}
                                      token_id={e.token_id} amount={e.amount}/>
                 })}

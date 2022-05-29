@@ -1,7 +1,7 @@
 import styles from "./nft.module.sass"
 import {Link, Outlet, useParams} from "react-router-dom";
 import {getNft, getNFTOwners, getPrice} from "../../utils/hooks/getNfts";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {Oval} from "react-loader-spinner";
 import {NftCost} from "../../components/ui/nftCost/nftCost";
@@ -13,8 +13,10 @@ import {useMoralisQuery, useMoralisWeb3Api, useNewMoralisObject} from "react-mor
 import {addBid} from "../../stores/reducers/bidSlice";
 import Moralis from "moralis";
 import {useAuth} from "../../utils/hooks/useAuth";
+import axios from "axios";
 
 export const Nft = () => {
+    const {current: abortController} = useRef(new AbortController());
     const {address, token_id} = useParams();
     const [Nft, setNft] = useState<INFT>();
     const selector = useAppSelector(state => state.UserReducer);
@@ -66,10 +68,8 @@ export const Nft = () => {
                 })
             }
         }).catch((e) => {
-            console.log(e);
+            console.log(e)
         })
-
-
     }
 
     const objectIdQuery = () => {
@@ -83,10 +83,10 @@ export const Nft = () => {
         });
     };
 
-
     useEffect(() => {
-        getNft(address!, token_id!)
+        getNft(address!, token_id!,abortController)
             .then((r) => {
+                console.log(r);
                 setNft(r);
                 const data = {
                     address: address,
@@ -100,16 +100,16 @@ export const Nft = () => {
                         setIsLiked(false);
                     }
                 })
-
             })
             .catch((e) => console.log(e))
             .finally(() => setIsLoading(false))
         //@ts-ignore
         dispatch(fetchOwners({address, token_id}));
         objectIdQuery();
-
+        return ()=>{
+            abortController.abort();
+        }
     }, [])
-
 
     if (isLoading) {
         return (
@@ -139,7 +139,6 @@ export const Nft = () => {
                     <NftInfoSwitcher/>
                 </div>
             </div>
-
         </div>
     )
 }

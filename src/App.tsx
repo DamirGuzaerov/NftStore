@@ -24,11 +24,22 @@ import {CollectedList} from "./pages/profile/subPagesProfile/collected/Collected
 import {CreatedList} from "./pages/profile/subPagesProfile/created/CreatedList";
 import {NotFoundPage} from "./pages/notfound/NotFoundPage";
 import {BitsList} from "./pages/profile/subPagesProfile/bits/bits";
+import {useAuth} from "./utils/hooks/useAuth";
+import {fetchUser} from "./stores/reducers/ActionCreators";
+import {useDispatch} from "react-redux";
+import {getUser} from "./stores/reducers/userSlice";
+import {TooManyRequests} from "./pages/errorPages/tooManyRequests/tooManyRequests";
 
 function App() {
+    const isAuth = useAuth();
+    const dispatch = useDispatch()
     Moralis.start({
         serverUrl:'https://bsnaqump47ti.usemoralis.com:2053/server',
         appId:"xqgXudEiFZ9pKlox3caOx08FRP52AQfwyOLghFxt"})
+
+    if(isAuth){
+        dispatch(getUser());
+    }
 
     return (
         <Routes>
@@ -64,6 +75,7 @@ function App() {
                     <Route element={<NftBids/>} path={'/assets/:address/:token_id/bids'}/>
                 </Route>
                 <Route element={<DiscoverPage/>} path={'/discover'}/>
+                <Route element={<TooManyRequests/>} path={'/tooManyRequests'}/>
             </Route>
         </Routes>
     );
