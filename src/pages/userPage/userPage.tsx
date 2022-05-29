@@ -85,24 +85,13 @@ export const UserPage = () => {
                                     <button>
                                         <Icon name={'share'} width={20} height={20}/>
                                     </button>
-
-                                    <Link to={'/settings'}>
                                         <button>
                                             <Icon name={'options'} width={20} height={20}/>
                                         </button>
-                                    </Link>
                                 </div>
                             </div>
 
                             <div className={styles.profile_nfts_container}>
-                                <div className={styles.buttons_edit_row}>
-                                    {user!=undefined&&<button className={styles.edit_button}>
-                                        <p>
-                                            Edit profile
-                                        </p>
-                                        <Icon name={'edit'} width={16} height={16}/>
-                                    </button>}
-                                </div>
                                 <div className={styles.profile_nfts}>
                                     <nav className={styles.profile_nav}>
                                         <button className={styles.nav_buttons}>

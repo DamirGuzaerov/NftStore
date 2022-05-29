@@ -26,11 +26,8 @@ export const Profile = () => {
 
 
     useEffect(() => {
-
         query.first().then((r) => {
-            console.log(r?.attributes);
             setUserData(r?.attributes);
-            console.log(userData);
             setIsLoading(false);
         })
         getCollection(user.wallet, 'eth').then((r) => {
@@ -69,21 +66,21 @@ export const Profile = () => {
                             <button>
                                 <Icon name={'share'} width={20} height={20}/>
                             </button>
-                            <Link to={'/settings'}>
                                 <button>
                                     <Icon name={'options'} width={20} height={20}/>
                                 </button>
-                            </Link>
                         </div>
                     </div>
                     <div className={styles.profile_nfts_container}>
                         <div className={styles.buttons_edit_row}>
-                            <button className={styles.edit_button}>
-                                <p>
-                                    Edit profile
-                                </p>
-                                <Icon name={'edit'} width={16} height={16}/>
-                            </button>
+                            <Link to={'/settings'}>
+                                <button className={styles.edit_button}>
+                                    <p>
+                                        Edit profile
+                                    </p>
+                                    <Icon name={'edit'} width={16} height={16}/>
+                                </button>
+                            </Link>
                         </div>
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
@@ -100,16 +97,6 @@ export const Profile = () => {
                                     Bids
                                 </Link>
                             </nav>
-                            {/*{NFTs.length > 0 ? (*/}
-                            {/*    <div className={styles.nft_list}>*/}
-                            {/*        {NFTs.map(item => {*/}
-                            {/*            return (<NftPreviewCard creatorImgUrl={user.wallet} imgUrl={item.image}*/}
-                            {/*                                    nftCost={'0'} nftLikes={'0'} nftName={item.name}/>)*/}
-                            {/*        })}*/}
-                            {/*    </div>) : (*/}
-                            {/*    <>*/}
-                            {/*    </>*/}
-                            {/*)}*/}
                             <Outlet/>
                         </div>
                     </div>
