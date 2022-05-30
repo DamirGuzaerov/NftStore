@@ -24,8 +24,7 @@ export const PreUploadNFT = () => {
                 </h1>
                 <p className={styles.upload_upper_description}>
                     Choose <span className={styles.white_description}>“Single”</span> if you want your collectible to be
-                    one of a kind or <span className={styles.white_description}>“Multiple”</span> if you want to sell
-                    one collectible multiple times
+                    one
                 </p>
 
                 <div className={styles.upload_type_container}>
@@ -35,11 +34,6 @@ export const PreUploadNFT = () => {
                             <DefaultButton value={'Create Single'} paddingRightLeft={16} type={'action'}
                                            paddingTopBottom={12} func={console.log}/>
                         </Link>
-                    </div>
-                    <div className={styles.upload_type_card}>
-                        <img src={secondImg} className={styles.upload_card_img}/>
-                            <DefaultButton value={'Create Multiple'} paddingRightLeft={16} type={'submit'}
-                                           paddingTopBottom={12} func={console.log}/>
                     </div>
                 </div>
             </div>

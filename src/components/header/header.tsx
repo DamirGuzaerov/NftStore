@@ -5,17 +5,15 @@ import {Link} from "react-router-dom";
 import {DefaultButton} from "../ui/buttons/default-button";
 import {addModal, removeModal} from "../../stores/reducers/modalSlice";
 import {useDispatch} from "react-redux";
-import {useAuth} from "../../utils/hooks/useAuth";
-import {useEffect, useLayoutEffect, useRef, useState} from "react";
-import {getBalance} from "../../utils/hooks/getNfts";
+import {useEffect,useState} from "react";
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import pic from '../../assets/images/tempImg/nftPreviewImg.png';
 import {MobileNav} from "../mobileNav/mobileNav";
 
-
 export const Header = () => {
     const dispatch = useDispatch();
-    const auth = useAuth();
+    const user = useAppSelector(state => state.UserReducer)
+    const [isAuth,setIsAuth] = useState(false);
     const [isOpen, setIsOpen] = useState(false)
     const openLogin = () => {
         dispatch(removeModal())
@@ -24,6 +22,9 @@ export const Header = () => {
     const closeModal = () => {
         dispatch(removeModal());
     }
+    useEffect(()=>{
+        setIsAuth(user.token !== "");
+    },[user.token])
     useEffect(() => {
         window.addEventListener("resize", checkWindowSize)
         return () => {
@@ -54,7 +55,7 @@ export const Header = () => {
                     <div className={styles.search_wrapper}>
                         <div className={styles.buttons_container}>
 
-                            {!auth ? (
+                            {!isAuth ? (
                                     <DefaultButton type={'action'} paddingRightLeft={16} paddingTopBottom={12}
                                                    value={'Sign in'}
                                                    func={() => openLogin()}/>) :

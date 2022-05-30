@@ -13,8 +13,6 @@ import pic from "../../assets/images/tempImg/nftPreviewImg.png";
 export const MobileNav = () => {
     const dispatch = useDispatch();
     const auth = useAuth();
-    const [balance, setBalance] = useState();
-    const selector = useAppSelector(state => state.UserReducer);
     const openLogin = () => {
         dispatch(removeModal())
         dispatch(addModal('Login'));
@@ -22,13 +20,6 @@ export const MobileNav = () => {
     const closeModal = () => {
         dispatch(removeModal());
     }
-    useEffect(() => {
-        if (auth) {
-            getBalance(selector.wallet).then((r) => {
-                setBalance(r);
-            })
-        }
-    }, [selector])
 
     return <>
         <div className={styles.menu_wrapper}>
@@ -53,12 +44,10 @@ export const MobileNav = () => {
                                 </Link>
                                 <Link to={'/profile'} className={styles.profile_header}>
                                     <img src={pic} className={styles.profile_header_image} alt={'avatar'}/>
-                                    <p className={styles.balance}>
-                                        {balance}
+                                    <p className={styles.profile}>
+                                        Profile
                                     </p>
-                                    <p className={styles.eth}>
-                                        ETH
-                                    </p>
+
                                 </Link>
                             </div>
                         </>)}

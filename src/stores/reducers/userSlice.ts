@@ -1,9 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../utils/models/iuser";
 import {fetchUser} from "./ActionCreators";
-import {useNavigate} from "react-router-dom";
-import {getCurrentUserLocalStorage} from "../../utils/hooks/getCurrentUserLocalStorage";
-import {modalSlice} from "./modalSlice";
+import {getCurrentUser} from "../../utils/services/userServices/userService";
 
 const initialState: IUser = {
     name: '',
@@ -18,11 +16,18 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         getUser(state){
-            const user = getCurrentUserLocalStorage();
+            const user = getCurrentUser();
             state.isLoading = false;
             state.name = user.name;
             state.wallet = user.ethAddress;
             state.token = user.sessionToken;
+            state.error = '';
+        },
+        logOutUser(state){
+            state.isLoading = false;
+            state.name = "";
+            state.wallet = "";
+            state.token = "";
             state.error = '';
         }
     },
@@ -44,5 +49,5 @@ export const userSlice = createSlice({
         }
     }
 });
-export const {getUser} = userSlice.actions;
+export const {getUser,logOutUser} = userSlice.actions;
 export default userSlice.reducer;

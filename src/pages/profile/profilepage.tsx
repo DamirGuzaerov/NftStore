@@ -6,19 +6,24 @@ import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard
 import React, {useEffect, useState} from "react";
 import {getCollection, getNft} from "../../utils/hooks/getNfts";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
-import {Link, Outlet} from "react-router-dom";
+import {Link, Outlet, useNavigate} from "react-router-dom";
 import {useMoralis} from "react-moralis";
 import Moralis from "moralis";
+import {logOut} from "../../utils/services/userServices/userService";
+import {useDispatch} from "react-redux";
+import {logOutUser} from "../../stores/reducers/userSlice";
 
 
 export const Profile = () => {
     const user = useAppSelector(state => state.UserReducer);
+    const dispath = useDispatch();
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [userData, setUserData] = useState<any>();
     const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600";
     const userObj = Moralis.Object.extend("_User");
     const query = new Moralis.Query(userObj);
+    const navigate = useNavigate()
     query.containedIn("ethAddress", [
         user.wallet
     ]);
@@ -32,12 +37,19 @@ export const Profile = () => {
         })
     }, [])
 
-    if(isLoading) {
-        return(
+    if (isLoading) {
+        return (
             <>
             </>
         )
     }
+
+    function logOutProfile() {
+        logOut();
+        dispath(logOutUser());
+        navigate("/")
+    }
+
     return (
         <div className={styles.profile_container_wrapper}>
             <header className={styles.bannerHeader}>
@@ -63,29 +75,31 @@ export const Profile = () => {
                             <button>
                                 <Icon name={'share'} width={20} height={20}/>
                             </button>
-                            <Link to={'/settings'}>
-                                <button>
-                                    <Icon name={'options'} width={20} height={20}/>
-                                </button>
-                            </Link>
+                            <button className={styles.exit_button_wrapper} onClick={logOutProfile}>
+                                <p>
+                                    Log out
+                                </p>
+                                <div className={styles.exit_icon}>
+                                    <Icon name={'exit'} width={20} height={20}/>
+                                </div>
+                            </button>
                         </div>
                     </div>
                     <div className={styles.profile_nfts_container}>
                         <div className={styles.buttons_edit_row}>
-                            <button className={styles.edit_button}>
-                                <p>
-                                    Edit profile
-                                </p>
-                                <Icon name={'edit'} width={16} height={16}/>
-                            </button>
+                            <Link to={'/settings'}>
+                                <button className={styles.edit_button}>
+                                    <p>
+                                        Edit profile
+                                    </p>
+                                    <Icon name={'edit'} width={16} height={16}/>
+                                </button>
+                            </Link>
                         </div>
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
                                 <Link to={'/profile/collected'} className={styles.nav_buttons}>
                                     Collected
-                                </Link>
-                                <Link to={'/profile/created'} className={styles.nav_buttons}>
-                                    Created
                                 </Link>
                                 <Link to={'/profile/liked'} className={styles.nav_buttons}>
                                     Likes
