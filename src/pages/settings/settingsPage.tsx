@@ -58,31 +58,20 @@ export const SettingsPage = () => {
     }
 
     const handleSaveUser = () => {
-        currentUser?.set({
-            name: name === "" ? undefined : name,
-            email: email === "" ? undefined : email,
-            bio: bio === "" ? undefined : bio
-        })
-        console.log(isBio,isEmail,bio,email,name)
-        console.log(user);
-        console.log(currentUser)
+
+
         if(isBio && isEmail) {
-            console.log(name,email,bio)
-            currentUser?.set({
-                name: name === "" ? undefined : name,
-                email: email === "" ? undefined : email,
-                bio: bio === "" ? undefined : bio
-            })
-            setUserData({
-                name: name === "" ? undefined : name,
-                email: email === "" ? undefined : email,
-                bio: bio === "" ? undefined : bio
-            }).then(r => {
+            try {
+                currentUser?.set({
+                    name: name === "" ? undefined : name,
+                    email: email === "" ? undefined : email,
+                    bio: bio === "" ? undefined : bio
+                })
                 showToast('success');
-            }).catch(e => {
-                console.log(e);
+            }
+             catch{
                 showToast('fail');
-            })
+            }
         } else {
             showToast('emailFail');
         }
