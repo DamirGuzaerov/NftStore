@@ -106,7 +106,7 @@ export const VirtualCollection = () => {
                                                 onRowsRendered={onRowsRendered}
                                                 ref={registerChild}
                                                 rowHeight={CARD.HEIGHT}
-                                                style={{color: "white"}}
+                                                style={{color: "white", backgroundColor:"#141416"}}
                                                 scrollTop={scrollTop}
                                                 rowRenderer={
                                                     ({index, key, style}) => {
