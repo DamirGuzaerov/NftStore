@@ -7,6 +7,7 @@ import {DefaultButton} from "../../components/ui/buttons/default-button";
 import {useMoralis, useMoralisCloudFunction} from "react-moralis";
 import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
 import {SettingsTextInput} from "../../components/ui/inputs/settingsTextInput/settingsTextInput";
+import Moralis from "moralis";
 
 export const SettingsPage = () => {
 
@@ -54,8 +55,8 @@ export const SettingsPage = () => {
         setList([toastProperties]);
     }
 
-
     const handleSaveUser = () => {
+        Moralis.enableEncryptedUser();
         console.log(isBio,isEmail,bio,email,name)
         console.log(user);
         if(isBio && isEmail) {

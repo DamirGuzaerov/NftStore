@@ -139,9 +139,7 @@ export const UploadNFT = () => {
                                                 paddingTopBottom={16}
                                                 func={() => upload()}/>)}
                         </div>
-
                     </div>
-
                     <div className={styles.preview_container}>
                         <div className={styles.preview_card}>
                             <h2>Preview</h2>
