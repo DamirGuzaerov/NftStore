@@ -22,7 +22,7 @@ import {UserPage} from "./pages/userPage/userPage";
 import {LikedList} from "./pages/profile/subPagesProfile/liked/LikedList";
 import {CollectedList} from "./pages/profile/subPagesProfile/collected/CollectedList";
 import {CreatedList} from "./pages/profile/subPagesProfile/created/CreatedList";
-import {NotFoundPage} from "./pages/notfound/NotFoundPage";
+import {NotFoundPage} from "./pages/errorPages/notfound/NotFoundPage";
 import {BitsList} from "./pages/profile/subPagesProfile/bits/bits";
 import {useAuth} from "./utils/hooks/useAuth";
 import {useDispatch} from "react-redux";

@@ -25,7 +25,6 @@ export const fetchOwners = createAsyncThunk(
     'owners/fetchOwners',
     async({address, token_id}: url, thunkAPI) => {
         try {
-
             return getNFTOwners(address, token_id, 'eth').then(r => {
                 return r.data.result;
             });
