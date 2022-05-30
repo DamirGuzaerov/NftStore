@@ -1,8 +1,6 @@
 import styles from "./collection.module.sass";
 import React, {useEffect, useRef, useState} from "react";
 import {Oval} from "react-loader-spinner";
-import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
-import authorImg from "../../assets/images/tempImg/creatorImg.png";
 import {INFT} from "../../components/swipers/nftSwiper/NFTSwiper";
 import {getCollection} from "../../utils/hooks/getNfts";
 import {Link, useParams} from "react-router-dom";

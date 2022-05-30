@@ -19,7 +19,6 @@ export const NftBids = () => {
     const selector = useAppSelector(state => state.BidReducer);
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<IBid[]>([]);
-    const timer = useRef(0);
 
     const setBids = () => {
         const transaction = Moralis.Object.extend("Transaction");

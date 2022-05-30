@@ -1,6 +1,6 @@
 import styles from "./nftBidCard.module.sass"
 import {Avatar} from "../avatar/avatar";
-import user from "../../../assets/images/tempImg/creator.png";
+import userImg from "../../../assets/images/tempImg/creator.png";
 import {DefaultButton} from "../buttons/default-button";
 import {addModal} from "../../../stores/reducers/modalSlice";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/redux-hooks";
@@ -12,6 +12,7 @@ import {useAuth} from "../../../utils/hooks/useAuth";
 import {getEthPrice} from "../../../utils/hooks/getNfts";
 import {Timer} from "../timer/timer";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
+import {Link} from "react-router-dom";
 
 export const NftBidCard = () => {
 
@@ -19,6 +20,7 @@ export const NftBidCard = () => {
     const [bid, setBid] = useState<IBid>();
     const [list, setList] = useState<ToastProperties[]>([]);
     const auth = useAuth();
+    const user = useAppSelector(state => state.UserReducer)
     const selector = useAppSelector(state => state.BidReducer)
     const [ethPrice, setEthPrice] = useState(0);
     const openModal = (modal: string) => {
@@ -71,12 +73,15 @@ export const NftBidCard = () => {
                     {bid?.user !== undefined ? (
                         <>
                             <div className={styles.highestBidUser}>
-                                <Avatar width={50} height={50} imgUrl={user}/>
+                                <Avatar width={50} height={50} imgUrl={userImg}/>
                                 <div className={styles.highestBidInfo}>
                                     <p className={styles.bid_eth}>
                                         <span>Highest bid by</span>
-                                        <span className={styles.userName}>
-                                        {pipeString(bid?.user)}</span>
+                                        <Link to={`${user.wallet==bid.user? ("/profile/") : ('/pageUser/'+ bid.user)}`}>
+                                            <span className={styles.userName}>
+                                                {pipeString(bid?.user)}
+                                            </span>
+                                        </Link>
                                     </p>
                                     <p className={styles.bid}>
                                         <span>{bid?.price} ETH </span>

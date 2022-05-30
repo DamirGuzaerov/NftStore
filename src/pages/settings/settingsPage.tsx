@@ -96,23 +96,6 @@ export const SettingsPage = () => {
                         You can set preferred display name and manage other personal settings.
                     </p>
                     <div className={styles.profile__settings_container}>
-                        <div className={styles.profile__image_container}>
-                            <img src={profileImage} className={styles.profile__image}/>
-                            <div className={styles.profile__image__description_container}>
-                                <p className={styles.image__title}>
-                                    Profile photo
-                                </p>
-
-                                <p className={styles.image__description}>
-                                    We recommend an image
-                                    of at least 400x400.Gifs work too 🙌
-                                </p>
-                                <label className={styles.image__upload}>
-                                    <p>Upload</p>
-                                    <input type={"file"} accept={'image/*'}/>
-                                </label>
-                            </div>
-                        </div>
                         <div className={styles.account__info_container}>
                             <p className={styles.image__title}>
                                 Account info

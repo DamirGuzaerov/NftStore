@@ -46,7 +46,12 @@ function App() {
             <Route path={'/'} element={<Layout/>}>
                 <Route path='*' element={<NotFoundPage/>}/>
                 <Route element={<Homepage/>} index/>
-                <Route element={<UserPage/>} path={"/pageUser/:wallet"}/>
+                <Route element={<UserPage/>} path={"/pageUser/:wallet"}>
+                    <Route path={'liked'} element={<LikedList/>}/>
+                    <Route path={'collected'} element={<CollectedList/>}/>
+                    <Route path={'created'} element={<CreatedList/>}/>
+                    <Route path={'bids'} element={<BitsList/>}/>
+                </Route>
                 <Route path={'/profile'} element={<RequireAuth>
                     <Profile/>
                 </RequireAuth>}>
@@ -55,7 +60,6 @@ function App() {
                     <Route path={'created'} element={<CreatedList/>}/>
                     <Route path={'bids'} element={<BitsList/>}/>
                 </Route>
-
                 <Route path={'/preUpload'} element={<RequireAuth>
                     <PreUploadNFT/>
                 </RequireAuth>}/>

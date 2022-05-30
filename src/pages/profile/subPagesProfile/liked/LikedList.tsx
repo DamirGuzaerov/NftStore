@@ -6,6 +6,8 @@ import {getNft} from "../../../../utils/hooks/getNfts";
 import styles from "../SubPagesStyles.module.sass"
 import {ShopCard} from "../../../../components/cards/shopCard/shopCard";
 import {Oval} from "react-loader-spinner";
+import {IUser} from "../../../../utils/models/iuser";
+import {useParams} from "react-router-dom";
 
 export const LikedList = () => {
     const [likedNfts, setLikedNfts] = useState<INFT[]>([]);
@@ -13,9 +15,10 @@ export const LikedList = () => {
     let contoller = new AbortController()
     const like = Moralis.Object.extend("Likes");
     const query = new Moralis.Query(like);
+    const {wallet} = useParams();
     const [isLoading, setIsLoading] = useState(true);
     query.containedIn("UserAddress", [
-        userSelector.wallet
+        !!wallet?wallet:userSelector.wallet
     ]);
 
     useEffect(() => {
