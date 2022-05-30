@@ -133,7 +133,8 @@ export const VirtualCollection = () => {
                                                                             nftCost={"0"}
                                                                             nftName={NFTs[i].metadata.name}
                                                                             nftLikes={'0'}
-                                                                        />
+                                                                            address={NFTs[i].token_address}
+                                                                            token_id={NFTs[i].token_id}/>
                                                                     </Link>
                                                                 </div>
                                                             )

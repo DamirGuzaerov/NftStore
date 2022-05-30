@@ -2,9 +2,45 @@ import styles from './MainSwiper.module.sass';
 import author from './../../../assets/images/tempImg/creatorImg.png';
 import {Link} from "react-router-dom";
 import {nftPreviewProps} from "../../cards/nftPreviewCard/nftPreviewCard";
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
+import Moralis from "moralis";
 
-export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, creatorImgUrl}) => {
+export const MainNFTSlide: FC<nftPreviewProps> = (
+    {
+        address,
+        token_id,
+        imgUrl,
+        nftName,
+        nftCost,
+        creatorImgUrl
+    }) => {
+    const [highestBid, setHighestBid] = useState("");
+
+    useEffect(() => {
+        const transaction = Moralis.Object.extend("Transaction");
+        const query = new Moralis.Query(transaction);
+        query.containedIn("address", [
+            address
+        ])
+        query.containedIn("token", [
+            token_id
+        ])
+        query.descending("price");
+        const fetchTransaction = async () => {
+            return await query.first();
+        }
+
+        fetchTransaction().then(r => {
+            const val = r?.attributes;
+            if (r) {
+                setHighestBid(val?.price);
+            } else {
+                setHighestBid("0");
+            }
+        })
+
+    }, [])
+
     return (
         <div className={styles.mainSwiperContainer}>
             <img src={imgUrl} className={styles.image_settings} alt={imgUrl}/>
@@ -17,30 +53,24 @@ export const MainNFTSlide:FC<nftPreviewProps> = ({imgUrl, nftName, nftCost, crea
                             <img src={author} className={styles.author_avatar}/>
                         </div>
                         <div className={styles.author_name}>
-
                             <p>Creator</p>
                             <Link to={'/'}>{creatorImgUrl}</Link>
                         </div>
                     </div>
-
-                    <div>
-
-                    </div>
                 </div>
                 <div className={styles.price_container}>
                     <h3>
-                        Current price
+                        Current best bid
                     </h3>
                     <h2>
-                        {nftCost}
+                        {highestBid} ETH
                     </h2>
                 </div>
-                <button className={styles.buy_button}>
-                    Buy right now
-                </button>
-                <button className={styles.view_button}>
-                    View item
-                </button>
+                <Link to={`/assets/${address.toLowerCase()}/${token_id}/info`}>
+                    <button className={styles.view_button}>
+                        View item
+                    </button>
+                </Link>
             </div>
         </div>
     );

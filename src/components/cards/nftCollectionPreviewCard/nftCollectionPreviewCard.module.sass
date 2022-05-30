@@ -1,3 +1,4 @@
+@import "src/assets/globalStyles/globalStyles"
 .cardWrapper
   width: 333px
   height: 79px
@@ -21,3 +22,7 @@
 
 .collectionPrice
   color: #8C8C8C
+@include _875
+  .cardWrapper
+    width: 100%
+    border-bottom: 1px solid #8C8C8C

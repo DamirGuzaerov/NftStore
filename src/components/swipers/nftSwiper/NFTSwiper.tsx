@@ -49,9 +49,22 @@ const NFTSwiper = () => {
             <h1 className={styles.titleStyle}>Best NFT</h1>
             <div className={styles.customSwiperWrapper}>
                 <Swiper
+                    breakpoints={{
+                        335: {
+                            slidesPerView: 1,
+                        },
+                        440: {
+                            slidesPerView: 2,
+                        },
+                        768: {
+                            slidesPerView: 3,
+                        },
+                        940: {
+                            slidesPerView: 4,
+                        },
+                    }}
                     modules={[Navigation]}
                     spaceBetween={32}
-                    slidesPerView={4}
                     navigation
                     className={styles.customSwiper}
 
@@ -61,6 +74,8 @@ const NFTSwiper = () => {
                         return (
                             <SwiperSlide key={index}>
                                 <NftPreviewCard
+                                    address={nft.token_address}
+                                    token_id={nft.token_id}
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={'0'}

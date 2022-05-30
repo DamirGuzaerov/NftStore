@@ -4,6 +4,7 @@ import creator from "../../../assets/images/tempImg/creator.png";
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Link} from "react-router-dom";
+import {pipeString} from "../../../utils/services/stringServices/shortenString";
 
 export const NftInfo = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
@@ -24,7 +25,7 @@ export const NftInfo = () => {
               <div className={styles.userInfo}>
                   Creator
                   <div className={styles.userName}>
-                      {creatorInfo}
+                      {pipeString(creatorInfo)}
                   </div>
               </div>
           </div>

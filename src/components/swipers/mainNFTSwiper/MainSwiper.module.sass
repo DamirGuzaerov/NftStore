@@ -1,4 +1,5 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
 
 .mainSwiperContainer
   margin-top: 93px
@@ -9,8 +10,8 @@
   width: 100%
 
 .image_settings
-  object-fit: cover
-  width: 640px
+  object-fit: contain
+  width: 50%
   border-radius: 14px
 
 .loading
@@ -19,7 +20,7 @@
 .mainSlideContent
   display: flex
   flex-direction: column
-  max-width: 350px
+  max-width: 420px
 
 .title_nft
   word-wrap: break-word
@@ -98,16 +99,16 @@
   justify-content: center
 
 
-.buy_button
-  margin-top: 40px
-  @include button-skeleton
-  background: gs.$button-submit-color
 
 .view_button
+  width: 100%
   margin-top: 15px
   @include button-skeleton
-  background: none
+  background: gs.$button-submit-color
   border: 2px solid #353945
+  &:hover
+    cursor: pointer
+    background: rgb(46, 94, 220,0.8)
 
 .skeleton_text
   width: 100%
@@ -125,7 +126,7 @@
     background-color: hsl(0, 0%, 10%)
 
 
-@media (max-width: 800px)
+@include _875
   .mainSwiperContainer
     flex-direction: column
     align-items: center
@@ -133,11 +134,14 @@
 
   .title_nft
     margin-top: 40px
+    font-size: 32px
 
   .image_settings
-    width: 60%
+    width: 100%
 
-
+  .mainSlideContent
+    max-width: none
+    width: 100%
 
 
 

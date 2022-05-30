@@ -1,4 +1,5 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
 
 .customSwiper
   min-height: 300px
@@ -23,9 +24,10 @@
 .loading
   @include gs.loading_container
 
-@media (max-width: 800px)
+@include _875
   .titleStyle
     display: none
+
 
 
 

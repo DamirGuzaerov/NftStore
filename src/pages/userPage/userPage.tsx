@@ -8,28 +8,32 @@ import {useMoralis, useMoralisQuery} from "react-moralis";
 import Moralis from "moralis";
 import {Oval} from "react-loader-spinner";
 import NftPreviewCard from "../../components/cards/nftPreviewCard/nftPreviewCard";
+
 export interface UserAttributes {
     username: string;
     ethAddress: string;
+
     [x: string | number | symbol]: unknown;
 }
 
 export interface UserInterface {
     id: string;
     attributes: UserAttributes;
+
     [x: string | number | symbol]: unknown;
 }
+
 export const UserPage = () => {
-    let neededUser :|undefined|UserInterface;
-    const [user,setUser] = useState<Moralis.Object<Moralis.Attributes>>();
-    const { isInitialized } = useMoralis();
+    let neededUser: | undefined | UserInterface;
+    const [user, setUser] = useState<Moralis.Object<Moralis.Attributes>>();
+    const {isInitialized} = useMoralis();
     const [isLoading, setIsLoading] = useState(true);
     const {wallet} = useParams();
-    const { fetch } = useMoralisQuery(
+    const {fetch} = useMoralisQuery(
         "User",
         (query) => query.equalTo("ethAddress", wallet),
         [],
-        { autoFetch: false }
+        {autoFetch: false}
     );
 
     const getUser = () => {
@@ -41,15 +45,15 @@ export const UserPage = () => {
             onError: (error) => {
                 console.log(error)
             },
-        }).then(r=>{
+        }).then(r => {
             setIsLoading(false);
         });
     };
 
-    useEffect(()=>{
-        if(isInitialized)
+    useEffect(() => {
+        if (isInitialized)
             getUser();
-    },[isInitialized])
+    }, [isInitialized])
 
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const img = "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=h600"
@@ -69,57 +73,65 @@ export const UserPage = () => {
                 <div className={styles.profile_container}>
                     <div className={styles.profile}>
                         {/*{user&&<>*/}
-                            <div className={styles.profile_info_block}>
-                                <img className={styles.profile_avatar} src={pic}/>
-                                <p className={styles.profile_name}>
-                                    {(user != undefined)? user!.get("username"):"unknown"}
-                                </p>
-                                <p className={styles.wallet}>
-                                    {wallet}
-                                    <Icon height={16} name={'wallet-link'} width={16}/>
-                                </p>
-                                <p className={styles.description_profile}>
-                                    A wholesome farm owner in Montana. Upcoming gallery solo show in Germany
-                                </p>
-                                <div className={styles.buttons_profile}>
-                                    <button>
-                                        <Icon name={'share'} width={20} height={20}/>
+                        <div className={styles.profile_info_block}>
+                            <img className={styles.profile_avatar} src={pic}/>
+                            <p className={styles.profile_name}>
+                                {(user != undefined) ? user!.get("username") : "unknown"}
+                            </p>
+                            <p className={styles.wallet}>
+                                {wallet}
+                                <Icon height={16} name={'wallet-link'} width={16}/>
+                            </p>
+                            <p className={styles.description_profile}>
+                                A wholesome farm owner in Montana. Upcoming gallery solo show in Germany
+                            </p>
+                            <div className={styles.buttons_profile}>
+                                <button>
+                                    <Icon name={'share'} width={20} height={20}/>
+                                </button>
+                                <button>
+                                    <Icon name={'options'} width={20} height={20}/>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={styles.profile_nfts_container}>
+                            <div className={styles.profile_nfts}>
+                                <nav className={styles.profile_nav}>
+                                    <button className={styles.nav_buttons}>
+                                        Collected
                                     </button>
-                                        <button>
-                                            <Icon name={'options'} width={20} height={20}/>
-                                        </button>
-                                </div>
-                            </div>
+                                    <button className={styles.nav_buttons}>
+                                        Created
+                                    </button>
+                                    <button className={styles.nav_buttons}>
+                                        Likes
+                                    </button>
+                                </nav>
 
-                            <div className={styles.profile_nfts_container}>
-                                <div className={styles.profile_nfts}>
-                                    <nav className={styles.profile_nav}>
-                                        <button className={styles.nav_buttons}>
-                                            Collected
-                                        </button>
-                                        <button className={styles.nav_buttons}>
-                                            Created
-                                        </button>
-                                        <button className={styles.nav_buttons}>
-                                            Likes
-                                        </button>
-                                    </nav>
-
-                                    {NFTs.length > 0 ? (
-                                        <div className={styles.nft_list}>
-                                            {NFTs.map(item => {
-                                                return (<NftPreviewCard creatorImgUrl={item.image} imgUrl={item.image}
-                                                                        nftCost={'0'} nftLikes={'0'} nftName={item.name}/>)
-                                            })}
-                                        </div>) : (
-                                        <>
-                                            <p className={styles.empty_list_title}> Your NFTs list is empty!</p>
-                                            <Link className={styles.empty_list_link} to={'/'}>Find something for
-                                                yourself!</Link>
-                                        </>
-                                    )}
-                                </div>
+                                {NFTs.length > 0 ? (
+                                    <div className={styles.nft_list}>
+                                        {NFTs.map(item => {
+                                            return (
+                                                <NftPreviewCard
+                                                    address={item.token_address}
+                                                    token_id={item.token_id}
+                                                    creatorImgUrl={item.image}
+                                                    imgUrl={item.image}
+                                                    nftCost={'0'}
+                                                    nftLikes={'0'}
+                                                    nftName={item.name}
+                                                />)
+                                        })}
+                                    </div>) : (
+                                    <>
+                                        <p className={styles.empty_list_title}> Your NFTs list is empty!</p>
+                                        <Link className={styles.empty_list_link} to={'/'}>Find something for
+                                            yourself!</Link>
+                                    </>
+                                )}
                             </div>
+                        </div>
                         {/*</>}*/}
                         {/*{user==undefined&&<h1 className={styles.unknownUser}>
                             Unknown user

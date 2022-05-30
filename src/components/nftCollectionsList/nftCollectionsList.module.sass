@@ -1,5 +1,5 @@
+@import "src/assets/globalStyles/globalStyles"
 .collectionsList
-  height: 240px
   -webkit-column-count: 3
   -moz-column-count: 3
   column-count: 3
@@ -19,8 +19,10 @@
 
   display: flex
   align-items: center
+
 .collectionsListFilterTitle
   margin-right: 16px
+
 select
   margin-right: -10px
   margin-left: 8px
@@ -34,3 +36,21 @@ select
   border: 0
   outline: none
 
+@include _875
+  .collectionsListFilter
+    justify-content: center
+    font-size: 46px
+  .collectionsListWrapper
+    padding-top: 0
+  .collectionsList
+    -webkit-column-count: 1
+    -moz-column-count: 1
+    column-count: 1
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    li
+      display: block
+      width: 100%
+      max-width: 470px

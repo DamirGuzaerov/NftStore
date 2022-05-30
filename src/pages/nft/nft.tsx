@@ -87,7 +87,6 @@ export const Nft = () => {
         setTimeout(() => setDisable(false), 500);
     }
 
-
     useEffect(() => {
         getNft(address!, token_id!, abortController)
             .then((r) => {

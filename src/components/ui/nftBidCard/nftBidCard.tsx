@@ -10,6 +10,7 @@ import {IBid} from "../nftBids/nftBids";
 import {Toast, ToastProperties} from "../toaster/Toast";
 import {useAuth} from "../../../utils/hooks/useAuth";
 import {getEthPrice} from "../../../utils/hooks/getNfts";
+import {pipeString} from "../../../utils/services/stringServices/shortenString";
 
 export const NftBidCard = () => {
 
@@ -64,7 +65,9 @@ export const NftBidCard = () => {
                                 <Avatar width={50} height={50} imgUrl={user}/>
                                 <div className={styles.highestBidInfo}>
                                     <p className={styles.bid_eth}>
-                                        Highest bid by <span className={styles.userName}>{bid?.user}</span>
+                                        <span>Highest bid by</span>
+                                        <span className={styles.userName}>
+                                        {pipeString(bid?.user)}</span>
                                     </p>
                                     <p className={styles.bid}>
                                         <span>{bid?.price} ETH </span>
@@ -104,8 +107,8 @@ export const NftBidCard = () => {
                         </span>
                             <span className={styles.percent}>1.5%</span>
                             <span className={styles.serviceFeeInfoText}>
-                        1 ETH
-                        </span>
+                                1 ETH
+                            </span>
                             <span className={styles.serviceFeeInfoText}>
                         ${ethPrice}
                         </span>

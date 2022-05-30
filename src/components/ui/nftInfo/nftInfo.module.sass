@@ -15,11 +15,17 @@
   margin-left: 20px
   font-size: 20px
   color: #969696
-
+  overflow: hidden
   display: flex
   flex-direction: column
   justify-content: space-between
 
 .userName
   color: #FCFCFD
+  overflow: hidden
+  text-overflow: ellipsis
+
+@include _875
+  .userInfo
+    font-size: initial
 

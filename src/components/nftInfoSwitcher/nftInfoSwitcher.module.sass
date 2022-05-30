@@ -1,3 +1,4 @@
+@import "src/assets/globalStyles/globalStyles"
 .routesPanelWrapper
   width: 100%
   margin-top: 16px
@@ -12,6 +13,7 @@
   padding: 5px 2px
   list-style: none
   display: flex
+  width: 100%
   justify-content: space-around
   align-items: center
 
@@ -36,6 +38,13 @@
 
 .infoContainer
   margin: 12px 0
+
+@include _875
+  .link
+    font-size: 12px
+
+
+
 
 
 

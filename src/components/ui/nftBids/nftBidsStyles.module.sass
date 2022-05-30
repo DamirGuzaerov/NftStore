@@ -10,7 +10,6 @@
   font-size: 20px
   color: #969696
   width: 100%
-
   display: flex
   flex-direction: row
   justify-content: space-between
@@ -22,20 +21,41 @@
   overflow: hidden
   white-space: nowrap
 
-.userInfo:last-child
-  margin-right: 30px
-
 .subtitle
   display: flex
   justify-content: right
 
+@include _875
+  .subtitle
+    justify-content: left
+  .userInfo
+    overflow: hidden
+    display: flex
+  .userName
+    overflow: hidden
+    text-overflow: ellipsis
+    width: auto
+    font-size: initial
+    box-sizing: border-box
+    margin-left: 16px
+  .bidInfo
+    font-size: initial
+    flex-direction: column
+    overflow: hidden
+  .price
+    margin-left: 16px
+    white-space: nowrap
+  .bid_eth
+
+
+.userInfo:last-child
+  margin-right: 30px
+
 
 .price
-
   span
     color: white
     font-weight: 600
-
 
 .owner
   display: flex

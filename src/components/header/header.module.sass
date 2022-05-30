@@ -11,14 +11,13 @@ header
   display: flex
   align-items: center
   justify-content: space-between
-  padding: 20px 0px
+  padding: 20px 0
 
 .logo
   display: flex
   flex-direction: row
 
 .logo_name
-  font-family: 'Poppins'
   font-style: normal
   font-weight: 600
   font-size: 24px
@@ -91,25 +90,25 @@ header
 @media (max-width: 1038px)
   .logo_name
     padding-right: 16px
-  nav
-    display: flex
-    align-items: center
+  .header_wrapper
+    nav
+      display: flex
+      align-items: center
 
-    a
-      font-size: 12px
-      text-align: center
-      margin-left: 16px
-
-    a:last-child
-      margin-right: 16px
+      a
+        font-size: 12px
+        text-align: center
+        margin-left: 16px
+      a:last-child
+        margin-right: 16px
 
 @media (max-width: 675px)
 
   .header_wrapper
     max-width: 90%
     margin: 0 auto
-  nav, .search_wrapper
-    display: none
+    nav, .search_wrapper
+      display: none
 
   .logo_name
     padding: 0

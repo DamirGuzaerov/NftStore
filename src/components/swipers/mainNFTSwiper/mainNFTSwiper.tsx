@@ -8,6 +8,7 @@ import {INFT} from "../nftSwiper/NFTSwiper";
 import {getCollection, getNft, getPrice} from "../../../utils/hooks/getNfts";
 import author from "../../../assets/images/tempImg/creatorImg.png";
 import {Link} from "react-router-dom";
+import {NftBidCard} from "../../ui/nftBidCard/nftBidCard";
 
 export const MainNFTSwiper = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
@@ -40,18 +41,14 @@ export const MainNFTSwiper = () => {
                                 <div className={`${sliderStyles.author_avatar} ${sliderStyles.skeleton}`}/>
                             </div>
                             <div className={sliderStyles.author_name}>
-
                                 <p>Creator</p>
                                 <p className={`${sliderStyles.skeleton} ${sliderStyles.skeleton_text}`}> </p>
                             </div>
                         </div>
-
                         <div>
-
                         </div>
                     </div>
                     <div className={`${sliderStyles.price_container} ${sliderStyles.skeleton} ${sliderStyles.price_container_loading}`}>
-
                     </div>
                 </div>
             </div>
@@ -74,12 +71,11 @@ export const MainNFTSwiper = () => {
             {NFTs.map((e) => {
                 return (
                     <SwiperSlide key={e.token_id}>
-                        <MainNFTSlide creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'} nftLikes={'0'}
+                        <MainNFTSlide address = {e.token_address} token_id = {e.token_id} creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'} nftLikes={'0'}
                                       nftName={e.metadata.name}/>
                     </SwiperSlide>
                 );
             })}
-
             <div ref={navigationPrevRef}/>
             <div ref={navigationNextRef}/>
         </Swiper>

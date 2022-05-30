@@ -2,6 +2,7 @@ import styles from "./nftDetails.module.sass"
 import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Oval} from "react-loader-spinner";
+import {pipeString} from "../../../utils/services/stringServices/shortenString";
 
 export const NftDetails = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
@@ -30,8 +31,8 @@ export const NftDetails = () => {
                     <label htmlFor="contractAddress">
                         Contract address:
                     </label>
-                    <span id={"contractAddress"}>
-                        {details?.token_address}
+                    <span className={styles.contractAddress}>
+                        {pipeString(details?.token_address)}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>
@@ -39,7 +40,7 @@ export const NftDetails = () => {
                         Token id:
                     </label>
                     <span id={"tokenId"}>
-                        {details?.token_id}
+                        {pipeString(details?.token_id!)}
                     </span>
                 </li>
                 <li className={styles.nftDetail}>

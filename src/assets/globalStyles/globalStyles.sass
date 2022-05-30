@@ -2,7 +2,7 @@ $dark-main-color: rgba(20, 20, 22, 1)
 $light-main-color: rgba(35, 38, 47, 1)
 $max-width: 1120px
 $links-color: rgba(119, 126, 144, 1)
-$button-submit-color: rgba(55, 114, 255, 1)
+$button-submit-color: rgb(46, 94, 220)
 $button-submit-hover-color: rgb(0, 72, 253)
 $default-font-size: 16px
 $Neutrals4: rgba(119, 126, 144, 1)
@@ -75,3 +75,7 @@ h1
   display: flex
   box-sizing: border-box
   justify-content: center
+
+@mixin _875
+  @media (max-width: 875px)
+    @content

@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import Moralis from "moralis";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Oval} from "react-loader-spinner";
+import {pipeString} from "../../../utils/services/stringServices/shortenString";
 
 export interface IBid {
     user: string,
@@ -62,7 +63,7 @@ export const NftBids = () => {
                             <div className={styles.userInfo}>
                                 User
                                 <div className={styles.userName}>
-                                    {item.user}
+                                    {pipeString(item.user)}
                                 </div>
                             </div>
                             <div className={styles.userInfo}>

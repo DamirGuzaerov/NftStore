@@ -87,13 +87,13 @@ export const Collection = () => {
                         return (
                             <Link key={index}
                                   to={`/assets/${collection.address}/${nft.token_id}/info`}>
-                                <NftPreviewCard
+                               {/* <NftPreviewCard
                                     imgUrl={nft.image}
                                     creatorImgUrl={authorImg}
                                     nftCost={"0"}
                                     nftName={nft.metadata.name}
                                     nftLikes={'0'}
-                                />
+                                />*/}
                             </Link>
                         )
                     })}

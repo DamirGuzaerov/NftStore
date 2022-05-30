@@ -1,4 +1,5 @@
 @use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
 
 .mainContainer
   max-width: 1440px
@@ -9,7 +10,6 @@
 
 .imageWrapper
   overflow: hidden
-  max-width: 640px
   width: 100%
   margin-right: 96px
 
@@ -23,6 +23,17 @@
   color: white
   font-size: 2em
   margin-bottom: 10px
+
+@include _875
+  .mainCardWrapper
+    flex-direction: column
+  .imageWrapper
+    margin-right: 0
+    margin-bottom: 16px
+  .mainContainer
+    padding: 25px
+  .name
+    font-size: 24px
 
 .mainCardWrapper
   display: flex
@@ -65,12 +76,14 @@
     background: #121417
     border: 3px solid #6d6f73
 
-
-
 .loading
   width: 100%
   padding: 100px
   display: flex
   box-sizing: border-box
   justify-content: center
+
+
+
+
 
