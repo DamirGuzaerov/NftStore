@@ -28,10 +28,7 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
         nftLikes
     } = props;
 
-    const [price, setPrice] = useState(10);
 
-    const transaction = Moralis.Object.extend("Transaction");
-    const query = new Moralis.Query(transaction);
 
     return (
         <div className={styles.previewCardWrapper}>

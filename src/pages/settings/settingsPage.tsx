@@ -2,11 +2,12 @@ import styles from './settingsPage.module.sass';
 import {Link} from "react-router-dom";
 import Icon from "../../components/ui/icon/icon";
 import profileImage from '../../assets/images/tempImg/nftPreviewImg.png';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {DefaultButton} from "../../components/ui/buttons/default-button";
 import {useMoralis, useMoralisCloudFunction} from "react-moralis";
 import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
 import {SettingsTextInput} from "../../components/ui/inputs/settingsTextInput/settingsTextInput";
+import Moralis from "moralis";
 
 export const SettingsPage = () => {
 
@@ -18,6 +19,14 @@ export const SettingsPage = () => {
     const [isEmail, setIsEmail] = useState(false);
     const [isBio, setIsBio] = useState(false);
     let toastProperties = null;
+
+    useEffect(() => {
+        Moralis.User.currentAsync().then((user) => {
+            console.log(user);
+        });
+
+    }, [])
+
 
     const showToast = (type: string) => {
         switch (type) {

@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Oval} from "react-loader-spinner";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
+import {BidSkeleton} from "../loading/skeleton/bidSkeleton/BidSkeleton";
 
 export const NftDetails = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
@@ -20,9 +21,9 @@ export const NftDetails = () => {
         }
     }, [selector.owners.length]);
 
-    if(isLoading) return <div className={styles.loading}>
-        <Oval color="#00BFFF" height={100} width={100}/>
-    </div>
+    if(isLoading) {
+       return <BidSkeleton/>
+    }
 
     return (
         <div className={styles.infoWrapper}>

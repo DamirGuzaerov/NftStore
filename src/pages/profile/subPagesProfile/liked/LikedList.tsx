@@ -8,6 +8,7 @@ import {ShopCard} from "../../../../components/cards/shopCard/shopCard";
 import {Oval} from "react-loader-spinner";
 import {IUser} from "../../../../utils/models/iuser";
 import {useParams} from "react-router-dom";
+import {NftSkeleton} from "../../../../components/ui/loading/skeleton/nftSkeleton/nftSkeleton";
 
 export const LikedList = () => {
     const [likedNfts, setLikedNfts] = useState<INFT[]>([]);
@@ -45,8 +46,10 @@ export const LikedList = () => {
     }, []);
 
     return (<>
-            {isLoading && <div className={styles.loading}>
-                <Oval color="rgba(200, 83, 109, 1)" height={100} width={100}/>
+            {isLoading && <div className={styles.liked_container}>
+                <NftSkeleton/>
+                <NftSkeleton/>
+                <NftSkeleton/>
             </div>}
             {!isLoading && <div className={styles.liked_container}>
                 {likedNfts.map((e, counter) => {
