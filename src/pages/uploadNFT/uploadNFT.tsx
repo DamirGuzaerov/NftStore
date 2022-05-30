@@ -1,6 +1,6 @@
 import styles from './upload.module.sass';
 import {FileInput} from "../../components/ui/inputs/dragdrop/fileInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import img from '../../assets/images/tempImg/nftPreviewImg.png';
 import Icon from "../../components/ui/icon/icon";
 import {TextInput} from "../../components/ui/inputs/input/textInput";
@@ -10,9 +10,6 @@ import Moralis from "moralis";
 import Web3 = Moralis.Web3;
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
-
-const web3 = new Web3(Web3.givenProvider);
-
 
 export const UploadNFT = () => {
     const [preview, setPreview] = useState(null);
@@ -25,6 +22,9 @@ export const UploadNFT = () => {
     const [list, setList] = useState<ToastProperties[]>([]);
     const selector = useAppSelector(state => state.UserReducer);
     let toastProperties = null;
+    useEffect(()=>{
+        console.log(selector.wallet);
+    },[])
     const showToast = (type: string) => {
         switch (type) {
             case 'success':
@@ -52,7 +52,7 @@ export const UploadNFT = () => {
     }
 
     async function upload() {
-        console.log(preview);
+        const web3 =  await Moralis.enableWeb3();
         if (preview != null) {
             const imageFile = new Moralis.File(itemName, file);
             await imageFile.saveIPFS();
@@ -72,7 +72,7 @@ export const UploadNFT = () => {
                 userAddress: selector.wallet,
                 tokenType: 'ERC721',
                 tokenUri: metadataUri,
-                royaltiesAmout: royalty
+                royaltiesAmount: royalty
             }).then(() => {
                 showToast('success');
             }).catch(() => {
@@ -88,32 +88,26 @@ export const UploadNFT = () => {
     return (
         <>
             <div className={styles.background_uploadPage}>
+                <h1>
+                    Create single collectible
+                </h1>
                 <div className={styles.uploadPage_container}>
                     <div className={styles.create_nft_container}>
-                        <h1>
-                            Create single collectible
-                        </h1>
-
                         <p className={styles.input_block_main_description}>
                             Upload file
                         </p>
                         <p className={styles.input_block_description}>
-                            Drag or choose your file to upload
+                            Drag your file to upload
                         </p>
-
                         <FileInput setFile={setFile} setPreview={setPreview}/>
-
                         <p className={styles.input_block_main_description}>
                             Item details
                         </p>
-
                         <TextInput placeholder={'e. g. "Redeemable Bitcoin Card with logo"'}
                                    globalPlaceholder={'ITEM NAME'}
                                    setValue={setItemName}/>
-
                         <TextInput placeholder={'e. g. “After purchasing you will able to recived the logo...”'}
                                    globalPlaceholder={'description'} setValue={setDescription}/>
-
                         <label>
                             <p className={styles.label_font_description}>
                                 Royalties
@@ -131,9 +125,7 @@ export const UploadNFT = () => {
                                            paddingTopBottom={16}
                                            func={() => upload()}/>
                         </div>
-
                     </div>
-
                     <div className={styles.preview_container}>
                         <div className={styles.preview_card}>
                             <h2>Preview</h2>
@@ -141,27 +133,23 @@ export const UploadNFT = () => {
                                 : (<div className={styles.preview_img}>
                                     <div className={`${styles.preview_img} ${styles.preview__img_plug}`}></div>
                                 </div>)}
-
                             <div className={styles.nft_content}>
                                 <div className={styles.nft_content_row}>
                                     <p>
                                         {itemName}
                                     </p>
-
                                     <div className={styles.nft_price}>
                                         <p>
                                             {''} ETH
                                         </p>
                                     </div>
                                 </div>
-
                                 <div className={styles.nft_content_row}>
                                     <img className={styles.creatorAvatar} src={''} alt=""/>
                                     <p>
                                         {amount} in stock
                                     </p>
                                 </div>
-
                                 <div className={styles.nft_content_row}>
                                 <span className={styles.bet}>
                                     <Icon name={'nftbet'} width={20} height={20}/>
