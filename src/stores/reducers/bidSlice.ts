@@ -5,6 +5,7 @@ interface IBid {
     token?: string,
     isLoading?: boolean,
     error?: string
+    price?: string
 }
 
 const initialState: IBid = {
@@ -22,9 +23,12 @@ export const bidSlice = createSlice({
             state.address = action.payload.address;
             state.isLoading = true
         },
+        setPrice(state, action: PayloadAction<string>) {
+            state.price = action.payload;
+        }
     }
 });
 
-export const {addBid} = bidSlice.actions;
+export const {addBid, setPrice} = bidSlice.actions;
 
 export default bidSlice.reducer;

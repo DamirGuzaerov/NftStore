@@ -1,7 +1,7 @@
 import styles from "./nftBidsStyles.module.sass";
 import {Avatar} from "../avatar/avatar";
 import creator from "../../../assets/images/tempImg/creator.png";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Moralis from "moralis";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Oval} from "react-loader-spinner";
@@ -14,41 +14,49 @@ export interface IBid {
 
 export const NftBids = () => {
     const selector = useAppSelector(state => state.BidReducer);
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState<IBid[]>([]);
+    const timer = useRef(0);
+
+    const setBids = () => {
+        const transaction = Moralis.Object.extend("Transaction");
+        const query = new Moralis.Query(transaction);
+        query.containedIn("address", [
+            selector.address
+        ])
+        query.containedIn("token", [
+            selector.token
+        ])
+        const fetchTransaction = async () => {
+            return await query.find();
+        }
+
+        fetchTransaction().then(r => {
+            const list: IBid[] = [];
+            r.forEach(i => {
+                const val = i.attributes;
+                console.log(i);
+                list.push({
+                    user: val.user,
+                    price: val.price,
+                    createdAt: val.createdAt
+                })
+            })
+            setTransactions(list);
+            setIsLoading(false)
+            console.log(transactions);
+        })
+    }
 
     useEffect(() => {
-        console.log(selector.isLoading);
-        const transaction = Moralis.Object.extend("Transaction");
-            const query = new Moralis.Query(transaction);
-            query.containedIn("address", [
-                selector.address
-            ])
-            query.containedIn("token", [
-                selector.token
-            ])
-            const fetchTransaction = async () => {
-                return await query.find();
-            }
+        setBids();
+    }, [selector.price])
 
-            fetchTransaction().then(r => {
-                const list: IBid[] = [];
-                r.forEach(i => {
-                    const val = i.attributes;
-                    list.push({
-                        user: val.user,
-                        price: val.price,
-                        createdAt: val.createdAt
-                    })
-                })
-                setTransactions(list);
-                setIsLoading(false)
-                console.log(transactions);
-            })
-        console.log(selector.isLoading);
-    }, [selector.isLoading])
+    useEffect(() => {
+        setBids();
+    }, []);
 
-    if(isLoading) return <div className={styles.loading}>
+    if (isLoading) return <div className={styles.loading}>
         <Oval color="#00BFFF" height={100} width={100}/>
     </div>
 
