@@ -6,37 +6,38 @@ import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Link} from "react-router-dom";
 import {Oval} from "react-loader-spinner";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
+import {CardSkeleton} from "../loading/skeleton/cardSkeleton/cardSkeleton";
 
 export const NftOwners = () => {
-   const selector = useAppSelector(state => state.OwnerReducer);
-   const [owners,setOwners] = useState(selector.owners);
-   const [isLoading, setIsLoading] = useState(true);
-   useEffect(() => {
-       setIsLoading(false)
-       setOwners(selector.owners)
-   }, [selector.owners.length])
+    const selector = useAppSelector(state => state.OwnerReducer);
+    const [owners, setOwners] = useState(selector.owners);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
+        setIsLoading(false)
+        setOwners(selector.owners)
+    }, [selector.owners.length])
 
-    if(isLoading) return <div className={styles.loading}>
-        <Oval color="#00BFFF" height={100} width={100}/>
-    </div>
+    if (isLoading) {
+        return <CardSkeleton/>
+    }
 
     return (
-            <div className={styles.owners}>
-                {owners.map((item, counter) => {
-                    return (
-                        <Link key={counter} to={"/pageUser/"+item.owner_of}>
-                            <div className={styles.owner}>
-                                <Avatar height={50} width={50} imgUrl={creator}/>
-                                <div className={styles.userInfo}>
-                                    Owner
-                                    <div className={styles.userName} >
-                                        {pipeString(item.owner_of)}
-                                    </div>
+        <div className={styles.owners}>
+            {owners.map((item, counter) => {
+                return (
+                    <Link key={counter} to={"/pageUser/" + item.owner_of}>
+                        <div className={styles.owner}>
+                            <Avatar height={50} width={50} imgUrl={creator}/>
+                            <div className={styles.userInfo}>
+                                Owner
+                                <div className={styles.userName}>
+                                    {pipeString(item.owner_of)}
                                 </div>
                             </div>
-                        </Link>
-                    )
-                })}
-            </div>
-        )
+                        </div>
+                    </Link>
+                )
+            })}
+        </div>
+    )
 }

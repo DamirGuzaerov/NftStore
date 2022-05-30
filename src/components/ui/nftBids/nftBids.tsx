@@ -6,12 +6,14 @@ import Moralis from "moralis";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Oval} from "react-loader-spinner";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
+import {CardSkeleton} from "../loading/skeleton/cardSkeleton/cardSkeleton";
 
 export interface IBid {
     user: string,
     price: string,
     createdAt: any
 }
+
 
 export const NftBids = () => {
     const selector = useAppSelector(state => state.BidReducer);
@@ -57,10 +59,13 @@ export const NftBids = () => {
         setBids();
     }, []);
 
-    if (isLoading) return <div className={styles.loading}>
-        <Oval color="#00BFFF" height={100} width={100}/>
-    </div>
-
+    if (isLoading) {
+        return <>
+            <CardSkeleton/>
+            <CardSkeleton/>
+            <CardSkeleton/>
+        </>
+    }
     return (
         <div className={styles.owners}>
             {transactions.map((item, count) => {

@@ -1,13 +1,15 @@
 import styles from "./nftPreviewCard.module.sass"
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
 import Icon from "../../ui/icon/icon";
 import {NftCost} from "../../ui/nftCost/nftCost";
 import {Link} from "react-router-dom";
+import Moralis from "moralis";
+import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 
 
 export interface nftPreviewProps {
-    address:string,
-    token_id:string
+    address: string,
+    token_id: string
     imgUrl: string,
     nftName: string,
     nftCost: string,
@@ -26,6 +28,11 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
         nftLikes
     } = props;
 
+    const [price, setPrice] = useState(10);
+
+    const transaction = Moralis.Object.extend("Transaction");
+    const query = new Moralis.Query(transaction);
+
     return (
         <div className={styles.previewCardWrapper}>
             <Link to={`/assets/${address.toLowerCase()}/${token_id}/info`}>
@@ -36,17 +43,16 @@ const NftPreviewCard: FC<nftPreviewProps> = (props) => {
                             <button className={styles.buyNftButton}>View Item
                                 <Icon width={20} height={20} name={'rhomb'}/>
                             </button>
-                         </Link>
+                        </Link>
                     </div>
                 </div>
             </Link>
             <div className={styles.previewCardInfoWrapper}>
                 <div className={styles.previewCardMainInfo}>
                     <div className={styles.nftName}>{nftName}</div>
-                    <NftCost cost={100} currency={"ETH"}/>
+                    <NftCost currency={"ETH"}/>
                 </div>
                 <div className={styles.previewCardSecInfo}>
-                    <img className={styles.creatorAvatar} src={creatorImgUrl} alt=""/>
                     <div className={styles.nftLikes}>
                         <div className={styles.iconContainer}>
                             <Link className={styles.likeIcon} to={`/assets/${address.toLowerCase()}/${token_id}/info`}>

@@ -42,13 +42,14 @@ export const MainNFTSwiper = () => {
                             </div>
                             <div className={sliderStyles.author_name}>
                                 <p>Creator</p>
-                                <p className={`${sliderStyles.skeleton} ${sliderStyles.skeleton_text}`}> </p>
+                                <p className={`${sliderStyles.skeleton} ${sliderStyles.skeleton_text}`}></p>
                             </div>
                         </div>
                         <div>
                         </div>
                     </div>
-                    <div className={`${sliderStyles.price_container} ${sliderStyles.skeleton} ${sliderStyles.price_container_loading}`}>
+                    <div
+                        className={`${sliderStyles.price_container} ${sliderStyles.skeleton} ${sliderStyles.price_container_loading}`}>
                     </div>
                 </div>
             </div>
@@ -71,7 +72,8 @@ export const MainNFTSwiper = () => {
             {NFTs.map((e) => {
                 return (
                     <SwiperSlide key={e.token_id}>
-                        <MainNFTSlide address = {e.token_address} token_id = {e.token_id} creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'} nftLikes={'0'}
+                        <MainNFTSlide address={e.token_address} token_id={e.token_id} creatorImgUrl={e.name}
+                                      imgUrl={e.image} nftCost={'0'} nftLikes={'0'}
                                       nftName={e.metadata.name}/>
                     </SwiperSlide>
                 );

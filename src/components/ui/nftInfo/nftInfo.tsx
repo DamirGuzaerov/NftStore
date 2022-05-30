@@ -5,17 +5,25 @@ import React, {useEffect, useState} from "react";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {Link} from "react-router-dom";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
+import {CardSkeleton} from "../loading/skeleton/cardSkeleton/cardSkeleton";
 
 export const NftInfo = () => {
     const selector = useAppSelector(state => state.OwnerReducer);
     const [creatorInfo, setCreatorInfo] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         try {
             setCreatorInfo(selector.owners[0].token_address);
+            setIsLoading(false);
         } catch (e) {
             setCreatorInfo('author')
+            setIsLoading(false);
         }
     }, [selector]);
+
+    if(isLoading) {
+        return <CardSkeleton/>
+    }
 
   return(
       <div className={styles.infoWrapper}>

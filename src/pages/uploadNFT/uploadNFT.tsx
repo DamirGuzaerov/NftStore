@@ -11,7 +11,6 @@ import Web3 = Moralis.Web3;
 import {useAppSelector} from "../../utils/hooks/redux-hooks";
 import {Toast, ToastProperties} from "../../components/ui/toaster/Toast";
 
-const web3 = new Web3(Web3.givenProvider);
 
 
 export const UploadNFT = () => {
@@ -52,6 +51,7 @@ export const UploadNFT = () => {
     }
 
     async function upload() {
+        await Moralis.enableWeb3();
         console.log(preview);
         if (preview != null) {
             const imageFile = new Moralis.File(itemName, file);
@@ -66,16 +66,18 @@ export const UploadNFT = () => {
             const metadataFile = new Moralis.File(`${itemName}metadata.json`, {base64: btoa(JSON.stringify(metadata))});
             await metadataFile.saveIPFS();
             const metadataUri = metadataFile.url();
+            console.log(selector.wallet, metadataUri, royalty);
 
             let res = Moralis.Plugins.rarible.lazyMint({
                 chain: 'eth',
                 userAddress: selector.wallet,
                 tokenType: 'ERC721',
                 tokenUri: metadataUri,
-                royaltiesAmout: royalty
+                royaltiesAmount: royalty
             }).then(() => {
                 showToast('success');
-            }).catch(() => {
+            }).catch((e: any) => {
+                console.log(e);
                 showToast('fail');
             })
             console.log(res);
