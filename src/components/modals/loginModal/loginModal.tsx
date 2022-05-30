@@ -6,9 +6,7 @@ import Icon from "../../ui/icon/icon";
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../../utils/hooks/redux-hooks";
 import {removeModal} from "../../../stores/reducers/modalSlice";
-import {useAuth} from "../../../utils/hooks/useAuth";
 import {useEffect, useState} from "react";
-
 
 export const LoginModal = () => {
     const dispatch = useDispatch()

@@ -10,11 +10,12 @@ import {SettingsTextInput} from "../../components/ui/inputs/settingsTextInput/se
 import Moralis from "moralis";
 
 export const SettingsPage = () => {
-
     const [name, setName] = useState();
     const [list, setList] = useState<ToastProperties[]>([]);
     const [email, setEmail] = useState();
     const [bio, setBio] = useState();
+    const query = new Moralis.Query(Moralis.User);
+    const currentUser = Moralis.User.current();
     const {user, setUserData} = useMoralis();
     const [isEmail, setIsEmail] = useState(false);
     const [isBio, setIsBio] = useState(false);
@@ -29,6 +30,7 @@ export const SettingsPage = () => {
 
 
     const showToast = (type: string) => {
+
         switch (type) {
             case 'success':
                 toastProperties = {
@@ -63,22 +65,21 @@ export const SettingsPage = () => {
         setList([toastProperties]);
     }
 
-
     const handleSaveUser = () => {
-        console.log(isBio,isEmail,bio,email,name)
-        console.log(user);
+
+
         if(isBio && isEmail) {
-            console.log(name,email,bio)
-            setUserData({
-                name: name === "" ? undefined : name,
-                email: email === "" ? undefined : email,
-                bio: bio === "" ? undefined : bio
-            }).then(r => {
+            try {
+                currentUser?.set({
+                    name: name === "" ? undefined : name,
+                    email: email === "" ? undefined : email,
+                    bio: bio === "" ? undefined : bio
+                })
                 showToast('success');
-            }).catch(e => {
-                console.log(e);
+            }
+             catch{
                 showToast('fail');
-            })
+            }
         } else {
             showToast('emailFail');
         }
