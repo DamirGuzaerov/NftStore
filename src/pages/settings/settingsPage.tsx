@@ -10,17 +10,19 @@ import {SettingsTextInput} from "../../components/ui/inputs/settingsTextInput/se
 import Moralis from "moralis";
 
 export const SettingsPage = () => {
-
     const [name, setName] = useState();
     const [list, setList] = useState<ToastProperties[]>([]);
     const [email, setEmail] = useState();
     const [bio, setBio] = useState();
+    const query = new Moralis.Query(Moralis.User);
+    const currentUser = Moralis.User.current();
     const {user, setUserData} = useMoralis();
     const [isEmail, setIsEmail] = useState(false);
     const [isBio, setIsBio] = useState(false);
     let toastProperties = null;
 
     const showToast = (type: string) => {
+
         switch (type) {
             case 'success':
                 toastProperties = {
@@ -56,11 +58,21 @@ export const SettingsPage = () => {
     }
 
     const handleSaveUser = () => {
-        Moralis.enableEncryptedUser();
+        currentUser?.set({
+            name: name === "" ? undefined : name,
+            email: email === "" ? undefined : email,
+            bio: bio === "" ? undefined : bio
+        })
         console.log(isBio,isEmail,bio,email,name)
         console.log(user);
+        console.log(currentUser)
         if(isBio && isEmail) {
             console.log(name,email,bio)
+            currentUser?.set({
+                name: name === "" ? undefined : name,
+                email: email === "" ? undefined : email,
+                bio: bio === "" ? undefined : bio
+            })
             setUserData({
                 name: name === "" ? undefined : name,
                 email: email === "" ? undefined : email,
