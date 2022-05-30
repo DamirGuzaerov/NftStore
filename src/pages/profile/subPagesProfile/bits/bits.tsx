@@ -7,6 +7,7 @@ import {getNft} from "../../../../utils/hooks/getNfts";
 import {ShopCard} from "../../../../components/cards/shopCard/shopCard";
 import {Oval} from "react-loader-spinner";
 import {useParams} from "react-router-dom";
+import {NftSkeleton} from "../../../../components/ui/loading/skeleton/nftSkeleton/nftSkeleton";
 
 export const BitsList = () => {
     const [transactions, setTransactions] = useState<INFT[]>([]);
@@ -14,9 +15,9 @@ export const BitsList = () => {
     const transaction = Moralis.Object.extend("Transaction");
     const query = new Moralis.Query(transaction);
     const {wallet} = useParams();
-    const [isLoading,setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     query.containedIn("user", [
-        !!wallet?wallet:userSelector.wallet
+        !!wallet ? wallet : userSelector.wallet
     ]);
 
     useEffect(() => {
@@ -25,8 +26,8 @@ export const BitsList = () => {
         }
         const promises: any[] = [];
         const nfts: INFT[] = [];
-        fetchTransactions().then( (r) => {
-            r.map( async (i) => {
+        fetchTransactions().then((r) => {
+            r.map(async (i) => {
                 const val = i.attributes;
                 promises.push(getNft(val.address, val.token).then(r => {
                     nfts.push(r);
@@ -40,17 +41,20 @@ export const BitsList = () => {
     }, []);
 
 
-    return(<>
-            {isLoading && <div className={styles.loading}>
-                <Oval color="#00BFFF" height={100} width={100}/>
+
+    return (<>
+            {isLoading && <div className={styles.liked_container}>
+                <NftSkeleton/>
+                <NftSkeleton/>
+                <NftSkeleton/>
             </div>}
-        {!isLoading&&<div className={styles.liked_container}>
+            {!isLoading && <div className={styles.liked_container}>
                 {transactions.map((e, counter) => {
                     return <ShopCard key={counter} creatorImgUrl={e.name} imgUrl={e.image} nftCost={'0'}
                                      nftName={e.metadata.name} address={e.token_address}
                                      token_id={e.token_id} amount={e.amount}/>
                 })}
             </div>}
-    </>
+        </>
     )
 };
