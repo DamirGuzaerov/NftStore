@@ -98,9 +98,6 @@ export const Profile = () => {
                         </div>
                         <div className={styles.profile_nfts}>
                             <nav className={styles.profile_nav}>
-                                <Link to={'/profile/collected'} className={styles.nav_buttons}>
-                                    Collected
-                                </Link>
                                 <Link to={'/profile/liked'} className={styles.nav_buttons}>
                                     Likes
                                 </Link>

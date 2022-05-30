@@ -6,15 +6,17 @@ import Moralis from "moralis";
 import {getNft} from "../../../../utils/hooks/getNfts";
 import {ShopCard} from "../../../../components/cards/shopCard/shopCard";
 import {Oval} from "react-loader-spinner";
+import {useParams} from "react-router-dom";
 
 export const BitsList = () => {
     const [transactions, setTransactions] = useState<INFT[]>([]);
     const userSelector = useAppSelector(state => state.UserReducer);
     const transaction = Moralis.Object.extend("Transaction");
     const query = new Moralis.Query(transaction);
+    const {wallet} = useParams();
     const [isLoading,setIsLoading] = useState(true);
     query.containedIn("user", [
-        userSelector.wallet
+        !!wallet?wallet:userSelector.wallet
     ]);
 
     useEffect(() => {
