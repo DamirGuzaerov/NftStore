@@ -10,6 +10,7 @@ import {IBid} from "../nftBids/nftBids";
 import {Toast, ToastProperties} from "../toaster/Toast";
 import {useAuth} from "../../../utils/hooks/useAuth";
 import {getEthPrice} from "../../../utils/hooks/getNfts";
+import {Timer} from "../timer/timer";
 import {pipeString} from "../../../utils/services/stringServices/shortenString";
 
 export const NftBidCard = () => {
@@ -24,7 +25,7 @@ export const NftBidCard = () => {
         dispatch(addModal(modal));
     }
 
-    useEffect(() => {
+    const setHighestBid = () => {
         const transaction = Moralis.Object.extend("Transaction");
         const query = new Moralis.Query(transaction);
         query.containedIn("address", [
@@ -52,8 +53,16 @@ export const NftBidCard = () => {
         }).catch(e => {
             setEthPrice(1800);
         })
+    }
 
+    useEffect(() => {
+        setHighestBid();
     }, [])
+
+    useEffect(() => {
+        console.log(selector.price);
+        setHighestBid();
+    }, [selector.price]);
 
     return (
         <>
@@ -83,14 +92,6 @@ export const NftBidCard = () => {
                     {auth ? (<div className={styles.purchaseButtons}>
                         <div className={styles.btnWrapper}>
                             <DefaultButton
-                                func={() => alert("Пока не реализовано")}
-                                paddingTopBottom={16}
-                                type={"default"}
-                                value={"Purchase now"}
-                                large={true}/>
-                        </div>
-                        <div className={styles.btnWrapper}>
-                            <DefaultButton
                                 func={() => openModal('PlaceBid')}
                                 paddingTopBottom={16}
                                 type={"action"}
@@ -112,7 +113,9 @@ export const NftBidCard = () => {
                             <span className={styles.serviceFeeInfoText}>
                         ${ethPrice}
                         </span>
+                            <Timer timer={bid.createdAt}/>
                         </div>) : null
+
                     }
 
                 </div>

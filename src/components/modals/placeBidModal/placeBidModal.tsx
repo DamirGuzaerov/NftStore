@@ -8,9 +8,10 @@ import {DefaultButton} from "../../ui/buttons/default-button";
 import {useDispatch} from "react-redux";
 import {removeModal} from "../../../stores/reducers/modalSlice";
 import {useNewMoralisObject} from "react-moralis";
-import {ToastProperties} from "../../ui/toaster/Toast";
+import {Toast, ToastProperties} from "../../ui/toaster/Toast";
 import Moralis from "moralis";
 import {update} from "react-spring";
+import {setPrice} from "../../../stores/reducers/bidSlice";
 
 export const PlaceBidModal = () => {
     const auth = useAuth();
@@ -84,8 +85,7 @@ export const PlaceBidModal = () => {
                 queryResult.set("price", parseFloat(bid));
                 // @ts-ignore
                 queryResult.save().then(() => {
-                    console.log("SUCCSESS")
-                    dispatch("")
+                    dispatch(setPrice(bid))
                     closeModal();
                     showToast('success');
                 }).catch(() => {
@@ -101,6 +101,7 @@ export const PlaceBidModal = () => {
                 }
                 await save(data, {
                     onSuccess: (item) => {
+                        dispatch(setPrice(bid));
                         closeModal();
                         showToast('success');
                     },
@@ -141,7 +142,7 @@ export const PlaceBidModal = () => {
                     </p>
 
                     <p>
-                        {balance !== undefined && !isNaN(parseInt(bid)) ? parseInt(bid) * 0.00001 : 0} ETH
+                        {balance !== undefined && !isNaN(parseInt(bid)) ? parseInt(bid) * 0.001 : 0} ETH
                     </p>
                 </span>
                 <span className={styles.bid_line}>
@@ -168,8 +169,7 @@ export const PlaceBidModal = () => {
                                    func={closeModal}/>
                 </div>
             </div>
+            <Toast list={list} position={'bottom_right'} setList={setList}/>
         </ModalTemplate>
-
-
     );
 }
