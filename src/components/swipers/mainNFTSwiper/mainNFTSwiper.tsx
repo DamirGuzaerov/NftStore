@@ -13,12 +13,13 @@ import {NftBidCard} from "../../ui/nftBidCard/nftBidCard";
 export const MainNFTSwiper = () => {
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const currentCursor = useRef(null)
 
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
 
     useEffect(() => {
-        getCollection('0xAd4D85257c815A4B2C7088a664e958b035B24323', 'eth', 5).then(r => {
+        getCollection('0xAd4D85257c815A4B2C7088a664e958b035B24323', 'eth', 5,currentCursor).then(r => {
             setIsLoading(false);
             console.log(NFTs[0])
             setNFTs(r);

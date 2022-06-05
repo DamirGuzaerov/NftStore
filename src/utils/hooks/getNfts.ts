@@ -5,19 +5,21 @@ import pic from '../../../src/assets/images/tempImg/nftPreviewImg.png'
 const url = 'https://deep-index.moralis.io/api/v2';
 const apikey = 'xT5ByvjxK1Inmt1kr5uG9sjt403MBTwy8QLvZNCyBQXs6egE2KSyGBor8fGVLP1B'
 
-export async function getCollection(address: string, chain: string, limit?: number, offset?: number, controller?: AbortController) {
+export async function getCollection(address: string, chain: string, limit?: number, offset?: any, controller?: AbortController) {
+    console.log(offset.current)
     return axios.get(url + `/nft/${address}`, {
         signal: controller?.signal,
         params: {
             chain: chain,
             limit: limit,
-            offset: offset,
+            cursor: offset.current,
         },
         headers: {
             'X-API-KEY': apikey ?? 'update api key',
         }
     }).then(async (response) => {
         const arr = await setImages(response.data.result);
+        offset.current = response.data.cursor
         return arr;
     }).catch((error) => {
         if (axios.isCancel(error)) {

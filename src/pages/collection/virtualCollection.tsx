@@ -19,19 +19,18 @@ const CARD = {
     HEIGHT: 460
 };
 
-const oneFetchLimit = 40;
+const oneFetchLimit = 30;
 
 export const VirtualCollection = () => {
     const {current: abortController} = useRef(new AbortController());
     const [NFTs, setNFTs] = useState<INFT[]>([]);
     const rowsCount = useRef(0);
-    const currentOffset = useRef(0);
+    const currentOffset = useRef(null);
     const {collectionName} = useParams();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         fetchNFTs(abortController).then(r => {
-            currentOffset.current += oneFetchLimit
         });
         return () => {
             abortController.abort();
@@ -41,12 +40,11 @@ export const VirtualCollection = () => {
     const collection = getNftCollectionByName(collectionName!.replaceAll('_', ' '))!
 
     async function fetchNFTs(controller: AbortController) {
-        getCollection(collection.address, "eth", oneFetchLimit, currentOffset.current, controller)
+        getCollection(collection.address, "eth", oneFetchLimit, currentOffset, controller)
             .then(
                 result => {
                     console.log(result);
                     setNFTs([...NFTs, ...result])
-                    currentOffset.current += oneFetchLimit
                     setIsLoading(false)
                 })
     }

@@ -36,11 +36,9 @@ function App() {
         serverUrl: 'https://g12o0xvp31x1.usemoralis.com:2053/server',
         appId: "m9ztPgLe96c2w3H2ntZSg7tyiVXlUVuf0lPb8eua"
     })
-
     if (isAuth) {
         dispatch(getUser());
     }
-
     return (
         <Routes>
             <Route path={'/'} element={<Layout/>}>

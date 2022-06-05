@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Navigation} from 'swiper';
 import {Swiper, SwiperSlide} from "swiper/react";
 import styles from "./Swiper.module.sass"
@@ -25,9 +25,10 @@ const NFTSwiper = () => {
     const [isLoading, setIsLoading] = useState(true);
     let index = 0;
     const [NFTs, setNFTs] = useState<INFT[]>();
+    const currentCursor = useRef(null)
 
     useEffect(() => {
-        getCollection('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 'eth', 15).then(r => {
+        getCollection('0xED5AF388653567Af2F388E6224dC7C4b3241C544', 'eth', 15,currentCursor).then(r => {
             setIsLoading(false);
             setNFTs(r);
         }).catch(() => {
