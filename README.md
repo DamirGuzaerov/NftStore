@@ -1,46 +1,74 @@
-# Getting Started with Create React App
+# App screencast
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Header no auth
 
-## Available Scripts
+![изображение](https://user-images.githubusercontent.com/86714479/198268070-c695e089-3d4e-4613-ac7c-9747179050b8.png)
 
-In the project directory, you can run:
+## Header auth
 
-### `npm start`
+![изображение](https://user-images.githubusercontent.com/86714479/198270680-82f874c1-8c12-4372-a4e4-c9f3be1ad1bc.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Main page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![изображение](https://user-images.githubusercontent.com/86714479/198275316-242388ce-3099-4adf-8d18-87193eb39e47.png)
 
-### `npm test`
+## NFT collection page with dynamic pagination
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![изображение](https://user-images.githubusercontent.com/86714479/198271005-b7bb4e9b-d326-40e9-9619-05e90cebac5d.png)
 
-### `npm run build`
+![изображение](https://user-images.githubusercontent.com/86714479/198271175-1b855606-e9c5-4c93-adb1-4746caa466af.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Discover page with dynamic pagination
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![изображение](https://user-images.githubusercontent.com/86714479/198271465-3e561d86-1f05-4c3f-85f7-6e8d43e6c898.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![изображение](https://user-images.githubusercontent.com/86714479/198271555-df35c35c-191a-4057-a50e-4ccb7b9418e8.png)
 
-### `npm run eject`
+## NFT page 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![изображение](https://user-images.githubusercontent.com/86714479/198271700-f0ccb84c-c410-4663-a032-ead88a6e31b7.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![изображение](https://user-images.githubusercontent.com/86714479/198271778-ab6ff77a-6849-4247-9bbc-3f54bb0ba51e.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![изображение](https://user-images.githubusercontent.com/86714479/198271819-9fa3bf08-c2c9-4194-b826-7d647b60f040.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![изображение](https://user-images.githubusercontent.com/86714479/198272016-3db2b7ad-9696-4916-81b9-152b161b048a.png)
 
-## Learn More
+Auth user can like NFT and place a bid for NFT
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![изображение](https://user-images.githubusercontent.com/86714479/198273596-7bc29717-130b-4a76-ae78-bab27a4e738d.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### NFT page bid placing dialog
+
+![изображение](https://user-images.githubusercontent.com/86714479/198272453-897ede8b-7e37-4925-8e15-805e68d36d7c.png)
+
+## NFT collections page
+
+![изображение](https://user-images.githubusercontent.com/86714479/198272804-aa07aeb6-32fa-47a3-8d06-1c18185b164f.png)
+
+## Upload NFT page
+
+![изображение](https://user-images.githubusercontent.com/86714479/198273914-66ecdb8c-bff5-46fc-a09b-9758ce613b68.png)
+
+![изображение](https://user-images.githubusercontent.com/86714479/198274030-a8d69c77-b4d4-4d28-83d1-e55bff3931a9.png)
+
+## 404 page 
+
+![изображение](https://user-images.githubusercontent.com/86714479/198274254-2e3980be-685f-41e9-bf99-0002f8b8c84d.png)
+
+## User profile page
+
+![изображение](https://user-images.githubusercontent.com/86714479/198274877-e1c58539-5561-4d69-abbb-0d432efffda7.png)
+
+
+## User edit profile page 
+
+![изображение](https://user-images.githubusercontent.com/86714479/198274995-42ded9c8-a5cd-471b-bc78-7f85d3988554.png)
+
+
+
+
+
+
+
+
