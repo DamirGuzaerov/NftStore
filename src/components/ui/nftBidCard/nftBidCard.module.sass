@@ -1,0 +1,70 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
+.bidCard
+  display: flex
+  flex-direction: column
+  margin-top: 12px
+  width: 100%
+  padding: 24px
+
+  background: #23262F
+  color: #777E91
+  font-size: 16px
+
+  border: 1px solid #353945
+  box-sizing: border-box
+
+  box-shadow: 0 64px 64px -48px rgba(31, 47, 70, 0.12)
+  border-radius: 16px
+
+.highestBidUser
+  display: flex
+  align-items: center
+  overflow: hidden
+
+.highestBidInfo
+  margin-left: 14px
+
+.userName
+  color: white
+  font-weight: bold
+  font-size: 16px
+
+.bid
+  color: white
+  font-size: 16px
+  font-weight: bold
+
+.bidDollars
+  color: #777E91
+  font-size: 16px
+
+.btnWrapper
+  width: 100%
+  &:not(:last-child)
+    margin-right: 16px
+.purchaseButtons
+  margin: 16px 0
+  display: flex
+
+.serviceFeeInfoText
+  word-spacing: normal
+  margin-right: 14px
+
+.percent
+  color: white
+  margin-right: 14px
+
+.bid_eth
+  white-space: nowrap
+  font-size: 16px
+
+@include _875
+  .bidCard
+    max-width: none
+  .bid_eth
+    overflow: hidden
+    text-overflow: ellipsis
+  .highestBidInfo
+    overflow: hidden
+  .userName
+    margin-left: 12px

@@ -1,0 +1,31 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
+.infoWrapper
+  width: 100%
+  color: white
+
+.creators
+  display: flex
+  align-items: center
+  font-size: 24px
+  padding-bottom: 16px
+
+  border-bottom: 1px solid rgba(141, 141, 141, 0.7)
+
+.userInfo
+  margin-left: 20px
+  font-size: 20px
+  color: #969696
+  overflow: hidden
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+.userName
+  color: #FCFCFD
+  overflow: hidden
+  text-overflow: ellipsis
+
+@include _875
+  .userInfo
+    font-size: initial
+

@@ -1,0 +1,35 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
+
+.infoWrapper
+  width: 100%
+
+  color: white
+
+  display: flex
+  flex-direction: column
+
+.nftDetails
+  list-style: none
+  width: 100%
+  font-size: 18px
+  overflow: hidden
+.nftDetail
+  width: 100%
+
+  display: flex
+  justify-content: space-between
+  padding: 10px 0
+  overflow: hidden
+  text-overflow: ellipsis
+
+.contractAddress
+  overflow: hidden
+  text-overflow: ellipsis
+
+
+.loading
+  @include loader
+
+@include _875
+  .nftDetail
+    font-size: 12px

@@ -1,0 +1,28 @@
+@import "src/assets/globalStyles/globalStyles"
+.cardWrapper
+  width: 333px
+  height: 79px
+  display: flex
+  align-items: center
+
+.cardPreviewImg
+  border-radius: 100%
+  width: 48px
+  height: 48px
+  margin-right: 17px
+
+.collectionInfo
+  font-size: 16px
+  display: flex
+  flex-direction: column
+  align-items: baseline
+
+.collectionName
+  color: white
+
+.collectionPrice
+  color: #8C8C8C
+@include _875
+  .cardWrapper
+    width: 100%
+    border-bottom: 1px solid #8C8C8C

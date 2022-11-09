@@ -1,0 +1,56 @@
+@import "src/assets/globalStyles/globalStyles"
+.collectionsList
+  -webkit-column-count: 3
+  -moz-column-count: 3
+  column-count: 3
+  list-style: disc
+  text-align: center
+  li
+    display: inline-block
+
+.collectionsListWrapper
+  padding-top: 40px
+  padding-bottom: 54px
+  text-align: left
+
+.collectionsListFilter
+  text-align: left
+  margin-bottom: 38px
+
+  display: flex
+  align-items: center
+
+.collectionsListFilterTitle
+  margin-right: 16px
+
+select
+  margin-right: -10px
+  margin-left: 8px
+
+  -webkit-appearance: none
+  -moz-appearance: none
+  appearance: none
+  background: none
+  color: #3772FF
+  font-size: 64px
+  border: 0
+  outline: none
+
+@include _875
+  .collectionsListFilter
+    justify-content: center
+    font-size: 46px
+  .collectionsListWrapper
+    padding-top: 0
+  .collectionsList
+    -webkit-column-count: 1
+    -moz-column-count: 1
+    column-count: 1
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    li
+      display: block
+      width: 100%
+      max-width: 470px

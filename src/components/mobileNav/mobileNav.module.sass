@@ -1,0 +1,92 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+header
+  width: 100%
+  background-color: gs.$dark-main-color
+  @include gs.divider
+
+
+.search_wrapper
+  display: flex
+  align-items: center
+
+.buttons_container
+  min-width: 140px
+  display: flex
+  justify-content: space-between
+
+.icon_wrapper
+  display: flex
+  margin-left: 10px
+
+.mobileNavigation
+  display: none
+
+.profile_header
+  display: flex
+  align-items: center
+  border: 2px solid rgba(119, 126, 144, 1)
+  border-radius: 30px
+  margin-left: 12px
+  padding: 4px 8px !important
+
+.profile
+  color: white
+  font-weight: 700
+  margin-right: 4px
+
+.profile_header_image
+  height: 32px
+  width: 32px
+  border-radius: 50%
+  margin-right: 12px
+
+.upload_button
+  display: flex
+  margin-right: 5px
+
+.header__content
+  nav
+    display: flex
+    align-items: center
+
+    a
+      width: 100%
+      font-size: 24px
+      text-align: center
+      color: #777e90
+      padding: 14px 0
+
+    a:not(:last-child)
+      @include gs.divider
+
+@media (max-width: 675px)
+  .header_wrapper
+    max-width: 90%
+    margin: 0 auto
+    nav, .search_wrapper
+      display: none
+
+  .mobileNavigation
+    display: flex
+    border: none
+    background: none
+
+
+.header__nav
+  display: flex
+  flex-direction: column
+
+.menu_wrapper
+  position: absolute
+  width: 100%
+  top: 72px
+  background-color: #1d1d1f
+  @include gs.divider
+  z-index: 2
+
+.profile_header_wrapper
+  display: flex
+  align-items: center
+
+

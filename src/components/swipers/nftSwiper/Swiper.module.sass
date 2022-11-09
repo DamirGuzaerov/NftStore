@@ -1,0 +1,33 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
+
+.customSwiper
+  min-height: 300px
+  max-width: 1120px
+  margin: 0 auto
+
+.customSwiperWrapper
+  display: flex
+  align-items: center
+  margin-top: 64px
+
+.customSwiperContainer
+  position: relative
+  height: 791px
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+.titleStyle
+  text-align: left
+
+.loading
+  @include gs.loading_container
+
+@include _875
+  .titleStyle
+    display: none
+
+
+
+

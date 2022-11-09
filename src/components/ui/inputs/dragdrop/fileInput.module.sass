@@ -1,0 +1,29 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+.input_dragAndDrop
+  margin-top: 16px
+  display: flex
+  max-width: 640px
+  width: 100%
+  max-height: 182px
+  background-color: rgba(35, 38, 47, 1)
+  padding: 155px 64px
+  border-radius: 16px
+
+.input_dragAndDrop_dropped
+  @extend .input_dragAndDrop
+  background-color: rgba(35, 38, 47, 0.7)
+
+.info_drugAndDrop_container
+  display: flex
+  flex-direction: column
+  margin: 0 auto
+  align-items: center
+  height: 54px
+
+.text_drugAndDrop
+  @include gs.poppins-font
+  font-weight: 400
+  color: gs.$Neutrals4
+  margin-top: 5px
+

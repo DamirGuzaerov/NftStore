@@ -1,0 +1,121 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+
+header
+  width: 100%
+  background-color: gs.$dark-main-color
+  @include gs.divider
+
+.header_wrapper
+  max-width: gs.$max-width
+  margin: 0 auto
+  display: flex
+  align-items: center
+  justify-content: space-between
+  padding: 20px 0
+
+.logo
+  display: flex
+  flex-direction: row
+
+.logo_name
+  font-style: normal
+  font-weight: 600
+  font-size: 24px
+  color: white
+  margin-left: 8px
+  padding-right: 32px
+  border-right: 2px solid #353945
+
+.header__left_content
+  display: flex
+  flex-direction: row
+  align-items: center
+
+  nav
+    a
+      margin-left: 32px
+      @include gs.links-settings
+
+    a:hover
+      color: white
+
+.search_wrapper
+  display: flex
+  align-items: center
+
+.buttons_container
+  min-width: 140px
+  display: flex
+  justify-content: space-between
+
+.icon_wrapper
+  display: flex
+  margin-left: 10px
+
+.mobileNavigation
+  display: none
+
+.profile_header
+  display: flex
+  align-items: center
+  padding: 4px 12px 3px 4px
+  border: 2px solid rgba(119, 126, 144, 1)
+  color: #ffffff
+  border-radius: 30px
+  margin-left: 12px
+  font-size: 16px
+  &:hover
+    color: rgba(182, 182, 182, 0.8)
+    border: 2px solid rgba(119, 126, 144, 0.8)
+.profile
+  color: white
+  font-weight: 700
+  margin-right: 4px
+
+.profile_header_image
+  height: 32px
+  width: 32px
+  border-radius: 50%
+  margin-right: 12px
+
+.eth
+  font-weight: 700
+  color: rgba(69, 178, 107, 1)
+
+.upload_button
+  display: flex
+  margin-right: 5px
+
+
+@media (max-width: 1038px)
+  .logo_name
+    padding-right: 16px
+  .header_wrapper
+    nav
+      display: flex
+      align-items: center
+
+      a
+        font-size: 12px
+        text-align: center
+        margin-left: 16px
+      a:last-child
+        margin-right: 16px
+
+@media (max-width: 675px)
+
+  .header_wrapper
+    max-width: 90%
+    margin: 0 auto
+    nav, .search_wrapper
+      display: none
+
+  .logo_name
+    padding: 0
+    border: 0
+
+  .mobileNavigation
+    display: flex
+    border: none
+    background: none
+

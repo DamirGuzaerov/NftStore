@@ -1,0 +1,124 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
+.bannerHeader
+  width: 100%
+
+.bannerWrapper
+  height: 320px
+  background: #343434
+  overflow: hidden
+  border-bottom: 1px white solid
+
+.bannerImg
+  width: 100%
+  height: 100%
+  object-fit: cover
+
+.headerContent
+  text-align: center
+  color: white
+
+.collectionPreviewImgWrapper
+  width: 126px
+  height: 126px
+  margin: 0 auto
+
+  position: relative
+  top: -55px
+
+  border-radius: 100%
+  border: 2px white solid
+
+  &:hover
+    cursor: pointer
+
+.collectionPreviewImg
+  width: 100%
+  height: 100%
+  border-radius: 100%
+
+.collectionInfo
+  position: relative
+  top: -50px
+
+.collectionName
+  font-size: 40px
+  margin-top: 14px
+  margin-bottom: 14px
+
+.collectionDesc
+  color: #efefef
+  text-align: center
+
+  max-width: 760px
+
+  margin: 24px auto 0
+
+  p:not(:last-child)
+    margin-bottom: 14px
+
+.collectionGridWrapper
+  max-width: 1980px
+  width: 100%
+  height: 100%
+  margin: 0 auto
+
+.collectionGrid
+  margin: 30px 0
+  display: grid
+  grid-template-columns: repeat(auto-fill, 350px)
+  grid-column-gap: 15px
+  grid-row-gap: 1em
+  justify-content: center
+
+.loading
+  @include loader
+.List
+  border: 1px solid black
+  box-sizing: border-box
+
+.Row
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  padding: 0 0.5rem
+  box-sizing: border-box
+  margin-bottom: 16px
+
+
+.Item
+  display: inline-flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+.formWrapper
+  display: flex
+  justify-content: center
+
+.form
+  width: 60%
+  display: flex
+  align-items: center
+.searchInput
+  background: inherit
+  color: white
+
+  width: 100%
+
+  border: 2px solid #353945
+  border-radius: 12px
+
+  padding: 12px 16px
+  margin: 12px 24px
+  font-size: 20px
+
+  &:focus
+    background: #383838
+
+.dropDownContainer
+
+
+

@@ -1,0 +1,81 @@
+$dark-main-color: rgba(20, 20, 22, 1)
+$light-main-color: rgba(35, 38, 47, 1)
+$max-width: 1120px
+$links-color: rgba(119, 126, 144, 1)
+$button-submit-color: rgb(46, 94, 220)
+$button-submit-hover-color: rgb(0, 72, 253)
+$default-font-size: 16px
+$Neutrals4: rgba(119, 126, 144, 1)
+$Neutrals3 : rgba(53, 57, 69, 1)
+
+
+@mixin poppins-font
+  font-family: 'Poppins'
+  font-style: normal
+  font-weight: 600
+
+@mixin links-settings
+  color: $links-color
+  font-weight: 700
+  font-size: 14px
+  line-height: 16px
+
+@mixin divider
+  border-bottom: 1px solid #353945
+
+h1
+  font-family: 'DM Sans'
+  font-style: normal
+  font-weight: 500
+  font-size: 64px
+  line-height: 60px
+  color: white
+
+@mixin loading_container
+  display: flex
+  justify-content: center
+  margin: 35px 0
+
+@mixin oneLineDisplayText
+  display: -webkit-box
+  -webkit-line-clamp: 1
+  -webkit-box-orient: vertical
+  overflow: hidden
+
+@mixin bannerHeader
+  width: 100%
+
+@mixin bannerWrapper
+  height: 320px
+  background: #343434
+  overflow: hidden
+  border-bottom: 1px white solid
+
+@mixin bannerImg
+  width: 100%
+  height: 100%
+  object-fit: cover
+
+@mixin headerContent
+  text-align: center
+  color: white
+
+
+@mixin _700
+  @media (max-width: 700px)
+    @content
+
+@mixin _375
+  @media (max-width: 375px)
+    @content
+
+@mixin loader
+  width: 100%
+  padding: 100px
+  display: flex
+  box-sizing: border-box
+  justify-content: center
+
+@mixin _875
+  @media (max-width: 875px)
+    @content

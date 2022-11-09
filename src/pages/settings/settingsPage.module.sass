@@ -1,0 +1,142 @@
+@import 'src/assets/globalStyles/globalStyles.sass'
+
+
+.upload_page
+  &_background
+    background-color: $dark-main-color
+
+  &__container
+    max-width: $max-width
+    margin: 0 auto 24px
+    padding: 0 24px
+
+  &__header
+    display: flex
+    flex-direction: row
+    align-items: center
+    padding-bottom: 24px
+    border-bottom: 1px solid #353945
+
+.return_button
+  display: flex
+  align-items: center
+  padding: 12px 16px 12px 19px
+  border: 2px solid #353945
+  box-sizing: border-box
+  border-radius: 90px
+  background: none
+  margin-top: 24px
+
+  p
+    margin-left: 15px
+    color: white
+    @include poppins-font
+
+  &:hover
+    opacity: 0.7
+
+
+
+.page_label
+  margin-top: 64px
+  text-align: center
+
+  &__description
+    @include poppins-font
+    color: $Neutrals4
+    font-weight: 500
+    margin-top: 16px
+    text-align: center
+
+
+.profile
+  &__settings_container
+    display: flex
+    flex-direction: row
+    margin-top: 30px
+    justify-content: center
+
+    @include _700
+      flex-direction: column
+
+  &__image
+    height: 128px
+    width: 128px
+    border-radius: 50%
+
+    &_container
+      display: flex
+      flex-direction: row
+      margin: 15px auto
+
+    &__description_container
+      display: flex
+      flex-direction: column
+      margin-left: 32px
+
+
+
+.image
+
+  &__title
+    @include poppins-font
+    color: white
+
+  &__description
+    max-width: 192px
+    margin-top: 8px
+    @include poppins-font
+    font-weight: 400
+    font-size: 14px
+    line-height: 22px
+    color: $Neutrals4
+
+  &__upload
+    margin-top: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+
+    width: 80px
+    height: 40px
+    background: none
+    border: 2px solid $Neutrals3
+    border-radius: 90px
+
+    input[type="file"]
+      display: none
+
+    p
+      color: white
+
+    &:hover
+      opacity: 0.8
+
+
+.account__info_container
+  display: flex
+  flex-direction: column
+
+  @include _700
+    margin: 0 auto
+
+.inputs_container
+  display: flex
+  flex-direction: column
+  width: 400px
+  border-bottom: 1px solid $Neutrals3
+
+  @include _700
+    max-width: 400px
+    width: 100%
+    margin: 0 auto
+
+.desc_inputs
+  margin: 40px 0
+  color: $Neutrals4
+  line-height: 24px
+
+.submit_button_wrapper
+  margin-top: 40px
+  width: 200px
+

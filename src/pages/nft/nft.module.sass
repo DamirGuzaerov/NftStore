@@ -1,0 +1,89 @@
+@use 'src/assets/globalStyles/globalStyles' as gs
+@import 'src/assets/globalStyles/globalStyles'
+
+.mainContainer
+  max-width: 1440px
+  width: 100%
+  box-sizing: border-box
+  padding: 65px
+  margin: 0 auto
+
+.imageWrapper
+  overflow: hidden
+  width: 100%
+  margin-right: 96px
+
+.cardImage
+  width: 100%
+  border-radius: 5%
+  object-fit: contain
+
+.name
+  @include gs.oneLineDisplayText
+  color: white
+  font-size: 2em
+  margin-bottom: 10px
+
+@include _875
+  .mainCardWrapper
+    flex-direction: column
+  .imageWrapper
+    margin-right: 0
+    margin-bottom: 16px
+  .mainContainer
+    padding: 25px
+  .name
+    font-size: 24px
+
+.mainCardWrapper
+  display: flex
+  justify-content: space-between
+  width: 100%
+
+.mainCardInfo
+  width: 100%
+  text-align: left
+
+.price
+  display: flex
+  align-items: center
+  color: #969696
+  font-size: 24px
+
+.currentPrice
+  font-weight: 500
+  font-size: 20px
+  margin-left: 15px
+
+.topInfo
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+.likeBtn
+  border-radius: 100%
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 12px
+  background: #1c2634
+  border: 3px solid #353945
+  box-shadow: 0 64px 64px -48px rgba(31, 47, 70, 0.12)
+  color: #ff765e
+  &:hover
+    cursor: pointer
+    color: #ff4b2e
+    background: #121417
+    border: 3px solid #6d6f73
+
+.loading
+  width: 100%
+  padding: 100px
+  display: flex
+  box-sizing: border-box
+  justify-content: center
+
+
+
+
+
